@@ -5,4 +5,4 @@ const saltRounds = 10;
 
 bcrypt.hash(password, saltRounds).then((hash: string) => {
     console.log('Хэш:', hash);
-});
+});1

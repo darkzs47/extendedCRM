@@ -1,10 +1,10 @@
-import  { UserRepository } from "../../../core/repositories/UserRepository/UserRepository";
+import  { IUserRepository } from "../../../core/repositories/UserRepository/IUserRepository";
 import { User } from "../../../core/models/User/User";
 import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/createUserDto";
 import * as fs from "fs/promises";
 import {logger} from "../../../logger";
 
-export class UserRepositoryImpl implements UserRepository{
+export class UserRepositoryJSON implements IUserRepository{
     constructor(readonly filePath: string) {}
 
     private async readFile(): Promise<User[]> {

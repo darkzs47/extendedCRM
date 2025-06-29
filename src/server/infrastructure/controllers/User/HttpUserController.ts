@@ -4,7 +4,7 @@ import {constants} from "http2";
 import { Request, Response } from 'express';
 import hashPassword from "../../../hash";
 
-export class UserController {
+export class HttpUserController {
     constructor(readonly userService: UserService) {}
 
     async createUser(req: Request, res: Response): Promise<void> {

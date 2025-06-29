@@ -6,8 +6,12 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^6.0.0"
+  },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^24.0.7",
     "typescript": "^5.5.3"
   },
   "private": true

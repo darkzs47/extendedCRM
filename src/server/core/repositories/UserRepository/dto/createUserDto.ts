@@ -1,3 +1,5 @@
+import {UserRole} from "../../../models/User/User";
+
 export class CreateUserDto {
     constructor(
         readonly id: number,
@@ -7,7 +9,7 @@ export class CreateUserDto {
         readonly email: string,
         readonly phone: string,
         readonly password: string,
-        readonly role: string,
+        readonly role: UserRole,
         readonly supplierID?: number,
     ) {    }
 }

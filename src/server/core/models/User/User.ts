@@ -1,16 +1,16 @@
-type UserRole = "admin" | "user" | "supplier";
+export type UserRole = "admin" | "user" | "supplier";
 
 export class User {
     constructor(
-        id: number,
-        secondName: string,
-        name: string,
-        lastName: string,
-        email: string,
-        phone: string,
-        password: string,
-        role: UserRole,
-        supplierID?: number,
+        readonly id: number,
+        readonly secondName: string,
+        readonly name: string,
+        readonly lastName: string,
+        readonly email: string,
+        readonly phone: string,
+        readonly password: string,
+        readonly role: UserRole,
+        readonly supplierID?: number,
     ) {
     }
 }

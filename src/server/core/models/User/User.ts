@@ -1,17 +1,16 @@
-export type UserProps = {
-    id?: number;
-    secondName: string;
-    name: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    password: string;
-    role: string;
-    supplierID?: number;
-};
+type UserRole = "admin" | "user" | "supplier";
 
 export class User {
     constructor(
-        readonly props: UserProps
-    ) { }
+        id: number,
+        secondName: string,
+        name: string,
+        lastName: string,
+        email: string,
+        phone: string,
+        password: string,
+        role: UserRole,
+        supplierID?: number,
+    ) {
+    }
 }

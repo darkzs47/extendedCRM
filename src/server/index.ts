@@ -1,1 +1,3 @@
-console.log('Happy developing ✨')
+const { startServer } = require('./server');
+
+startServer();

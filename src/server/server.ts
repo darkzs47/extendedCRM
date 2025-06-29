@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
-
+import cors from 'cors';
 import { UserService } from './core/services/UserService/UserService';
 import { HttpUserController } from './infrastructure/controllers/User/HttpUserController';
 import { UserRepositoryJSON } from './infrastructure/db/repository/UserRepositoryJSON';
@@ -22,6 +22,7 @@ export const startServer = async () => {
 
     const app = express();
     app.use(pinoHttp({ logger }));
+    app.use(cors())
     app.use(bodyParser.json());
 
     app.post('/users', (req: Request, res: Response) => {

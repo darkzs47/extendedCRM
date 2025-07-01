@@ -18,5 +18,25 @@
     "phone": "+79991234567",
     "password": "$2b$07$u7.MXG6j97bGfTTTHnmGGulBMDNHXt6wBU93m4COji2uaprFFceD2",
     "role": "admin"
+  },
+  {
+    "id": 52,
+    "secondName": "Иванов",
+    "name": "Иван",
+    "lastName": "Иванович",
+    "email": "ivan@example.com",
+    "phone": "+79991234567",
+    "password": "$2b$07$X/Illd6HDa05/amiPdjGG.zqPkzdnGHiovjKiLixXa5Z4TutapvOK",
+    "role": "user"
+  },
+  {
+    "id": 53,
+    "secondName": "Иванов",
+    "name": "Иван",
+    "lastName": "Иванович",
+    "email": "ivan@example.com",
+    "phone": "+79991234567",
+    "password": "$2b$07$tfdLaXkNCTUHtXf5p4j2JOTHYoGLwbUjZpwvKYy8WWsRmo8thCNOu",
+    "role": "user"
   }
 ]

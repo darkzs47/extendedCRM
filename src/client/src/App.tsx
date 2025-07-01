@@ -12,11 +12,10 @@ export const NewUserForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     try {
-      await axios.post("http://localhost:5252/users", values);
-      console.log("Пользователь добавлен:", values);
+      await axios.post("http://localhost:5252/users/create", values);
       form.resetFields();
     } catch (error) {
-      console.error("Ошибка при добавлении пользователя:", error);
+      console.error("Ошибка");
     }
   };
 

@@ -1,5 +1,5 @@
 import {UserService} from "../../../core/services/UserService/UserService";
-import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/createUserDto";
+import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/CreateUserDto";
 import {constants} from "http2";
 import { Request, Response } from 'express';
 import hashPassword from "../../../hash";

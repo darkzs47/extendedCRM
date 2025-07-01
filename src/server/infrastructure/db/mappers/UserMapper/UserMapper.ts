@@ -1,6 +1,6 @@
 import { UserModel } from "../../models/User/UserModel";
 import { User } from "../../../../core/models/User/User";
-import {CreateUserDto} from "../../../../core/repositories/UserRepository/dto/createUserDto";
+import {CreateUserDto} from "../../../../core/repositories/UserRepository/dto/CreateUserDto";
 
 export class UserMapper {
     static toDomain(model: UserModel): User {

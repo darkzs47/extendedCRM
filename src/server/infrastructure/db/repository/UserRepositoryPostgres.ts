@@ -1,13 +1,12 @@
 import {IUserRepository} from "../../../core/repositories/UserRepository/IUserRepository";
-import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/createUserDto";
+import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/CreateUserDto";
 import {User} from "../../../core/models/User/User";
 import {UserModel} from "../models/User/UserModel";
 import {UserMapper} from "../mappers/UserMapper/UserMapper";
 
 export class UserRepositoryPostgres implements IUserRepository{
-    async add(dto: CreateUserDto): Promise<User> {
+    async create(dto: CreateUserDto): Promise<User> {
         const user = await UserModel.create(UserMapper.toModel(dto));
         return UserMapper.toDomain(user);
     }
-
 }

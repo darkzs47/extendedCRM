@@ -1,6 +1,6 @@
 import {User} from "../../models/User/User";
-import {CreateUserDto} from "./dto/createUserDto";
+import {CreateUserDto} from "./dto/CreateUserDto";
 
 export interface IUserRepository {
-    add(dto: CreateUserDto): Promise<User>;
+    create(dto: CreateUserDto): Promise<User>;
 }

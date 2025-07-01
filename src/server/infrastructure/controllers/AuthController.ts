@@ -11,7 +11,7 @@ export class AuthController {
             const token = await this.authService.login(email, password);
             res.status(constants.HTTP_STATUS_OK).json({token});
         } catch (e) {
-            res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: (e as Error).message});
+            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message});
         }
     }
 }

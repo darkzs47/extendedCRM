@@ -1,7 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
-
-import { Router } from 'express';
-
+import { Request, Response, Router } from 'express';
 import {AuthController} from "../controllers/AuthController";
 import {AuthService} from "../../core/services/AuthService/AuthService";
 import {AuthRepositoryPostgres} from "../db/repository/AuthRepositoryPostgres";

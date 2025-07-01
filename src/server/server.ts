@@ -4,8 +4,8 @@ import cors from 'cors';
 import pinoHttp from 'pino-http';
 import { logger } from './logger';
 import { sequelize } from './infrastructure/db/orm/sequelize';
-import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
+import authRoutes from './infrastructure/routes/auth.routes';
+import userRoutes from './infrastructure/routes/user.routes';
 
 export const startServer = async () => {
     await sequelize.authenticate();

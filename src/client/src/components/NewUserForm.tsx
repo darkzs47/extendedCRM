@@ -1,0 +1,99 @@
+import {type FC, memo} from 'react'
+
+import {Button, Form, Input, Select} from "antd";
+import axios from "axios";
+import {UserAddOutlined} from "@ant-design/icons";
+
+const { Option } = Select;
+const NewUserForm: FC = () => {
+    const [form] = Form.useForm();
+
+    const onFinish = async (values: any): Promise<void> => {
+        try {
+            await axios.post("http://localhost:5252/users/add", values);
+            form.resetFields();
+        } catch (error) {
+            console.error("Ошибка");
+        }
+    };
+
+    return (
+        <Form
+            form={form}
+            name="userForm"
+            layout="vertical"
+            onFinish={onFinish}
+        >
+            <Form.Item
+                label="Фамилия"
+                name="secondName"
+                rules={[{ required: true, message: "Введите фамилию" }]}
+            >
+                <Input placeholder="Иванов" />
+            </Form.Item>
+
+            <Form.Item
+                label="Имя"
+                name="name"
+                rules={[{ required: true, message: "Введите имя" }]}
+            >
+                <Input placeholder="Иван" />
+            </Form.Item>
+
+            <Form.Item
+                label="Отчество"
+                name="lastName"
+                rules={[{ required: true, message: "Введите отчество" }]}
+            >
+                <Input placeholder="Иванович" />
+            </Form.Item>
+
+            <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                    { required: true, message: "Введите email" },
+                    { type: "email", message: "Некорректный email" },
+                ]}
+            >
+                <Input placeholder="ivanov@example.com" />
+            </Form.Item>
+
+            <Form.Item
+                label="Телефон"
+                name="phone"
+                rules={[{ required: true, message: "Введите номер телефона" }]}
+            >
+                <Input placeholder="+79991234567" />
+            </Form.Item>
+
+            <Form.Item
+                label="Пароль"
+                name="password"
+                rules={[{ required: true, message: "Введите пароль" }]}
+            >
+                <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+                label="Роль"
+                name="role"
+                rules={[{ required: true, message: "Выберите роль" }]}
+            >
+                <Select placeholder="Выберите роль">
+                    <Option value="admin">Администратор</Option>
+                    <Option value="user">Пользователь</Option>
+                    <Option value="supplier">Поставщик</Option>
+                </Select>
+            </Form.Item>
+
+            <Form.Item>
+                <Button type="primary" htmlType="submit" icon={<UserAddOutlined />}>
+                    Добавить пользователя
+                </Button>
+            </Form.Item>
+        </Form>
+    );
+};
+
+export default memo(NewUserForm);

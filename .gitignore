@@ -7,7 +7,7 @@ yarn-debug.log*
 yarn-error.log*
 /.pnp
 .pnp.js
-users.json
+/users.json
 /src/server/hash.ts
 /src/server/generateToken.ts
 /.env

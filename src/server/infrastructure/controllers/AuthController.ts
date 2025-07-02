@@ -3,6 +3,7 @@ import {constants} from "http2";
 import { Request, Response, } from "express";
 import hashPassword from "../../hash";
 import {RegisterDto} from "../../core/repositories/Auth/dto/RegisterDto";
+import { validationResult } from "express-validator";
 
 export class AuthController {
     constructor(private authService: AuthService) {}
@@ -19,6 +20,11 @@ export class AuthController {
 
     async registration(req: Request, res: Response): Promise<void> {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Ошибка регистрации", errors})
+                return
+            }
             const {id, secondName, name, lastName, phone, email, password, role, supplierId} = req.body;
             const hashedPassword = await hashPassword(password);
             await this.authService.registration(new RegisterDto(id, secondName, name, lastName, email, phone, hashedPassword, role, supplierId));

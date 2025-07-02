@@ -1,6 +1,4 @@
-import {UserRole} from "../../../models/User/User";
-
-export class CreateUserDto {
+export class RegisterDto {
     constructor(
         readonly id: number,
         readonly secondName: string,
@@ -9,7 +7,7 @@ export class CreateUserDto {
         readonly email: string,
         readonly phone: string,
         readonly password: string,
-        readonly role: UserRole,
-        readonly supplierId?: number,
+        readonly role: undefined,
+        readonly supplierId: undefined,
     ) {    }
 }

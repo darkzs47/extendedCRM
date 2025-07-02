@@ -14,9 +14,18 @@ export class HttpUserController {
             await this.userService.createUser(new CreateUserDto(id, secondName, name, lastName, email, phone, hashedPassword, role));
 
             res.status(constants.HTTP_STATUS_CREATED).json("Пользователь создан");
-        } catch (e: unknown) {
+        } catch (e) {
             const error = e as Error;
             res.status(constants.HTTP_STATUS_NOT_FOUND).json("Пользователь не создан " + error.message);
+        }
+    }
+
+    async getUsers(req: Request, res: Response) {
+        try {
+
+        } catch (e) {
+            console.error(e);
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
         }
     }
 }

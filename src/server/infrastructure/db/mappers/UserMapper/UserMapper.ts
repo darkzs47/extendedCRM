@@ -1,6 +1,7 @@
 import { UserModel } from "../../models/User/UserModel";
 import { User } from "../../../../core/models/User/User";
 import {CreateUserDto} from "../../../../core/repositories/UserRepository/dto/CreateUserDto";
+import {RegisterDto} from "../../../../core/repositories/Auth/dto/RegisterDto";
 
 export class UserMapper {
     static toDomain(model: UserModel): User {
@@ -17,7 +18,7 @@ export class UserMapper {
         );
     }
 
-    static toModel(dto: CreateUserDto): Partial<UserModel> {
+    static toModel(dto: CreateUserDto | RegisterDto): Partial<UserModel> {
         return {
             id: dto.id,
             secondName: dto.secondName,
@@ -27,7 +28,7 @@ export class UserMapper {
             phone: dto.phone,
             password: dto.password,
             role: dto.role,
-            supplierId: dto.supplierID,
+            supplierId: dto.supplierId,
         };
     }
 }

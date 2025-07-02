@@ -11,4 +11,8 @@ router.post('/create', (req: Request, res: Response) => {
     postgresUserController.createUser(req, res);
 });
 
+router.get('/users', (req: Request, res: Response) => {
+    postgresUserController.getUsers(req, res);
+});
+
 export default router;

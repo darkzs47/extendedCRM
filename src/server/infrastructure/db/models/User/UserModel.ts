@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import {Table, Column, Model, PrimaryKey, AutoIncrement, Default} from 'sequelize-typescript';
 import { UserRole } from "../../../../core/models/User/User";
 
 @Table({ tableName: 'users', timestamps: false, underscored: true })
@@ -26,6 +26,7 @@ export class UserModel extends Model {
     @Column
     password!: string;
 
+    @Default("user")
     @Column
     role!: UserRole;
 

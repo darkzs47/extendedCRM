@@ -1,8 +1,7 @@
 import {IAuthRepository} from "../../repositories/Auth/IAuthRepository";
 import bcrypt from "bcrypt";
-import {generateToken} from "../../../generateToken";
+import {generateAccessToken} from "../../../generateAccessToken";
 import {RegisterDto} from "../../repositories/Auth/dto/RegisterDto";
-import {User} from "../../models/User/User";
 
 export class AuthService {
     constructor(readonly userRepository: IAuthRepository) {}
@@ -16,7 +15,7 @@ export class AuthService {
 
         if (!isPasswordValid) throw new Error('Invalid email or password');
 
-        const token = generateToken({ id: user.id, role: user.role });
+        const token = generateAccessToken({ id: user.id, role: user.role });
         return token;
     }
 

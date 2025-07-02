@@ -3,6 +3,7 @@ import {UserController} from "../controllers/User/UserController";
 import {UserService} from "../../core/services/UserService/UserService";
 import {UserRepositoryPostgres} from "../db/repository/UserRepositoryPostgres";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
+import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 
 const postgresUserController = new UserController(new UserService(new UserRepositoryPostgres()));
 
@@ -12,7 +13,7 @@ const router = Router();
 //     postgresUserController.createUser(req, res);
 // });
 
-router.get('/', AuthMiddleware,(req: Request, res: Response) => {
+router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request, res: Response) => {
     postgresUserController.getUsers(req, res);
 });
 

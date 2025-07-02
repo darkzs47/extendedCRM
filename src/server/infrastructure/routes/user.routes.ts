@@ -2,6 +2,7 @@ import {Request, Response, Router} from 'express';
 import {UserController} from "../controllers/User/UserController";
 import {UserService} from "../../core/services/UserService/UserService";
 import {UserRepositoryPostgres} from "../db/repository/UserRepositoryPostgres";
+import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 
 const postgresUserController = new UserController(new UserService(new UserRepositoryPostgres()));
 
@@ -11,7 +12,7 @@ const router = Router();
 //     postgresUserController.createUser(req, res);
 // });
 
-router.get('/', (req: Request, res: Response) => {
+router.get('/', AuthMiddleware,(req: Request, res: Response) => {
     postgresUserController.getUsers(req, res);
 });
 

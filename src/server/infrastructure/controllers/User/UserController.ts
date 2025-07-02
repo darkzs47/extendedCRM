@@ -25,9 +25,11 @@ export class UserController {
         try {
             const users = await this.userService.getUsers();
             res.json(users)
+            return
         } catch (e) {
             console.error(e);
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
+            return
         }
     }
 }

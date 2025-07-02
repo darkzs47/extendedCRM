@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
 import { UserModel } from '../models/User/UserModel';
+import {TokenModel} from "../models/Token/TokenModel";
 
 dotenv.config();
 
@@ -11,6 +12,6 @@ export const sequelize = new Sequelize({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    models: [UserModel],
+    models: [UserModel, TokenModel],
     logging: false,
 });

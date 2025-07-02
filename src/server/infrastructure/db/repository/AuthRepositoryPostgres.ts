@@ -14,4 +14,9 @@ export class AuthRepositoryPostgres implements IAuthRepository{
         const user = await UserModel.create(UserMapper.toModel(dto));
         return UserMapper.toDomain(user);
     }
+
+    async findById(id: number): Promise<UserModel | null> {
+        const user = await UserModel.findByPk(id)
+        return user ? user : null;
+    }
 }

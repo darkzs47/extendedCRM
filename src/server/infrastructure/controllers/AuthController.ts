@@ -11,8 +11,9 @@ export class AuthController {
     async login(req: Request, res: Response): Promise<void> {
         try {
             const {email, password} = req.body;
-            const token = await this.authService.login(email, password);
-            res.status(constants.HTTP_STATUS_OK).json({token});
+            const userData = await this.authService.login(email, password);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.status(constants.HTTP_STATUS_CREATED).json(userData);
         } catch (e) {
             res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message});
         }
@@ -27,11 +28,32 @@ export class AuthController {
             }
             const {id, secondName, name, lastName, phone, email, password, role, supplierId} = req.body;
             const hashedPassword = await hashPassword(password);
-            await this.authService.registration(new RegisterDto(id, secondName, name, lastName, email, phone, hashedPassword, role, supplierId));
-
+            const userData = await this.authService.registration(new RegisterDto(id, secondName, name, lastName, email, phone, hashedPassword, role, supplierId));
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});
             res.status(constants.HTTP_STATUS_CREATED).json("Пользователь создан");
         } catch (e) {
-            console.error(e);
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
+        }
+    }
+
+    async logout(req: Request, res: Response): Promise<void> {
+        try {
+            const {refreshToken} = req.cookies;
+            const token = await this.authService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            res.status(constants.HTTP_STATUS_OK);
+        } catch (e) {
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
+        }
+    }
+
+    async refresh(req: Request, res: Response): Promise<void> {
+        try {
+            const {refreshToken} = req.cookies;
+            const userData = await this.authService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.status(constants.HTTP_STATUS_CREATED).json(userData);
+        } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
         }
     }

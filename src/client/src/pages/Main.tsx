@@ -4,7 +4,7 @@ import {type FC, memo} from 'react'
 const Main: FC = () => {
     return (
         <main>
-            content
+            main page
         </main>
     )
 }

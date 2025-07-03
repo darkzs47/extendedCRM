@@ -3,30 +3,45 @@ import 'antd/dist/reset.css';
 import React, {useEffect} from "react";
 import Header from "./layouts/Header.tsx";
 import {checkAuth} from "./store/user/actions.ts";
-import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "./store/store.ts";
+import {useDispatch} from "react-redux";
+import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
+import {Navigate, Route, Routes} from "react-router-dom";
+import Register from "./pages/Register.tsx";
+import Main from "./pages/Main.tsx";
+import NewUserForm from "./components/NewUserForm.tsx";
+import {BrowserRouter as Router} from "react-router";
+import AuthRedirect from "./AuthRedirect.tsx";
+import PublicRoute from "./components/PublicRoute.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
-    const {isAuthUser} = useSelector((state: RootState) => state.user)
 
     useEffect(() => {
         if (localStorage.getItem("token")) dispatch(checkAuth())
     }, [])
 
-    if (!isAuthUser) {
-        return (
-            <>
-                <Login/>
-            </>
-        )
-    }
-
     return (
         <>
-         <Header/>
-            Успешная авторизация
+            <Router>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<AuthRedirect />} />
+                    <Route path="/login" element={
+                        <PublicRoute>
+                            <Login />
+                        </PublicRoute>
+                    } />
+                    <Route path="/register" element={
+                        <PublicRoute>
+                            <Register />
+                        </PublicRoute>
+                    } />
+                    <Route path="/main" element={<Main/>}/>
+                    <Route path="/users/add" element={<NewUserForm/>}/>
+                    <Route path="*" element={<Navigate to="/" />}/>
+                </Routes>
+            </Router>
         </>
     )
 }

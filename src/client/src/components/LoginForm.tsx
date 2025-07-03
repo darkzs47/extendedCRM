@@ -2,18 +2,15 @@ import {Button, Input} from "antd";
 import {type FC, type MouseEventHandler, useCallback, useState} from "react";
 import {memo} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {login} from "../store/user/actions.ts";
 import type {AppDispatch} from "../store/store.ts";
-import type {RootState} from "../store/store.ts";
 
 const LoginForm: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const {isAuthUser, user} = useSelector((state: RootState) => state.user)
-    console.log(isAuthUser, user)
     const toRegisterPageHandler: MouseEventHandler = useCallback(() => {
             navigate('/register')
         }, [navigate]

@@ -17,12 +17,10 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction):
 
         const payload = token.split(' ')[1];
         const decodedData = jwt.verify(payload, secret);
-        logger.info(decodedData);
 
         req.user = decodedData;
         next()
     } catch (e) {
-        console.error(e);
         res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Unauthorized"});
         return;
     }

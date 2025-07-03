@@ -4,6 +4,7 @@ import { Request, Response, } from "express";
 import hashPassword from "../../hash";
 import {RegisterDto} from "../../core/repositories/Auth/dto/RegisterDto";
 import { validationResult } from "express-validator";
+import {logger} from "../../logger";
 
 export class AuthController {
     constructor(private authService: AuthService) {}
@@ -39,9 +40,10 @@ export class AuthController {
     async logout(req: Request, res: Response): Promise<void> {
         try {
             const {refreshToken} = req.cookies;
-            const token = await this.authService.logout(refreshToken);
+            await this.authService.logout(refreshToken);
             res.clearCookie('refreshToken');
-            res.status(constants.HTTP_STATUS_OK);
+            res.status(constants.HTTP_STATUS_OK).json({ message: 'Logout successful' });
+            return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
         }

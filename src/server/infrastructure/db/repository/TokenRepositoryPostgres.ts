@@ -1,5 +1,6 @@
 import {ITokenRepository} from "../../../core/repositories/TokenRepository/ITokenRepository";
 import {TokenModel} from "../models/Token/TokenModel";
+import {logger} from "../../../logger";
 
 export class TokenRepositoryPostgres implements ITokenRepository {
     async findTokenByUserId(userId: number): Promise<TokenModel | null> {
@@ -21,8 +22,8 @@ export class TokenRepositoryPostgres implements ITokenRepository {
         return await TokenModel.create({ userId: userId, refreshToken });
     }
 
-    async removeToken(refreshToken: string): Promise<number> {
-        const tokenData = await TokenModel.destroy({ where: { refreshToken } });
-        return tokenData;
+    async removeToken(refreshToken: string): Promise<void> {
+        await TokenModel.destroy({ where: { refreshToken: refreshToken } });
+        return;
     }
 }

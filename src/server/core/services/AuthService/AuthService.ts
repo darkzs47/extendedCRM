@@ -53,9 +53,9 @@ export class AuthService {
         }
     }
 
-    async logout(refreshToken: string): Promise<number> {
-        const token = await this.tokenService.removeToken(refreshToken);
-        return token;
+    async logout(refreshToken: string): Promise<void> {
+        await this.tokenService.removeToken(refreshToken);
+        return;
     }
 
     async refresh(refreshToken: string): Promise<UserData> {
@@ -70,7 +70,6 @@ export class AuthService {
         if (!user) throw new Error('Unauthorized');
         const tokens = generateTokens({ id: user.id, role: user.role });
         await this.tokenService.saveToken(user.id, tokens.refreshToken);
-
         return {
             ...tokens,
             id: user.id,

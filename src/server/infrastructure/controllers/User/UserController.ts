@@ -27,7 +27,6 @@ export class UserController {
             res.json(users)
             return
         } catch (e) {
-            console.error(e);
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
             return
         }

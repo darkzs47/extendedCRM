@@ -9,8 +9,9 @@ export class TokenService {
         return await this.tokenRepository.saveToken(userId, refreshToken);
     }
 
-    async removeToken(refreshToken: string): Promise<number> {
-        return await this.tokenRepository.removeToken(refreshToken);
+    async removeToken(refreshToken: string): Promise<void> {
+        await this.tokenRepository.removeToken(refreshToken);
+        return
     }
 
     validateAccessToken(token: string): string | null | JwtPayload {
@@ -24,7 +25,7 @@ export class TokenService {
 
     validateRefreshToken(token: string): string | null | JwtPayload {
         try {
-            const userData = jwt.verify(token, process.env.SECRET_REFRESH as string);
+            const userData = jwt.verify(token, process.env.JWT_SECRET_REFRESH as string);
             return userData;
         } catch (e) {
             return null;

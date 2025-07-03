@@ -15,7 +15,10 @@ export const startServer = async () => {
         const app = express();
         app.use(pinoHttp({logger}));
         app.use(cookieParser())
-        app.use(cors())
+        app.use(cors({
+            origin: process.env.CLIENT_URL,
+            credentials: true,
+        }))
         app.use(bodyParser.json());
 
         app.use('/auth', authRoutes);

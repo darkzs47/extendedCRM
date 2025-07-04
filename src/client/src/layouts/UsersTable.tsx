@@ -8,6 +8,7 @@ import UserRow from "../components/UserRow.tsx";
 const UsersTable: FC = () => {
     const usersFromStore = useSelector((state: RootState) => state.users.users);
     const dispatch = useDispatch<AppDispatch>()
+    const [editingUserId, setEditingUserId] = useState<number | null>(null);
 
     const [users, setUsers] = useState<IUser[] | null>(null)
 
@@ -28,12 +29,18 @@ const UsersTable: FC = () => {
                 <th>Телефон</th>
                 <th>Роль</th>
                 <th>Поставщик</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
                 {users?.map((user) =>
                     <tr key={user.id}>
-                        <UserRow user={user}/>
+                        <UserRow
+                            user={user}
+                            isEditing={editingUserId === user.id}
+                            onEdit={() => setEditingUserId(user.id)}
+                            onCancel={() => setEditingUserId(null)}
+                        />
                     </tr>
                 )}
             </tbody>

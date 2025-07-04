@@ -21,10 +21,10 @@ export class UserController {
     //     }
     // }
 
-    async getUsers(req: Request, res: Response): Promise<void> {
+    async getAll(req: Request, res: Response): Promise<void> {
         try {
-            const users = await this.userService.getUsers();
-            res.json(users)
+            const users = await this.userService.getAll();
+            res.status(constants.HTTP_STATUS_OK).json(users)
             return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});

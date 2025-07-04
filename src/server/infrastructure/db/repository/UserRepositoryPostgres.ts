@@ -9,4 +9,10 @@ export class UserRepositoryPostgres implements IUserRepository{
         const user = await UserModel.create(UserMapper.toModel(dto));
         return UserMapper.toDomain(user);
     }
+
+    async getAll(): Promise<User[]> {
+        const usersModels = await UserModel.findAll();
+        const usersDomains = UserMapper.toDomains(usersModels)
+        return usersDomains;
+    }
 }

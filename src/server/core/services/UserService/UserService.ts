@@ -11,9 +11,8 @@ export class UserService{
     //     return this.userRepository.create(dto);
     // }
 
-    async getUsers(): Promise<User[]> {
-        const usersModels = await UserModel.findAll();
-        const usersDomains = UserMapper.toDomains(usersModels)
+    async getAll(): Promise<User[]> {
+        const usersDomains = await this.userRepository.getAll();
         return usersDomains;
     }
 }

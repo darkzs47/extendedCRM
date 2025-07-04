@@ -14,7 +14,7 @@ const router = Router();
 // });
 
 router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request, res: Response) => {
-    postgresUserController.getUsers(req, res);
+    postgresUserController.getAll(req, res);
 });
 
 export default router;

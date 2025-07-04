@@ -20,7 +20,6 @@ export class UserMapper {
 
     static toModel(dto: CreateUserDto | RegisterDto): Partial<UserModel> {
         return {
-            id: dto.id,
             secondName: dto.secondName,
             name: dto.name,
             lastName: dto.lastName,

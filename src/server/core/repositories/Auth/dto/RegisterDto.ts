@@ -1,6 +1,5 @@
 export class RegisterDto {
     constructor(
-        readonly id: number,
         readonly secondName: string,
         readonly name: string,
         readonly lastName: string,

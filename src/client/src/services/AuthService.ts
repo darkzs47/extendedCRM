@@ -9,7 +9,7 @@ export default class AuthService {
     }
 
     static async registration(request: RegisterRequest): Promise<AxiosResponse<AuthResponse>> {
-        return api.post<AuthResponse>('/auth/registration', {request});
+        return api.post<AuthResponse>('/auth/registration', request);
     }
 
     static async logout(): Promise<void> {

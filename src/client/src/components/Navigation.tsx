@@ -9,7 +9,6 @@ const Navigation: FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const isAuthUser = useSelector((state: RootState) => state.user.isAuthUser)
-    console.log(isAuthUser)
     const handleLogout: MouseEventHandler = useCallback(() => {
             dispatch(logout());
             navigate('/')

@@ -21,7 +21,7 @@ export const login = (email: string, password: string) => {
 }
 
 export const registration = (request: RegisterRequest) => {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch): Promise<void> => {
         try {
             const response = await AuthService.registration(request);
             localStorage.setItem("token", response.data.accessToken);

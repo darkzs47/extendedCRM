@@ -9,7 +9,7 @@ import Login from "./pages/Login.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
 import Main from "./pages/Main.tsx";
-import NewUserForm from "./components/NewUserForm.tsx";
+import NewUserForm from "./components/RegisterForm.tsx";
 import {BrowserRouter as Router} from "react-router";
 import AuthRedirect from "./AuthRedirect.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";

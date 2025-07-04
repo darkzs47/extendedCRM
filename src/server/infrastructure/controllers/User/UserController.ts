@@ -31,4 +31,15 @@ export class UserController {
             return
         }
     }
+
+    async delete(req: Request, res: Response): Promise<void> {
+        try {
+            const {id} = req.body;
+            await this.userService.delete(id)
+            res.status(constants.HTTP_STATUS_OK).json({ message: "Пользователь успешно удалён" })
+            return
+        } catch (e) {
+            res.status(constants.HTTP_STATUS_CONFLICT).json({message: (e as Error).message});
+        }
+    }
 }

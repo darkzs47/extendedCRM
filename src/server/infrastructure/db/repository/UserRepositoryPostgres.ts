@@ -15,4 +15,10 @@ export class UserRepositoryPostgres implements IUserRepository{
         const usersDomains = UserMapper.toDomains(usersModels)
         return usersDomains;
     }
+
+    async delete(id: number): Promise<void> {
+        const user = await UserModel.findByPk(id)
+        user ? user.destroy() : null;
+        return
+    }
 }

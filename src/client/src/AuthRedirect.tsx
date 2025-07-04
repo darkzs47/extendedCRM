@@ -5,7 +5,7 @@ import Login from "./pages/Login.tsx";
 import Main from "./pages/Main.tsx";
 
 const AuthRedirect = () => {
-    const isAuthUser = useSelector((state: RootState) => state.user.isAuthUser);
+    const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
 
     return (
         <>

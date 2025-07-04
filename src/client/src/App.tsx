@@ -2,14 +2,13 @@ import './App.css';
 import 'antd/dist/reset.css';
 import React, {useEffect} from "react";
 import Header from "./layouts/Header.tsx";
-import {checkAuth} from "./store/user/actions.ts";
+import {checkAuth} from "./store/currentUser/actions.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
 import Main from "./pages/Main.tsx";
-import NewUserForm from "./components/RegisterForm.tsx";
 import {BrowserRouter as Router} from "react-router";
 import AuthRedirect from "./AuthRedirect.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
@@ -38,7 +37,6 @@ function App() {
                         </PublicRoute>
                     } />
                     <Route path="/main" element={<Main/>}/>
-                    <Route path="/users/add" element={<NewUserForm/>}/>
                     <Route path="*" element={<Navigate to="/" />}/>
                 </Routes>
             </Router>

@@ -1,5 +1,5 @@
 import type {Dispatch} from "redux";
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../../types/user.ts";
+import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../../types/currentUser.ts";
 import AuthService from "../../services/AuthService.ts";
 import type {RegisterRequest} from "../../models/request/RegisterRequest.ts";
 import axios from "axios";

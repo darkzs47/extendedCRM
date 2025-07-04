@@ -1,24 +1,24 @@
-import {type UserActionTypes, type UserState} from "../../types/user.ts";
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../../types/user.ts";
+import {type UserActionTypes, type UserState} from "../../types/currentUser.ts";
+import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../../types/currentUser.ts";
 
 const initialState: UserState = {
-    user: null,
+    currentUser: null,
     isAuthUser: false,
 }
 
-const userReducer = (state = initialState, action: UserActionTypes): UserState => {
+const currentUserReducer = (state = initialState, action: UserActionTypes): UserState => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+                currentUser: action.payload,
                 isAuthUser: true
             }
         case LOGIN_FAILURE:
         case LOGOUT:
             return {
                 ...state,
-                user: null,
+                currentUser: null,
                 isAuthUser: false
             }
         default:
@@ -26,4 +26,4 @@ const userReducer = (state = initialState, action: UserActionTypes): UserState =
     }
 }
 
-export default userReducer;
+export default currentUserReducer;

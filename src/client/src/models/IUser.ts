@@ -8,4 +8,5 @@ export interface IUser {
     email: string,
     phone: string,
     role: UserRole,
+    supplierId?: number;
 }

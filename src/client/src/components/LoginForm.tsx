@@ -3,7 +3,7 @@ import {type FC, type MouseEventHandler, useCallback, useState} from "react";
 import {memo} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {login} from "../store/user/actions.ts";
+import {login} from "../store/currentUser/actions.ts";
 import type {AppDispatch} from "../store/store.ts";
 
 const LoginForm: FC = () => {

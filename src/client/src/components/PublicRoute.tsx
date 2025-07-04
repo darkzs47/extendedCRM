@@ -8,7 +8,7 @@ interface Props {
 }
 
 const PublicRoute = ({ children }: Props) => {
-    const isAuthUser = useSelector((state: RootState) => state.user.isAuthUser);
+    const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
 
     return isAuthUser ? <Navigate to="/" replace /> : children;
 };

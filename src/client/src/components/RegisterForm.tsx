@@ -2,7 +2,7 @@ import {type FC, memo, type MouseEventHandler, useCallback} from 'react'
 import {Button, Form, Input} from "antd";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../store/store.ts";
-import {registration} from "../store/user/actions.ts";
+import {registration} from "../store/currentUser/actions.ts";
 import {useNavigate} from "react-router-dom";
 import type {RegisterRequest} from "../models/request/RegisterRequest.ts";
 

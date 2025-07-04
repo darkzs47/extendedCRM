@@ -1,10 +1,11 @@
 import {type FC, memo} from 'react'
-
+import UsersTable from "../layouts/UsersTable.tsx";
 
 const Main: FC = () => {
+
     return (
         <main>
-            main page
+            <UsersTable/>
         </main>
     )
 }

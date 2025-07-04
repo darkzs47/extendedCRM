@@ -5,7 +5,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
 export interface UserState {
-    user: IUser | null;
+    currentUser: IUser | null;
     isAuthUser: boolean;
 }
 

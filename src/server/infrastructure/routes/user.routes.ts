@@ -17,4 +17,8 @@ router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request,
     postgresUserController.getAll(req, res);
 });
 
+router.delete('/delete', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
+    postgresUserController.delete(req, res);
+})
+
 export default router;

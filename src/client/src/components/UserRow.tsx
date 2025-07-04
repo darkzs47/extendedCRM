@@ -1,27 +1,38 @@
 import {type FC, memo, useCallback, useState} from "react";
 import type {IUser} from "../models/IUser.ts";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
-import {Button, Input, Tooltip} from "antd";
+import {Button, Input, Select, Tooltip} from "antd";
 import type {UserRole} from "../../../server/core/models/User/User.ts";
+import {useDispatch} from "react-redux";
+import type {AppDispatch} from "../store/store.ts";
+import {deleteUser} from "../store/users/actions.ts";
 
 interface UserRowProps {
     user: IUser;
     isEditing: boolean;
+    hideControls: boolean;
     onEdit: () => void;
     onCancel: () => void;
 }
 
-const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel }) => {
-    const [email, setEmail] = useState<string>(user.email)
-    const [phone, setPhone] = useState<string>(user.phone)
-    const [role, setRole] = useState<UserRole>(user.role)
+const roles: Record<string, string> = {
+    admin: "Администратор",
+    user: "Новый пользователь",
+    supplier: "Поставщик",
+    employee: "Сотрудник",
+}
+
+const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControls }) => {
+    const [email, setEmail] = useState<string>(user.email);
+    const [phone, setPhone] = useState<string>(user.phone);
+    const [role, setRole] = useState<UserRole>(user.role);
+    const dispatch = useDispatch<AppDispatch>();
     // const [supplierId, setSupplierId] = useState<string SELECT!!! | undefined>(user.supplierId)
 
-    const translatedRole = useCallback((role: string): string =>
-        role === 'admin' ? 'Администратор' :
-            (role === 'supplier' ? "Поставщик" :
-                (role === 'employee' ? 'Сотрудник' : 'Новый пользователь'))
-        , [])
+    const handleDeleteUser = useCallback((user: IUser) => {
+        const confirmString = `Вы действительно хотите удалить пользователя ${user.secondName} ${user.name} ${user.lastName}`;
+        if (confirm(confirmString)) dispatch(deleteUser({id: user.id}))
+    }, [dispatch]);
 
     return (
         <>
@@ -42,11 +53,13 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel }) => {
                             />
                         </td>
                         <td>
-                            <Input
-                                // @ts-ignore
-                                onChange={(e) => setRole(e.target.value)}
-                                value={role}
-                            />
+                            <Select value={role} onChange={setRole}>
+                                {Object.entries(roles).map(([key, label]) => (
+                                    <Select.Option key={key} value={key}>
+                                        {label}
+                                    </Select.Option>
+                                ))}
+                            </Select>
                         </td>
                         {/*<td>*/}
                         {/*    <Input*/}
@@ -77,26 +90,29 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel }) => {
                     <>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
-                        <td>{translatedRole(user.role)}</td>
+                        <td>{roles[user.role]}</td>
                         <td>{user.supplierId}</td>
-                        <td>
-                            <Tooltip title="Редактировать пользователя">
-                                <Button
-                                    icon={<EditOutlined />}
-                                    onClick={onEdit}
-                                    style={{ marginRight: 8 }}
-                                    shape="circle"
-                                />
-                            </Tooltip>
-                            <Tooltip title="Удалить пользователя">
-                                <Button
-                                    icon={<DeleteOutlined />}
-                                    danger
-                                    type="default"
-                                    shape="circle"
-                                />
-                            </Tooltip>
-                        </td>
+                        {!hideControls && (
+                            <td>
+                                <Tooltip title="Редактировать пользователя">
+                                    <Button
+                                        icon={<EditOutlined />}
+                                        onClick={onEdit}
+                                        style={{ marginRight: 8 }}
+                                        shape="circle"
+                                    />
+                                </Tooltip>
+                                <Tooltip title="Удалить пользователя">
+                                    <Button
+                                        icon={<DeleteOutlined />}
+                                        onClick={() => handleDeleteUser(user)}
+                                        danger
+                                        type="default"
+                                        shape="circle"
+                                    />
+                                </Tooltip>
+                            </td>
+                        )}
                     </>
                 )
             }

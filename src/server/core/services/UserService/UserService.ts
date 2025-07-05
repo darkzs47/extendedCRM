@@ -1,5 +1,6 @@
 import {IUserRepository} from "../../repositories/UserRepository/IUserRepository";
 import {User} from "../../models/User/User";
+import {UpdateUserDto} from "../../repositories/UserRepository/dto/UpdateUserDto";
 
 export class UserService{
     constructor(readonly userRepository: IUserRepository) {}
@@ -15,6 +16,11 @@ export class UserService{
 
     async delete(id: number): Promise<void> {
         await this.userRepository.delete(id);
-        return
+        return;
+    }
+
+    async update(dto: UpdateUserDto): Promise<void> {
+        await this.userRepository.update(dto);
+        return;
     }
 }

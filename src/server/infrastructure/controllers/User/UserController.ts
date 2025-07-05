@@ -4,6 +4,7 @@ import {constants} from "http2";
 import { Request, Response } from 'express';
 import hashPassword from "../../../hash";
 import {UserModel} from "../../db/models/User/UserModel";
+import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 
 export class UserController {
     constructor(readonly userService: UserService) {}
@@ -40,6 +41,16 @@ export class UserController {
             return
         } catch (e) {
             res.status(constants.HTTP_STATUS_CONFLICT).json({message: (e as Error).message});
+        }
+    }
+
+    async update(req: Request, res: Response): Promise<void> {
+        try {
+            const {id, role, email, phone} = req.body;
+            await this.userService.update(new UpdateUserDto(id, email, phone, role))
+            res.status(constants.HTTP_STATUS_OK).json({ message: "Данные успешно изменены" })
+        } catch (e) {
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
         }
     }
 }

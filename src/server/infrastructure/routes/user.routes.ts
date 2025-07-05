@@ -20,5 +20,8 @@ router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request,
 router.delete('/delete', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
     postgresUserController.delete(req, res);
 })
+router.patch('/update', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
+    postgresUserController.update(req, res);
+})
 
 export default router;

@@ -4,6 +4,7 @@ import {UserService} from "../../core/services/UserService/UserService";
 import {UserRepositoryPostgres} from "../db/repository/UserRepositoryPostgres";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
+import {updateUserValidation} from "../validations/updateUserValidation";
 
 const postgresUserController = new UserController(new UserService(new UserRepositoryPostgres()));
 
@@ -20,8 +21,14 @@ router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request,
 router.delete('/delete', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
     postgresUserController.delete(req, res);
 })
-router.patch('/update', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
-    postgresUserController.update(req, res);
-})
+router.patch(
+    '/update',
+    AuthMiddleware,
+    RoleMiddleware(["admin"]),
+    updateUserValidation,
+    (req: Request, res: Response) => {
+        postgresUserController.update(req, res);
+    }
+)
 
 export default router;

@@ -5,6 +5,7 @@ import { Request, Response } from 'express';
 import hashPassword from "../../../hash";
 import {UserModel} from "../../db/models/User/UserModel";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
+import {validationResult} from "express-validator";
 
 export class UserController {
     constructor(readonly userService: UserService) {}
@@ -46,6 +47,11 @@ export class UserController {
 
     async update(req: Request, res: Response): Promise<void> {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Некорректные данные", errors})
+                return
+            }
             const {id, role, email, phone} = req.body;
             await this.userService.update(new UpdateUserDto(id, email, phone, role))
             res.status(constants.HTTP_STATUS_OK).json({ message: "Данные успешно изменены" })

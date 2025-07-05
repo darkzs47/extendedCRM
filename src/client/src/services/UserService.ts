@@ -2,6 +2,7 @@ import type {AxiosResponse} from "axios";
 import api from "../http/index";
 import type {UserResponse} from "../models/response/UserResponse.ts";
 import type {DeleteRequest} from "../models/request/DeleteRequest.ts";
+import type {UpdateUserRequest} from "../models/request/UpdateUserRequest.ts";
 
 export default class UserService {
     static getAllUsers(): Promise<AxiosResponse<UserResponse>> {
@@ -12,5 +13,9 @@ export default class UserService {
         return api.delete<void>("users/delete", {
             data: request
         });
+    }
+
+    static updateUser(request: UpdateUserRequest): Promise<AxiosResponse<void>> {
+        return api.patch<void>("users/update", request);
     }
 }

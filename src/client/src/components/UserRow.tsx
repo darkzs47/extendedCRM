@@ -5,7 +5,7 @@ import {Button, Input, Select, Tooltip} from "antd";
 import type {UserRole} from "../../../server/core/models/User/User.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../store/store.ts";
-import {deleteUser} from "../store/users/actions.ts";
+import {deleteUser, updateUser} from "../store/users/actions.ts";
 
 interface UserRowProps {
     user: IUser;
@@ -22,6 +22,8 @@ const roles: Record<string, string> = {
     employee: "Сотрудник",
 }
 
+export type UserDataForUpdate = Omit<IUser, "name" | "secondName" | "lastName">
+
 const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControls }) => {
     const [email, setEmail] = useState<string>(user.email);
     const [phone, setPhone] = useState<string>(user.phone);
@@ -33,6 +35,20 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
         const confirmString = `Вы действительно хотите удалить пользователя ${user.secondName} ${user.name} ${user.lastName}`;
         if (confirm(confirmString)) dispatch(deleteUser({id: user.id}))
     }, [dispatch]);
+
+    const handleSaveChanges = useCallback((user: IUser) => {
+        const confirmString = `Вы действительно хотите изменить данные пользователя ${user.secondName} ${user.name} ${user.lastName}`;
+        if (confirm(confirmString)) {
+            const updatedData: UserDataForUpdate = {
+                id: user.id,
+                email,
+                phone,
+                role,
+                // supplierId,
+            };
+            dispatch(updateUser(updatedData))
+        }
+    }, [dispatch, email, phone, role, user])
 
     return (
         <>
@@ -70,6 +86,7 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
+                                    onClick={() => {handleSaveChanges(user)}}
                                     icon={<CheckOutlined />}
                                     shape="circle"
                                     style={{color: '#2fff00'}}

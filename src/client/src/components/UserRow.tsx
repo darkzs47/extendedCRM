@@ -36,7 +36,7 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
         if (confirm(confirmString)) dispatch(deleteUser({id: user.id}))
     }, [dispatch]);
 
-    const handleSaveChanges = useCallback((user: IUser) => {
+    const handleSaveChanges = useCallback(async (user: IUser) => {
         const confirmString = `Вы действительно хотите изменить данные пользователя ${user.secondName} ${user.name} ${user.lastName}`;
         if (confirm(confirmString)) {
             const updatedData: UserDataForUpdate = {
@@ -46,7 +46,13 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
                 role,
                 // supplierId,
             };
-            dispatch(updateUser(updatedData))
+            const result = await dispatch(updateUser(updatedData))
+            if (!result.success) {
+                setRole(user.role)
+                setPhone(user.phone)
+                setEmail(user.email)
+            }
+            onCancel()
         }
     }, [dispatch, email, phone, role, user])
 

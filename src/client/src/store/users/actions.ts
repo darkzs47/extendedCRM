@@ -25,11 +25,13 @@ export const deleteUser = (request: DeleteRequest) =>
     }
 
 export const updateUser = (request: UpdateUserRequest) =>
-    async (dispatch: Dispatch): Promise<void> => {
+    async (dispatch: Dispatch): Promise<{ success: boolean }> => {
         try {
             await UserService.updateUser(request);
             dispatch({ type: USER_UPDATE, payload: request });
+            return { success: true };
         } catch (e) {
             dispatch({ type: USERS_FAILURE });
+            return { success: false };
         }
     }

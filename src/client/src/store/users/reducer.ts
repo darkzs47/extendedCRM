@@ -39,7 +39,6 @@ export const usersReducer = (state = initialState, action: UsersActionTypes) => 
         case USERS_FAILURE:
             return {
                 ...state,
-                users: null,
             }
         default:
             return state;

@@ -6,6 +6,7 @@ import {registrationValidation} from "../validations/registerValidation";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {TokenService} from "../../core/services/TokenService/TokenService";
 import {TokenRepositoryPostgres} from "../db/repository/TokenRepositoryPostgres";
+import {loginValidation} from "../validations/authValidation";
 
 const tokenRepository = new TokenRepositoryPostgres();
 const tokenService = new TokenService(tokenRepository);
@@ -15,10 +16,9 @@ const authService = new AuthService(authRepository, tokenService);
 
 const authController = new AuthController(authService);
 
-
 const router = Router();
 
-router.post('/login', (req: Request, res: Response) => {
+router.post('/login', loginValidation, (req: Request, res: Response) => {
     authController.login(req, res);
 });
 

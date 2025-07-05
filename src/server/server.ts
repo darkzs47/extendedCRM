@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import pinoHttp from 'pino-http';
 import cookieParser from "cookie-parser"
@@ -7,6 +6,7 @@ import { logger } from './logger';
 import { sequelize } from './infrastructure/db/orm/sequelize';
 import authRoutes from './infrastructure/routes/auth.routes';
 import userRoutes from './infrastructure/routes/user.routes';
+import customerRoutes from './infrastructure/routes/customer.routes';
 
 export const startServer = async () => {
     try {
@@ -23,6 +23,7 @@ export const startServer = async () => {
 
         app.use('/auth', authRoutes);
         app.use('/users', userRoutes);
+        app.use('/customers', customerRoutes)
 
         const port = process.env.PORT;
         app.listen(port, () => {

@@ -18,11 +18,11 @@ router.get('/', AuthMiddleware, RoleMiddleware(["admin", "user"]),(req: Request,
     postgresUserController.getAll(req, res);
 });
 
-router.delete('/delete', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
+router.delete('/:id', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
     postgresUserController.delete(req, res);
 })
 router.patch(
-    '/update',
+    '/:id',
     AuthMiddleware,
     RoleMiddleware(["admin"]),
     updateUserValidation,

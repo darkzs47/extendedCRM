@@ -36,8 +36,8 @@ export class UserController {
 
     async delete(req: Request, res: Response): Promise<void> {
         try {
-            const {id} = req.body;
-            await this.userService.delete(id)
+            const {id} = req.params;
+            await this.userService.delete(Number(id))
             res.status(constants.HTTP_STATUS_OK).json({ message: "Пользователь успешно удалён" })
             return
         } catch (e) {
@@ -52,8 +52,9 @@ export class UserController {
                 res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Некорректные данные", errors})
                 return
             }
-            const {id, role, email, phone} = req.body;
-            await this.userService.update(new UpdateUserDto(id, email, phone, role))
+            const {id} = req.params;
+            const {role, email, phone} = req.body;
+            await this.userService.update(new UpdateUserDto(Number(id), email, phone, role))
             res.status(constants.HTTP_STATUS_OK).json({ message: "Данные успешно изменены" })
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});

@@ -6,11 +6,6 @@ const Header: FC = () => {
     return (
         <header>
             <Navigation/>
-
-            <h3>
-                Project
-            </h3>
-
         </header>
     )
 }

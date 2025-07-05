@@ -8,10 +8,11 @@ import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
-import Main from "./pages/Main.tsx";
+import AdminMain from "./pages/AdminMain.tsx";
 import {BrowserRouter as Router} from "react-router";
 import AuthRedirect from "./AuthRedirect.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
+import Customers from "./pages/Customers.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -36,7 +37,9 @@ function App() {
                             <Register />
                         </PublicRoute>
                     } />
-                    <Route path="/main" element={<Main/>}/>
+                    <Route path="/admin" element={<AdminMain/>}/>
+                    <Route path="/customers" element={<Customers/>}/>
+
                     <Route path="*" element={<Navigate to="/" />}/>
                 </Routes>
             </Router>

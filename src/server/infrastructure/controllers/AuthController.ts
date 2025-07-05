@@ -11,6 +11,11 @@ export class AuthController {
 
     async login(req: Request, res: Response): Promise<void> {
         try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Ошибка авторизации", errors})
+                return
+            }
             const {email, password} = req.body;
             const userData = await this.authService.login(email, password);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});

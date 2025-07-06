@@ -1,7 +1,8 @@
-import {type FC, memo} from "react";
-import {EditOutlined, DeleteOutlined} from '@ant-design/icons';
+import {type FC, memo, useCallback} from "react";
+import {DeleteOutlined, EyeOutlined} from '@ant-design/icons';
 import {Button, Tooltip} from "antd";
 import type {ICustomer} from "../models/ICustomer.ts";
+import {useNavigate} from "react-router-dom";
 
 interface CustomerRowProps {
     customer: ICustomer;
@@ -9,20 +10,27 @@ interface CustomerRowProps {
 
 const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
 
+    const navigate = useNavigate()
+
+    const handleShowDetails = useCallback((customer: ICustomer) => {
+        const id = customer.id;
+        navigate(`/customers/:${id}`)
+    }, [customer])
+
     return (
         <>
-            <td>{customer.company}</td>
+            <td>{customer.companyName}</td>
             <td>{customer.email}</td>
             <td>{customer.phone}</td>
             <td>
-                <Tooltip title="Редактировать пользователя">
+                <Tooltip title="Подробнее">
                     <Button
-                        icon={<EditOutlined/>}
-                        style={{marginRight: 8}}
-                        shape="circle"
+                        icon={<EyeOutlined />}
+                        type="default"
+                        onClick={() => handleShowDetails(customer)}
                     />
                 </Tooltip>
-                <Tooltip title="Удалить пользователя">
+                <Tooltip title="Удалить организацию">
                     <Button
                         icon={<DeleteOutlined/>}
                         danger

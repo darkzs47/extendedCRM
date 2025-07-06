@@ -39,6 +39,7 @@ function App() {
                     } />
                     <Route path="/admin" element={<AdminMain/>}/>
                     <Route path="/customers" element={<Customers/>}/>
+                    <Route path="/customers/:id" element={<CustomerInfo/>}/>
 
                     <Route path="*" element={<Navigate to="/" />}/>
                 </Routes>

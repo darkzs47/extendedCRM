@@ -2,10 +2,12 @@ import {legacy_createStore as createStore, combineReducers, applyMiddleware} fro
 import currentUserReducer from "./currentUser/reducer.ts";
 import {thunk, type ThunkDispatch} from 'redux-thunk';
 import {usersReducer} from "./users/reducer.ts";
+import {customersReducer} from "./customers/reducer.ts";
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
     users: usersReducer,
+    customers: customersReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

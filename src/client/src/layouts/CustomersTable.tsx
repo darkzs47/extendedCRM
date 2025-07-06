@@ -1,24 +1,32 @@
-import {type FC, memo, useState} from "react";
+import {type FC, memo, useEffect, useState} from "react";
 import type {ICustomer} from "../models/ICustomer.ts";
 import CustomerRow from "../components/CustomerRow.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../store/store.ts";
+import AddIdentityButton from "../components/AddIdentityButton.tsx";
+import { getAll } from "../store/customers/actions.ts";
 
 const CustomersTable: FC = () => {
+    const dispatch = useDispatch<AppDispatch>()
+    const customersFromStore = useSelector((state: RootState) => state.customers.customers)
 
     const [customers, setCustomers] = useState<ICustomer[] | null>(null);
 
+    const handleAddNewCustomer = () => {
+
+    }
+
+    useEffect(() => {
+        dispatch(getAll());
+    }, [dispatch]);
+
+    useEffect(() => {
+        setCustomers(customersFromStore);
+    }, [customersFromStore]);
+
     return (
         <>
-            <div>
-            <a href='#' style={{width: '5rem', height: '5rem'}}>
-                {/* ВЫНЕСТИ В КОМПОНЕНТ КНОПКУ И ИСПОЛЬЗОВАТЬ ЕЕ НА ВСЕХ СТРАНИЦАХ */}
-                <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 4v16m8-8H4"/>
-                </svg>
-                Добавить
-            </a>
-        </div>
+            <AddIdentityButton handler={() => handleAddNewCustomer}/>
         <table>
             <thead>
             <tr>

@@ -49,4 +49,7 @@ export class BranchModel extends Model {
 
     @Column
     supplierId?: number;
+
+    @Column
+    isMain!: boolean;
 }

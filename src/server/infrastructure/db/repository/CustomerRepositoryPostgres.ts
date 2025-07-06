@@ -10,15 +10,6 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
             include: [
                 {
                     model: BranchModel,
-                    as: 'mainBranch',
-                    include: [
-                        { model: AddressModel, as: 'addressActual' },
-                        { model: AddressModel, as: 'addressLegal' },
-                        { model: RepresentativeModel, as: 'representative' },
-                    ],
-                },
-                {
-                    model: BranchModel, // все остальные филиалы
                     as: 'branches',
                     include: [
                         { model: AddressModel, as: 'addressActual' },
@@ -27,7 +18,7 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                     ],
                 },
                 {
-                    model: RepresentativeModel, // прямые представители (не из филиалов)
+                    model: RepresentativeModel,
                     as: 'representatives',
                 },
             ],

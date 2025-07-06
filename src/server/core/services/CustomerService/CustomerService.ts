@@ -10,8 +10,9 @@ export class CustomerService {
         return customers;
     }
 
-    async getById(id: number): Promise<CustomerModel | null> {
+    async getById(id: number): Promise<CustomerModel> {
         const customer = await this.customerRepository.getById(id)
-        return customer
+        if (!customer) throw new Error(`Customer not found`);
+        return customer;
     }
 }

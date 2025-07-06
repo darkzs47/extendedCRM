@@ -15,12 +15,14 @@ export class UserService{
     }
 
     async delete(id: number): Promise<void> {
-        await this.userRepository.delete(id);
+        const deleteResult = await this.userRepository.delete(id);
+        if (!deleteResult) throw new Error("User deleted failed");
         return;
     }
 
     async update(dto: UpdateUserDto): Promise<void> {
-        await this.userRepository.update(dto);
+        const user = await this.userRepository.update(dto);
+        if (!user) throw new Error("User updated failed");
         return;
     }
 }

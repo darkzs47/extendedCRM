@@ -17,17 +17,15 @@ export class UserRepositoryPostgres implements IUserRepository{
         return usersDomains;
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(id: number): Promise<void | null> {
         const user = await UserModel.findByPk(id)
-        user ? user.destroy() : null;
-        return;
+        return user ? user.destroy() : null;
     }
 
-    async update(dto: UpdateUserDto): Promise<void> {
+    async update(dto: UpdateUserDto): Promise<UserModel | null> {
         const user = await UserModel.findByPk(dto.id)
-        user ? user.update(
+        return user ? user.update(
             { email: dto.email, phone: dto.phone, role: dto.role, supplierId: dto.supplierId ?? null },
         ) : null;
-        return;
     }
 }

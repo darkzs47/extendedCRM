@@ -33,6 +33,10 @@ export class TokenService {
     }
 
     async findToken(refreshToken: string) {
-        return await this.tokenRepository.findToken(refreshToken);
+        const token = await this.tokenRepository.findToken(refreshToken);
+
+        if (!token) throw new Error("Token not found");
+
+        return token;
     }
 }

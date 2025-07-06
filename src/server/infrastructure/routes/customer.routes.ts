@@ -9,8 +9,12 @@ const postgresCustomerController = new CustomerController(new CustomerService(ne
 
 const router = Router();
 
-router.get('/',  (req: Request, res: Response) => {
+router.get('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresCustomerController.getAll(req, res);
 });
+
+router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
+    postgresCustomerController.getById(req, res)
+})
 
 export default router;

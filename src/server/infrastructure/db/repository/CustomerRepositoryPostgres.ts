@@ -6,7 +6,12 @@ import {RepresentativeModel} from "../models/RepresentativeModel/RepresentativeM
 
 export class CustomerRepositoryPostgres implements ICustomerRepository {
     async getAll(): Promise<CustomerModel[]> {
-        const customersModels = await CustomerModel.findAll({
+        const customersModels = await CustomerModel.findAll();
+        return customersModels;
+    }
+
+    async getById(id: number): Promise<CustomerModel | null> {
+        const customersModels = await CustomerModel.findByPk(id ,{
             include: [
                 {
                     model: BranchModel,

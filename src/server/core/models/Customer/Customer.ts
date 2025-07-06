@@ -9,6 +9,5 @@ export class ICustomer {
         readonly email: string,
         readonly phone: string,
         readonly discount: number,
-        readonly mainBranchId: number,
     ) {}
 }

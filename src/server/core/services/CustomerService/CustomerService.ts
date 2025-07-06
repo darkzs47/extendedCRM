@@ -9,4 +9,9 @@ export class CustomerService {
         const customers = await this.customerRepository.getAll();
         return customers;
     }
+
+    async getById(id: number): Promise<CustomerModel | null> {
+        const customer = await this.customerRepository.getById(id)
+        return customer
+    }
 }

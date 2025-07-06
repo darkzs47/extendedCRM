@@ -1,4 +1,4 @@
-import type {ICustomer} from "./ICustomer.ts";
+import type {ICustomerFullInfo} from "./ICustomerFullInfo.ts";
 import type {IAddress} from "./IAddress.ts";
 import type {IRepresentative} from "./IRepresentative.ts";
 
@@ -17,6 +17,6 @@ export interface IBranch {
     addressActual: IAddress;
     addressLegal: IAddress;
     representative: IRepresentative;
-    customer?: ICustomer;
+    customer?: ICustomerFullInfo;
     // supplier?: ISupplier;
 }

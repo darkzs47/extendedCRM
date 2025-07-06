@@ -5,17 +5,17 @@ import type {DeleteRequest} from "../models/request/DeleteRequest.ts";
 import type {UpdateUserRequest} from "../models/request/UpdateUserRequest.ts";
 
 export default class UserService {
-    static getAllUsers(): Promise<AxiosResponse<UserResponse>> {
+    static async getAllUsers(): Promise<AxiosResponse<UserResponse>> {
         return api.get<UserResponse>("/users/");
     }
 
-    static deleteUser(request: DeleteRequest): Promise<AxiosResponse<void>> {
+    static async deleteUser(request: DeleteRequest): Promise<AxiosResponse<void>> {
         return api.delete<void>(`users/${request.id}`, {
             data: request
         });
     }
 
-    static updateUser(request: UpdateUserRequest): Promise<AxiosResponse<void>> {
+    static async updateUser(request: UpdateUserRequest): Promise<AxiosResponse<void>> {
         return api.patch<void>(`users/${request.id}`, request);
     }
 }

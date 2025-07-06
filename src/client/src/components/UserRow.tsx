@@ -58,7 +58,7 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
 
     return (
         <>
-            <th>{user.secondName} {user.name} {user.lastName}</th>
+            <td>{user.secondName} {user.name} {user.lastName}</td>
             {
                 isEditing ? (
                     <>

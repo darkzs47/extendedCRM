@@ -1,4 +1,4 @@
-import type {ICustomer} from "./ICustomer.ts";
+import type {ICustomerFullInfo} from "./ICustomerFullInfo.ts";
 
 export interface IRepresentative {
     id: number;
@@ -12,6 +12,6 @@ export interface IRepresentative {
     customerId: number,
     // supplierId: number,
 
-    customer: ICustomer,
+    customer: ICustomerFullInfo,
     // supplier: ISupplier,
 }

@@ -5,6 +5,9 @@ interface Props {
 }
 
 const AddIdentityButton: FC<Props> = ({ handler }) => {
+    () => {
+        handler()
+    }
     return (
         <div>
             <a href='#' style={{width: '5rem', height: '5rem'}}>
@@ -12,7 +15,7 @@ const AddIdentityButton: FC<Props> = ({ handler }) => {
                 <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                           d="M12 4v16m8-8H4"/>
                 </svg>
                 Добавить

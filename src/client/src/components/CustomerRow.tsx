@@ -14,7 +14,7 @@ const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
 
     const handleShowDetails = useCallback((customer: ICustomer) => {
         const id = customer.id;
-        navigate(`/customers/:${id}`)
+        navigate(`/customers/${id}`)
     }, [customer])
 
     return (

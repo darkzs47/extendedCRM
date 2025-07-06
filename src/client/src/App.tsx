@@ -13,6 +13,7 @@ import {BrowserRouter as Router} from "react-router";
 import AuthRedirect from "./AuthRedirect.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
 import Customers from "./pages/Customers.tsx";
+import CustomerInfo from "./pages/CustomerInfo.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();

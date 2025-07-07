@@ -12,10 +12,6 @@ const CustomersTable: FC = () => {
 
     const [customers, setCustomers] = useState<ICustomer[] | null>(null);
 
-    const handleAddNewCustomer = () => {
-
-    }
-
     useEffect(() => {
         dispatch(getAll());
     }, [dispatch]);
@@ -26,7 +22,7 @@ const CustomersTable: FC = () => {
 
     return (
         <>
-            <AddIdentityButton handler={() => handleAddNewCustomer}/>
+            <AddIdentityButton identity={"customers"}/>
         <table>
             <thead>
             <tr>

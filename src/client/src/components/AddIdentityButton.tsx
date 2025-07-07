@@ -1,15 +1,20 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useCallback} from "react";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
-    handler: () => void;
+    identity: string;
 }
 
-const AddIdentityButton: FC<Props> = ({ handler }) => {
-    () => {
-        handler()
-    }
+const AddIdentityButton: FC<Props> = ({ identity }) => {
+
+    const navigate = useNavigate()
+
+    const toAddIdentityPage = useCallback(() => {
+        navigate(`/${identity}/add`)
+    }, [])
+
     return (
-        <div>
+        <div onClick={toAddIdentityPage}>
             <a href='#' style={{width: '5rem', height: '5rem'}}>
                 {/* ВЫНЕСТИ В КОМПОНЕНТ КНОПКУ И ИСПОЛЬЗОВАТЬ ЕЕ НА ВСЕХ СТРАНИЦАХ */}
                 <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none"

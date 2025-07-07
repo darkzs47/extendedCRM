@@ -16,5 +16,9 @@ router.get('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Req
 router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresCustomerController.getById(req, res)
 })
+// AuthMiddleware, RoleMiddleware(['admin', 'employee'])
+router.post('/', (req, res) => {
+    postgresCustomerController.create(req, res)
+})
 
 export default router;

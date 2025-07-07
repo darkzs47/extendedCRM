@@ -1,4 +1,4 @@
-export class ICustomer {
+export class Customer {
     constructor(
         readonly id: number,
         readonly companyName: string,

@@ -19,7 +19,7 @@ export class RepresentativeModel extends Model {
     lastName!: string;
 
     @Column
-    position!: string;
+    representativePosition!: string;
 
     @Column
     phone!: string;
@@ -28,7 +28,7 @@ export class RepresentativeModel extends Model {
     email!: string;
 
     @Column
-    isMain?: boolean;
+    isMain!: boolean;
 
     @ForeignKey(() => CustomerModel)
     @Column

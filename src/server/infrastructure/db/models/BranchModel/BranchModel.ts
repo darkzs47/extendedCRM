@@ -42,10 +42,10 @@ export class BranchModel extends Model {
 
     @ForeignKey(() => CustomerModel)
     @Column
-    customerId!: number;
+    customerId?: number;
 
     @BelongsTo(() => CustomerModel, { foreignKey: 'customerId', as: 'customer' })
-    customer!: CustomerModel;
+    customer?: CustomerModel;
 
     @Column
     supplierId?: number;

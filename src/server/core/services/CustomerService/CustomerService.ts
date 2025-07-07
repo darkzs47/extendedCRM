@@ -1,5 +1,6 @@
 import {ICustomerRepository} from "../../repositories/CustomerRepository/ICustomerRepository";
 import {CustomerModel} from "../../../infrastructure/db/models/CustomerModel/CustomerModel";
+import {CreateCustomerDto} from "../../repositories/CustomerRepository/dto/CreateCustomerDto";
 
 export class CustomerService {
 
@@ -14,5 +15,11 @@ export class CustomerService {
         const customer = await this.customerRepository.getById(id)
         if (!customer) throw new Error(`Customer not found`);
         return customer;
+    }
+
+    async create(dto: CreateCustomerDto): Promise<CustomerModel> {
+        const newCustomer = await this.customerRepository.create(dto);
+        if (!newCustomer) throw new Error(`Create error`);
+        return newCustomer;
     }
 }

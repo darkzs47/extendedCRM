@@ -26,7 +26,6 @@ const CustomerInfo: FC = () => {
         setCustomer(customerFromStore)
     }, [customerFromStore])
 
-
     return (
         <main>
             <div>
@@ -56,8 +55,8 @@ const CustomerInfo: FC = () => {
             <div>
                 Филиалы
                 {customer?.branches.map((branch) =>
-                    <>
-                        <div key={branch.id}>
+                    <div key={branch.id}>
+                        <div>
                             Главный филиал: {branch.isMain ? 'Да' : 'Нет'} <br/>
                             Название: {branch.name} <br/>
                             Email: {branch.email} <br/>
@@ -105,7 +104,7 @@ const CustomerInfo: FC = () => {
                                 </div>
                             }
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </main>

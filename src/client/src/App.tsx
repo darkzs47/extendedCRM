@@ -14,6 +14,7 @@ import AuthRedirect from "./AuthRedirect.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
 import Customers from "./pages/Customers.tsx";
 import CustomerInfo from "./pages/CustomerInfo.tsx";
+import AddCustomer from "./pages/AddCustomer.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -39,8 +40,10 @@ function App() {
                         </PublicRoute>
                     } />
                     <Route path="/admin" element={<AdminMain/>}/>
+
                     <Route path="/customers" element={<Customers/>}/>
                     <Route path="/customers/:id" element={<CustomerInfo/>}/>
+                    <Route path="/customers/add" element={<AddCustomer/>}/>
 
                     <Route path="*" element={<Navigate to="/" />}/>
                 </Routes>

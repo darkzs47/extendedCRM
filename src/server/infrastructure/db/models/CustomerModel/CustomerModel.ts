@@ -31,7 +31,7 @@ export class CustomerModel extends Model {
     phone!: string;
 
     @Column
-    discount!: string;
+    discount!: number;
 
     @HasMany(() => BranchModel, { foreignKey: 'customerId', as: 'branches' })
     branches!: BranchModel[];

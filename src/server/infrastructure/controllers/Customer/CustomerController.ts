@@ -2,6 +2,8 @@ import {constants} from "http2";
 import {Request, Response} from "express";
 import {CustomerService} from "../../../core/services/CustomerService/CustomerService";
 import {CustomerModel} from "../../db/models/CustomerModel/CustomerModel";
+import {logger} from "../../../logger";
+import {CreateCustomerDto} from "../../../core/repositories/CustomerRepository/dto/CreateCustomerDto";
 
 type CustomerShort = Pick<CustomerModel, 'id' | 'companyName' | 'phone' | 'email'>;
 
@@ -29,6 +31,16 @@ export class CustomerController {
         } catch (e) {
             res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message});
             return
+        }
+    }
+
+    async create(req: Request, res: Response): Promise<void> {
+        try {
+            const { customer, branch, representative } = req.body;
+            const newCustomer = await this.customerService.create(new CreateCustomerDto(customer, branch, representative));
+            res.status(constants.HTTP_STATUS_CREATED).json({message: 'Клиент добавлен'})
+        } catch (e) {
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
         }
     }
 }

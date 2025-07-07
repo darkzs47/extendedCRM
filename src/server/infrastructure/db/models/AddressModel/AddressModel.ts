@@ -18,16 +18,16 @@ export class AddressModel extends Model {
     city!: string;
 
     @Column
-    street!: number;
+    street!: string;
 
     @Column
-    house!: number;
+    house!: string;
 
     @Column
-    building?: number;
+    building?: string;
 
     @Column
-    postCode!: number;
+    postCode!: string;
 
     @HasMany(() => BranchModel, { foreignKey: 'addressActualId' })
     actualAddressBranches!: BranchModel[];

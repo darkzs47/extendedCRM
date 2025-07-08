@@ -13,11 +13,12 @@ const RegisterForm: FC = () => {
     const navigate = useNavigate();
 
     const toLoginPageHandler: MouseEventHandler = useCallback(() => {
-        navigate('/')
+        navigate('/login')
     }, [navigate])
 
-    const handleRegister = useCallback((values: RegisterRequest) => {
-            dispatch(registration(values));
+    const handleRegister = useCallback(async (values: RegisterRequest) => {
+            const regResult = await dispatch(registration(values));
+            if (regResult) navigate('customers')
         }, []
     );
 

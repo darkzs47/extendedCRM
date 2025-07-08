@@ -16,9 +16,10 @@ const LoginForm: FC = () => {
         }, [navigate]
     );
 
-    const handleLogin: MouseEventHandler = useCallback(() => {
-            dispatch(login(email, password));
-        }, [email, password]
+    const handleLogin: MouseEventHandler = useCallback(async() => {
+            const authResult = await dispatch(login(email, password));
+            if (authResult) navigate('/customers')
+         }, [email, password]
     );
 
     return (

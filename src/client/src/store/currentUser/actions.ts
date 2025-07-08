@@ -7,29 +7,29 @@ import type {AuthResponse} from "../../models/response/AuthResponse.ts";
 import {API_URL} from "../../http";
 
 export const login = (email: string, password: string) => {
-    return async (dispatch: Dispatch): Promise<void> => {
+    return async (dispatch: Dispatch): Promise<{ success: boolean }> => {
         try {
             const response = await AuthService.login(email, password);
             localStorage.setItem("token", response.data.accessToken);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+            return {success: true};
         } catch (e) {
-            // @ts-ignore
-            console.error(e.response?.data?.error);
             dispatch({ type: LOGIN_FAILURE });
+            return {success: false};
         }
     }
 }
 
 export const registration = (request: RegisterRequest) => {
-    return async (dispatch: Dispatch): Promise<void> => {
+    return async (dispatch: Dispatch): Promise<{ success: boolean }> => {
         try {
             const response = await AuthService.registration(request);
             localStorage.setItem("token", response.data.accessToken);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+            return {success: true};
         } catch (e) {
-            // @ts-ignore
-            console.error(e.response?.data?.error);
             dispatch({ type: LOGIN_FAILURE });
+            return {success: false};
         }
     }
 }
@@ -41,8 +41,6 @@ export const logout = () => {
             localStorage.removeItem("token");
             dispatch({ type: LOGOUT });
         } catch (e) {
-            // @ts-ignore
-            console.error(e.response?.data?.error);
             dispatch({ type: LOGIN_FAILURE });
         }
     }
@@ -55,8 +53,6 @@ export const checkAuth = () => {
             localStorage.setItem("token", response.data.accessToken);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data });
         } catch (e) {
-            // @ts-ignore
-            console.error(e.response?.data?.error);
             dispatch({ type: LOGIN_FAILURE });
         }
     }

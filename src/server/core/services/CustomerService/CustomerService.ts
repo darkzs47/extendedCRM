@@ -29,4 +29,10 @@ export class CustomerService {
         if (!customer) throw new Error(`Customer not found`);
         return customer;
     }
+
+    async delete(id: number): Promise<void> {
+        const deleteResult = await this.customerRepository.delete(id);
+        if (!deleteResult) throw new Error(`Customer not found`);
+        return;
+    }
 }

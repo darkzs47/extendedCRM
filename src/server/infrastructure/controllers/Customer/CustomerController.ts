@@ -55,4 +55,14 @@ export class CustomerController {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message})
         }
     }
+
+    async delete(req: Request, res: Response): Promise<void> {
+        try {
+            const {id} = req.params;
+            await this.customerService.delete(Number(id))
+            res.status(constants.HTTP_STATUS_OK).json({message: 'Клиент успешно удалён'})
+        } catch (e) {
+            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message})
+        }
+    }
 }

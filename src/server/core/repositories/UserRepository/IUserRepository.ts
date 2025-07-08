@@ -6,6 +6,6 @@ import {UserModel} from "../../../infrastructure/db/models/User/UserModel";
 export interface IUserRepository {
     // create(dto: CreateUserDto): Promise<User>;
     getAll(): Promise<User[]>;
-    delete(id: number): Promise<void | null>;
+    delete(id: number): Promise<UserModel | null>;
     update(dto: UpdateUserDto): Promise<UserModel | null>;
 }

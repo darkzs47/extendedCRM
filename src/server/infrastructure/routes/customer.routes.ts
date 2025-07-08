@@ -25,4 +25,8 @@ router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req
     postgresCustomerController.updateDiscount(req, res)
 })
 
+router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req, res) => {
+    postgresCustomerController.delete(req, res)
+})
+
 export default router;

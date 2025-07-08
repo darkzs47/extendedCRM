@@ -10,7 +10,6 @@ import {CustomerMapper} from "../mappers/CustomerMapper/CustomerMapper";
 import {RepresentativeMapper} from "../mappers/RepresentativeMapper/RepresentativeMapper";
 import {BranchMapper} from "../mappers/BranchMapper/BranchMapper";
 import {logger} from "../../../logger";
-import {Customer} from "../../../core/models/Customer/Customer";
 import {UpdateDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateDiscountDto";
 
 export class CustomerRepositoryPostgres implements ICustomerRepository {
@@ -100,5 +99,11 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
             logger.error(e);
             return null;
         }
+    }
+
+    async delete(id: number): Promise<CustomerModel | null> {
+        const customer = await CustomerModel.findByPk(id)
+        customer ? customer.destroy() : null;
+        return customer ? customer : null;
     }
 }

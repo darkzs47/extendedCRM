@@ -17,9 +17,10 @@ export class UserRepositoryPostgres implements IUserRepository{
         return usersDomains;
     }
 
-    async delete(id: number): Promise<void | null> {
+    async delete(id: number): Promise<UserModel | null> {
         const user = await UserModel.findByPk(id)
-        return user ? user.destroy() : null;
+        user ? user.destroy() : null;
+        return user ? user : null;
     }
 
     async update(dto: UpdateUserDto): Promise<UserModel | null> {

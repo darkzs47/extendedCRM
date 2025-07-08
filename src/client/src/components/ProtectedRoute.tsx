@@ -10,12 +10,12 @@ interface Props {
 const ProtectedRoute = ({ children }: Props) => {
     const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
     const isLoading = useSelector((state: RootState) => state.currentUser.isLoading);
-
+    console.log(isLoading)
     if (isLoading) {
         return <div>Загрузка...</div>;
     }
 
-    return isAuthUser ? children : <Navigate to="/login" replace /> ;
+    return isAuthUser ? children : <Navigate to="/login"/> ;
 };
 
 export default ProtectedRoute;

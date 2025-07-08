@@ -16,7 +16,7 @@ const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
     const navigate = useNavigate()
 
     const [discountEditing, setDiscountEditing] = useState<boolean>(false)
-    const [discount, setDiscount] = useState<string>(((1 - customer.discount) * (-100)).toFixed(0))
+    const [discount, setDiscount] = useState<string>(((customer.discount - 1) * 100).toFixed(0));
 
     const handleShowDetails = useCallback((customer: ICustomer) => {
         const id = customer.id;
@@ -39,7 +39,7 @@ const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
             console.error("Некорректные данные");
             return
         }
-        const discountForServer = (Number(discount) + 1) / 100;
+        const discountForServer = 1 + (Number(discount) / 100);
         const request = {id: customer.id, discount: discountForServer}
         dispatch(updateDiscount(request))
     }, [discountEditing, discount])

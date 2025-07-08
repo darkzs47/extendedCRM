@@ -2,7 +2,7 @@ import {
     CUSTOMERS_FAILURE,
     CUSTOMERS_SUCCESS,
     type CustomersActionTypes,
-    type CustomersState,
+    type CustomersState, DELETE_CUSTOMER,
     UPDATE_DISCOUNT
 } from "../../types/customers.ts";
 
@@ -26,6 +26,13 @@ export const customersReducer = (state = initialState, action: CustomersActionTy
                             ? { ...customer, ...action.payload }
                             : customer
                 ) : null
+            }
+        case DELETE_CUSTOMER:
+            return {
+                ...state,
+                customers: state.customers
+                    ? state.customers.filter(customer => customer.id !== action.payload)
+                    : null
             }
         case CUSTOMERS_FAILURE:
             return {

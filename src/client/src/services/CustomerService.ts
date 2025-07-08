@@ -21,7 +21,7 @@ export default class CustomerService {
     }
 
     static async deleteCustomer(request: DeleteRequest): Promise<AxiosResponse<void>> {
-        return api.delete<void>(`/customers/${request}`);
+        return api.delete<void>(`/customers/${request.id}`);
     }
 
     static async updateDiscount(request: DiscountRequest): Promise<AxiosResponse<void>> {

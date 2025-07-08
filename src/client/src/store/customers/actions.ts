@@ -19,7 +19,7 @@ export const deleteCustomer = (request: DeleteRequest) => {
     return async (dispatch: Dispatch): Promise<void> => {
         try {
             await CustomerService.deleteCustomer(request);
-            dispatch({type: DELETE_CUSTOMER})
+            dispatch({type: DELETE_CUSTOMER, payload: request.id})
         } catch (e) {
             dispatch({type: CUSTOMERS_FAILURE});
         }

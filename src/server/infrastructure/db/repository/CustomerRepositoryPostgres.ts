@@ -103,6 +103,8 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
 
     async delete(id: number): Promise<CustomerModel | null> {
         const customer = await CustomerModel.findByPk(id)
+        logger.info(customer)
+        logger.info(id)
         customer ? customer.destroy() : null;
         return customer ? customer : null;
     }

@@ -23,6 +23,7 @@ export interface UpdateDiscountCustomerAction {
 
 export interface DeleteCustomerAction {
     type: typeof DELETE_CUSTOMER;
+    payload: number;
 }
 
 export interface CustomersFailureAction {

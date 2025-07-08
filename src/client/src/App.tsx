@@ -27,26 +27,24 @@ function App() {
         <>
             <Router>
                 <Header/>
-                <Routes>
-                    <Route path="/" element={<AuthRedirect />} />
-                    <Route path="/login" element={
-                        <PublicRoute>
-                            <Login />
-                        </PublicRoute>
-                    } />
-                    <Route path="/register" element={
-                        <PublicRoute>
-                            <Register />
-                        </PublicRoute>
-                    } />
-                    <Route path="/admin" element={<AdminMain/>}/>
+                <PublicRoute>
+                    <Routes>
+                        <Route path="/" element={<AuthRedirect/>}/>
+                        <Route path="/login" element={
+                            <Login/>
+                        }/>
+                        <Route path="/register" element={
+                            <Register/>
+                        }/>
+                        <Route path="/admin" element={<AdminMain/>}/>
 
-                    <Route path="/customers" element={<Customers/>}/>
-                    <Route path="/customers/:id" element={<CustomerInfo/>}/>
-                    <Route path="/customers/add" element={<AddCustomer/>}/>
+                        <Route path="/customers" element={<Customers/>}/>
+                        <Route path="/customers/:id" element={<CustomerInfo/>}/>
+                        <Route path="/customers/add" element={<AddCustomer/>}/>
 
-                    <Route path="*" element={<Navigate to="/" />}/>
-                </Routes>
+                        <Route path="*" element={<Navigate to="/"/>}/>
+                    </Routes>
+                </PublicRoute>
             </Router>
         </>
     )

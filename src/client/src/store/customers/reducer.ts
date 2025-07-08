@@ -2,7 +2,8 @@ import {
     CUSTOMERS_FAILURE,
     CUSTOMERS_SUCCESS,
     type CustomersActionTypes,
-    type CustomersState
+    type CustomersState,
+    UPDATE_DISCOUNT
 } from "../../types/customers.ts";
 
 const initialState: CustomersState = {
@@ -15,6 +16,16 @@ export const customersReducer = (state = initialState, action: CustomersActionTy
             return {
                 ...state,
                 customers: action.payload,
+            }
+        case UPDATE_DISCOUNT:
+            return {
+                ...state,
+                customers: state.customers ?
+                    state.customers.map(customer =>
+                        customer.id === action.payload.id
+                            ? { ...customer, ...action.payload }
+                            : customer
+                ) : null
             }
         case CUSTOMERS_FAILURE:
             return {

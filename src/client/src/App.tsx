@@ -10,8 +10,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
 import AdminMain from "./pages/AdminMain.tsx";
 import {BrowserRouter as Router} from "react-router";
-import AuthRedirect from "./AuthRedirect.tsx";
-import PublicRoute from "./components/PublicRoute.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Customers from "./pages/Customers.tsx";
 import CustomerInfo from "./pages/CustomerInfo.tsx";
 import AddCustomer from "./pages/AddCustomer.tsx";
@@ -27,24 +26,28 @@ function App() {
         <>
             <Router>
                 <Header/>
-                <PublicRoute>
                     <Routes>
-                        <Route path="/" element={<AuthRedirect/>}/>
-                        <Route path="/login" element={
-                            <Login/>
-                        }/>
-                        <Route path="/register" element={
-                            <Register/>
-                        }/>
-                        <Route path="/admin" element={<AdminMain/>}/>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
 
-                        <Route path="/customers" element={<Customers/>}/>
-                        <Route path="/customers/:id" element={<CustomerInfo/>}/>
-                        <Route path="/customers/add" element={<AddCustomer/>}/>
+                        <Route path="/" element={
+                            <ProtectedRoute><Customers /></ProtectedRoute>
+                        } />
+                        <Route path="/admin" element={
+                            <ProtectedRoute><AdminMain /></ProtectedRoute>
+                        } />
+                        <Route path="/customers" element={
+                            <ProtectedRoute><Customers /></ProtectedRoute>
+                        } />
+                        <Route path="/customers/:id" element={
+                            <ProtectedRoute><CustomerInfo /></ProtectedRoute>
+                        } />
+                        <Route path="/customers/add" element={
+                            <ProtectedRoute><AddCustomer /></ProtectedRoute>
+                        } />
 
-                        <Route path="*" element={<Navigate to="/"/>}/>
+                        <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
-                </PublicRoute>
             </Router>
         </>
     )

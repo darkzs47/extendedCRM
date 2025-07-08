@@ -7,10 +7,10 @@ interface Props {
     children: JSX.Element;
 }
 
-const PublicRoute = ({ children }: Props) => {
+const ProtectedRoute = ({ children }: Props) => {
     const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
 
-    return isAuthUser ? children : <Navigate to="/" replace /> ;
+    return isAuthUser ? children : <Navigate to="/login" replace /> ;
 };
 
-export default PublicRoute;
+export default ProtectedRoute;

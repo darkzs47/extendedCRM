@@ -4,6 +4,7 @@ import type {CustomerResponse} from "../models/response/CustomerResponse.ts";
 import type {CustomerFullInfoResponse} from "../models/response/CustomerFullInfoResponse.ts";
 import type {AddCustomerRequest} from "../models/request/AddCustomerRequest.ts";
 import type {AddCustomerResponse} from "../models/response/AddCustomerResponse.ts";
+import type {DeleteRequest} from "../models/request/DeleteRequest.ts";
 
 export default class CustomerService {
     static async getAll(): Promise<AxiosResponse<CustomerResponse>> {
@@ -15,7 +16,10 @@ export default class CustomerService {
     }
 
     static async create(request: AddCustomerRequest): Promise<AxiosResponse<AddCustomerResponse>> {
-        console.log(request);
         return api.post<AddCustomerResponse>("/customers/", request);
+    }
+
+    static async deleteCustomer(request: DeleteRequest): Promise<AxiosResponse<void>> {
+        return api.delete<void>(`/customers/${request}`);
     }
 }

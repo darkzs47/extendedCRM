@@ -3,4 +3,5 @@ export interface ICustomer {
     companyName: string;
     email: string;
     phone: string;
+    discount: string;
 }

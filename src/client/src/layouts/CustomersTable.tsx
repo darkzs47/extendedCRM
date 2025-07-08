@@ -29,6 +29,7 @@ const CustomersTable: FC = () => {
                 <th>Организация</th>
                 <th>Email</th>
                 <th>Телефон</th>
+                <th>Персональная скидка</th>
                 <th>Действия</th>
             </tr>
             </thead>

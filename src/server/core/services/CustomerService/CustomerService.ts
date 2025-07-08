@@ -1,6 +1,7 @@
 import {ICustomerRepository} from "../../repositories/CustomerRepository/ICustomerRepository";
 import {CustomerModel} from "../../../infrastructure/db/models/CustomerModel/CustomerModel";
 import {CreateCustomerDto} from "../../repositories/CustomerRepository/dto/CreateCustomerDto";
+import {UpdateDiscountDto} from "../../repositories/CustomerRepository/dto/UpdateDiscountDto";
 
 export class CustomerService {
 
@@ -21,5 +22,11 @@ export class CustomerService {
         const newCustomer = await this.customerRepository.create(dto);
         if (!newCustomer) throw new Error(`Create error`);
         return newCustomer;
+    }
+
+    async updateDiscount(dto: UpdateDiscountDto): Promise<CustomerModel> {
+        const customer = await this.customerRepository.updateDiscount(dto);
+        if (!customer) throw new Error(`Customer not found`);
+        return customer;
     }
 }

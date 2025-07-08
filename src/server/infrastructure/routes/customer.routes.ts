@@ -16,9 +16,13 @@ router.get('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Req
 router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresCustomerController.getById(req, res)
 })
-// AuthMiddleware, RoleMiddleware(['admin', 'employee'])
-router.post('/', (req, res) => {
+
+router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req, res) => {
     postgresCustomerController.create(req, res)
+})
+
+router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req, res) => {
+    postgresCustomerController.updateDiscount(req, res)
 })
 
 export default router;

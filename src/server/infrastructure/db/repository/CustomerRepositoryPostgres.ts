@@ -11,6 +11,7 @@ import {RepresentativeMapper} from "../mappers/RepresentativeMapper/Representati
 import {BranchMapper} from "../mappers/BranchMapper/BranchMapper";
 import {logger} from "../../../logger";
 import {Customer} from "../../../core/models/Customer/Customer";
+import {UpdateDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateDiscountDto";
 
 export class CustomerRepositoryPostgres implements ICustomerRepository {
     async getAll(): Promise<CustomerModel[]> {
@@ -83,6 +84,18 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                 return customer.id;
             })
             return await CustomerModel.findByPk(result)
+        } catch (e) {
+            logger.error(e);
+            return null;
+        }
+    }
+
+    async updateDiscount(dto: UpdateDiscountDto): Promise<CustomerModel | null> {
+        try {
+            const customer = await CustomerModel.findByPk(dto.id)
+            return customer ? customer.update(
+                {discount: dto.discount}
+            ) : null
         } catch (e) {
             logger.error(e);
             return null;

@@ -4,6 +4,7 @@ import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../../types/currentUser.ts";
 const initialState: UserState = {
     currentUser: null,
     isAuthUser: false,
+    isLoading: true,
 }
 
 const currentUserReducer = (state = initialState, action: UserActionTypes): UserState => {
@@ -12,7 +13,8 @@ const currentUserReducer = (state = initialState, action: UserActionTypes): User
             return {
                 ...state,
                 currentUser: action.payload,
-                isAuthUser: true
+                isAuthUser: true,
+                isLoading: false
             }
         case LOGIN_FAILURE:
         case LOGOUT:

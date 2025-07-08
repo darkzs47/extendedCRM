@@ -7,6 +7,7 @@ export const LOGOUT = 'LOGOUT';
 export interface UserState {
     currentUser: IUser | null;
     isAuthUser: boolean;
+    isLoading: boolean;
 }
 
 export interface LoginSuccessAction {

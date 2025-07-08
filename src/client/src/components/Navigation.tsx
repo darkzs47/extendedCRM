@@ -45,9 +45,6 @@ const Navigation: FC = () => {
                                     <NavLink to="/suppliers">Поставщики</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/branches">Филиалы</NavLink>
-                                </li>
-                                <li>
                                     <NavLink to="/tools">Инструменты</NavLink>
                                 </li>
                             </>
@@ -63,9 +60,6 @@ const Navigation: FC = () => {
                                 </li>
                                 <li>
                                     <NavLink to="/suppliers">Поставщики</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/branches">Филиалы</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/tools">Инструменты</NavLink>

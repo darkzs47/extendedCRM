@@ -1,31 +1,20 @@
 import {UserService} from "../../../core/services/UserService/UserService";
-import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/CreateUserDto";
 import {constants} from "http2";
 import { Request, Response } from 'express';
-import hashPassword from "../../../hash";
-import {UserModel} from "../../db/models/User/UserModel";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 import {validationResult} from "express-validator";
+import {UserModel} from "../../db/models/User/UserModel";
+
+type UserWithoutPassword = Pick<UserModel, 'id' | 'secondName' | 'name' | 'lastName' | 'phone' | 'email' | 'role' | 'supplierId' | 'supplier'>
 
 export class UserController {
     constructor(readonly userService: UserService) {}
 
-    // async createUser(req: Request, res: Response): Promise<void> {
-    //     try {
-    //         const {id, secondName, name, lastName, phone, email, role, password} = req.body;
-    //         const hashedPassword = await hashPassword(password);
-    //         await this.userService.createUser(new CreateUserDto(id, secondName, name, lastName, email, phone, hashedPassword, role));
-    //
-    //         res.status(constants.HTTP_STATUS_CREATED).json("Пользователь создан");
-    //     } catch (e) {
-    //         const error = e as Error;
-    //         res.status(constants.HTTP_STATUS_NOT_FOUND).json("Пользователь не создан " + error.message);
-    //     }
-    // }
-
     async getAll(req: Request, res: Response): Promise<void> {
         try {
-            const users = await this.userService.getAll();
+            const users: UserWithoutPassword[] = (await this.userService.getAll())
+                .map(({ id, secondName, name, lastName, phone, email, role, supplierId, supplier }) =>
+                    ({ id, secondName, name, lastName, phone, email, role, supplierId, supplier }));
             res.status(constants.HTTP_STATUS_OK).json(users)
             return
         } catch (e) {
@@ -53,8 +42,8 @@ export class UserController {
                 return
             }
             const {id} = req.params;
-            const {role, email, phone} = req.body;
-            await this.userService.update(new UpdateUserDto(Number(id), email, phone, role))
+            const {role, email, phone, supplierId} = req.body;
+            await this.userService.update(new UpdateUserDto(Number(id), email, phone, role, supplierId))
             res.status(constants.HTTP_STATUS_OK).json({ message: "Данные успешно изменены" })
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});

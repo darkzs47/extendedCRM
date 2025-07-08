@@ -1,6 +1,7 @@
 import {AutoIncrement, BelongsTo, Column, ForeignKey, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {BranchModel} from "../BranchModel/BranchModel";
 import {CustomerModel} from "../CustomerModel/CustomerModel";
+import {SupplierModel} from "../SupplierModel/SupplierModel";
 
 @Table({ tableName: 'representatives', timestamps: false, underscored: true })
 export class RepresentativeModel extends Model {
@@ -34,16 +35,16 @@ export class RepresentativeModel extends Model {
     @Column
     customerId?: number;
 
-    // @ForeignKey(() => SupplierModel)
-    @Column
-    supplierId?: number;
+    @BelongsTo(() => CustomerModel, { foreignKey: 'customerId', as: 'customer' })
+    customer?: CustomerModel;
 
     @HasMany(() => BranchModel, { foreignKey: 'representativeId' })
     branches!: BranchModel[];
 
-    @BelongsTo(() => CustomerModel)
-    customer?: CustomerModel;
+    @ForeignKey(() => SupplierModel)
+    @Column
+    supplierId?: number;
 
-    // @BelongsTo(() => SupplierModel)
-    // supplier?: SupplierModel;
+    @BelongsTo(() => SupplierModel, { foreignKey: 'supplierId', as: 'supplier' })
+    supplier?: SupplierModel;
 }

@@ -1,16 +1,16 @@
 import {type FC, memo, useState} from "react";
-import CustomerForm, {type CustomerFormValues} from "../layouts/CustomerForm.tsx";
+import {useNavigate} from "react-router-dom";
 import BranchForm, {type BranchFormValues} from "../layouts/BranchForm.tsx";
 import RepresentativeForm, {type RepresentativeFormValues} from "../layouts/RepresentativeForm.tsx";
-import type {AddCustomerRequest} from "../models/request/AddCustomerRequest.ts";
-import CustomerService from "../services/CustomerService.ts";
-import {useNavigate} from "react-router-dom";
+import SupplierForm, {type SupplierFormValues} from "../layouts/SupplierForm.tsx";
+import type {AddSupplierRequest} from "../models/request/AddSupplierRequest.ts";
+import SupplierService from "../services/SupplierService.ts";
 
-const AddCustomer: FC = () => {
+const AddSupplier: FC = () => {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
 
-    const [customerData, setCustomerData] = useState<CustomerFormValues | null>(null);
+    const [supplierData, setSupplierData] = useState<SupplierFormValues | null>(null);
     const [branchData, setBranchData] = useState<BranchFormValues | null>(null);
     const [representativeData, setRepresentativeData] = useState<RepresentativeFormValues | null>(null);
 
@@ -18,32 +18,32 @@ const AddCustomer: FC = () => {
     const handlePrev = () => setStep(prev => prev - 1);
 
     const handleSubmit = async () => {
-        if (!customerData || !branchData || !representativeData) {
+        if (!supplierData || !branchData || !representativeData) {
             console.error("Заполните все обязательные поля")
             return
         }
 
-        const request: AddCustomerRequest = {
-            customer: customerData,
+        const request: AddSupplierRequest = {
+            supplier: supplierData,
             branch: branchData,
             representative: representativeData,
         }
 
         try {
-            await CustomerService.create(request);
-            navigate('/customers')
+            await SupplierService.create(request);
+            navigate('/suppliers')
         } catch (e) {
-            console.error("Не удалось добавить клиента")
+            console.error("Не удалось добавить поставщика")
         }
     };
 
     return (
         <main>
-            {step === 1 && <CustomerForm
+            {step === 1 && <SupplierForm
                 onNext={handleNext}
-                onChange={setCustomerData}
+                onChange={setSupplierData}
                 // @ts-ignore
-                initialValues={customerData}
+                initialValues={supplierData}
             />}
             {step === 2 && <BranchForm
                 onNext={handleNext}
@@ -63,4 +63,4 @@ const AddCustomer: FC = () => {
     )
 }
 
-export default memo(AddCustomer);
+export default memo(AddSupplier);

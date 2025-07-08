@@ -10,9 +10,7 @@ const UsersTable: FC = () => {
     const currentUser = useSelector((state: RootState) => state.currentUser.currentUser)
     const dispatch = useDispatch<AppDispatch>()
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
-
     const [users, setUsers] = useState<IUser[] | null>(null)
-
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch]);

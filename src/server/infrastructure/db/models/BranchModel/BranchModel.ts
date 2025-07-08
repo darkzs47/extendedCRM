@@ -2,6 +2,7 @@ import {AutoIncrement, BelongsTo, Column, ForeignKey, Model, PrimaryKey, Table} 
 import {CustomerModel} from "../CustomerModel/CustomerModel";
 import {RepresentativeModel} from "../RepresentativeModel/RepresentativeModel";
 import {AddressModel} from "../AddressModel/AddressModel";
+import {SupplierModel} from "../SupplierModel/SupplierModel";
 
 @Table({ tableName: 'branches', timestamps: false, underscored: true })
 export class BranchModel extends Model {
@@ -47,8 +48,12 @@ export class BranchModel extends Model {
     @BelongsTo(() => CustomerModel, { foreignKey: 'customerId', as: 'customer' })
     customer?: CustomerModel;
 
+    @ForeignKey(() => SupplierModel)
     @Column
     supplierId?: number;
+
+    @BelongsTo(() => SupplierModel, { foreignKey: 'supplierId', as: 'supplier' })
+    supplier?: SupplierModel;
 
     @Column
     isMain!: boolean;

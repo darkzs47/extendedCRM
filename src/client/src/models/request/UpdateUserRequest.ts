@@ -5,4 +5,5 @@ export interface UpdateUserRequest {
     email: string;
     phone: string;
     role: UserRole;
+    supplierId?: number;
 }

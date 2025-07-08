@@ -2,47 +2,45 @@ import {type FC, memo, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
-import {getCustomerById} from "../store/customer/actions.ts";
-import type {ICustomerFullInfo} from "../models/ICustomerFullInfo.ts";
+import type {ISupplierFullInfo} from "../models/ISupplierFullInfo.ts";
+import {getSupplierById} from "../store/supplier/actions.ts";
 
-const CustomerInfo: FC = () => {
+const SupplierInfo: FC = () => {
     const {id} = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const customerFromStore = useSelector((state: RootState) => state.customer.customer)
-    const [customer, setCustomer] = useState<ICustomerFullInfo | null>(null)
+    const supplierFromStore = useSelector((state: RootState) => state.supplier.supplier)
+    const [supplier, setSupplier] = useState<ISupplierFullInfo | null>(null)
 
     useEffect(() => {
-        const getCustomerInfo = async () => {
-            const result = await dispatch(getCustomerById(Number(id)))
+        const getSupplierInfo = async () => {
+            const result = await dispatch(getSupplierById(Number(id)))
             if (!result.success) {
                 navigate('/customers')
             }
         }
-        getCustomerInfo()
+        getSupplierInfo()
     }, [])
 
     useEffect(() => {
-        setCustomer(customerFromStore)
-    }, [customerFromStore])
+        setSupplier(supplierFromStore)
+    }, [supplierFromStore])
 
     return (
         <main>
             <div>
                 <h2>Информация об организации</h2>
-                Организация: {customer?.companyName} <br/>
-                Организационно-правовая форма: {customer?.legalForm} <br/>
-                Email: {customer?.email} <br/>
-                Номер телефона: {customer?.phone} <br/>
-                ИНН: {customer?.inn} <br/>
-                КПП: {customer?.kpp} <br/>
-                ОГРН: {customer?.ogrn} <br/>
-                {/*@ts-ignore*/}
-                Размер персональной скидки: {((1 - customer?.discount) * -100).toFixed(0)}% <br/>
+                Организация: {supplier?.companyName} <br/>
+                Организационно-правовая форма: {supplier?.legalForm} <br/>
+                Email: {supplier?.email} <br/>
+                Номер телефона: {supplier?.phone} <br/>
+                ИНН: {supplier?.inn} <br/>
+                КПП: {supplier?.kpp} <br/>
+                ОГРН: {supplier?.ogrn} <br/>
             </div>
             <div>
                 Представители
-                {customer?.representatives.map((representative) =>
+                {supplier?.representatives.map((representative) =>
                     <div key={representative.id}>
                         Главный представитель клиента: {representative.isMain ? 'Да' : 'Нет'} <br/>
                         ФИО: {representative.secondName} {representative.name} {representative.lastName} <br/>
@@ -54,7 +52,7 @@ const CustomerInfo: FC = () => {
             </div>
             <div>
                 Филиалы
-                {customer?.branches.map((branch) =>
+                {supplier?.branches.map((branch) =>
                     <div key={branch.id}>
                         <div>
                             Главный филиал: {branch.isMain ? 'Да' : 'Нет'} <br/>
@@ -111,4 +109,4 @@ const CustomerInfo: FC = () => {
     )
 }
 
-export default memo(CustomerInfo);
+export default memo(SupplierInfo);

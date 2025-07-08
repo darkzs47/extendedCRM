@@ -4,17 +4,22 @@ import {User} from "../../../core/models/User/User";
 import {UserModel} from "../models/User/UserModel";
 import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
+import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 
 export class UserRepositoryPostgres implements IUserRepository{
-    // async create(dto: CreateUserDto): Promise<User> {
-    //     const user = await UserModel.create(UserMapper.toModel(dto));
-    //     return UserMapper.toDomain(user);
-    // }
 
-    async getAll(): Promise<User[]> {
-        const usersModels = await UserModel.findAll();
-        const usersDomains = UserMapper.toDomains(usersModels)
-        return usersDomains;
+    async getAll(): Promise<UserModel[]> {
+        const usersModels = await UserModel.findAll(
+            {
+                include: [
+                    {
+                        model: SupplierModel,
+                        as: 'supplier'
+                    }
+                ],
+            }
+        );
+        return usersModels;
     }
 
     async delete(id: number): Promise<UserModel | null> {

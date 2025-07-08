@@ -1,4 +1,5 @@
 import type {UserRole} from "../../../server/core/models/User/User.ts";
+import type {ISupplier} from "./ISupplier.ts";
 
 export interface IUser {
     id: number;
@@ -9,4 +10,5 @@ export interface IUser {
     phone: string,
     role: UserRole,
     supplierId?: number;
+    supplier?: ISupplier;
 }

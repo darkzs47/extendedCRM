@@ -6,6 +6,7 @@ import {CustomerModel} from "../models/CustomerModel/CustomerModel";
 import {BranchModel} from "../models/BranchModel/BranchModel";
 import {RepresentativeModel} from "../models/RepresentativeModel/RepresentativeModel";
 import {AddressModel} from "../models/AddressModel/AddressModel";
+import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 
 dotenv.config();
 
@@ -16,6 +17,6 @@ export const sequelize = new Sequelize({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    models: [UserModel, TokenModel, CustomerModel, BranchModel, RepresentativeModel, AddressModel],
+    models: [UserModel, TokenModel, CustomerModel, SupplierModel, BranchModel, RepresentativeModel, AddressModel],
     logging: false,
 });

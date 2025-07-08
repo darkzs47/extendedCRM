@@ -14,6 +14,9 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Customers from "./pages/Customers.tsx";
 import CustomerInfo from "./pages/CustomerInfo.tsx";
 import AddCustomer from "./pages/AddCustomer.tsx";
+import Suppliers from "./pages/Suppliers.tsx";
+import SupplierInfo from "./pages/SupplierInfo.tsx";
+import AddSupplier from "./pages/AddSupplier.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -46,6 +49,15 @@ function App() {
                         } />
                         <Route path="/customers/add" element={
                             <ProtectedRoute><AddCustomer /></ProtectedRoute>
+                        } />
+                        <Route path="/suppliers" element={
+                            <ProtectedRoute><Suppliers /></ProtectedRoute>
+                        } />
+                        <Route path="/suppliers/:id" element={
+                            <ProtectedRoute><SupplierInfo /></ProtectedRoute>
+                        } />
+                        <Route path="/suppliers/add" element={
+                            <ProtectedRoute><AddSupplier /></ProtectedRoute>
                         } />
 
                         <Route path="*" element={<Navigate to="/" />} />

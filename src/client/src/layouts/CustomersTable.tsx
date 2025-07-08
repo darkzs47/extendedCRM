@@ -4,7 +4,7 @@ import CustomerRow from "../components/CustomerRow.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
 import AddIdentityButton from "../components/AddIdentityButton.tsx";
-import { getAll } from "../store/customers/actions.ts";
+import { getAllCustomers } from "../store/customers/actions.ts";
 
 const CustomersTable: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -13,7 +13,7 @@ const CustomersTable: FC = () => {
     const [customers, setCustomers] = useState<ICustomer[] | null>(null);
 
     useEffect(() => {
-        dispatch(getAll());
+        dispatch(getAllCustomers());
     }, [dispatch]);
 
     useEffect(() => {

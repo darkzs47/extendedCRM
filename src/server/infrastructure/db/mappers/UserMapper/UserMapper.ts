@@ -30,11 +30,4 @@ export class UserMapper {
             supplierId: dto.supplierId,
         };
     }
-
-    static toDomains(models: UserModel[]): User[] {
-        return models.map(model => {
-            const {password, ...modelWithoutPassword} = model.get()
-            return modelWithoutPassword as User;
-        });
-    }
 }

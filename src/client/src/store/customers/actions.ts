@@ -4,7 +4,7 @@ import CustomerService from "../../services/CustomerService";
 import type {DeleteRequest} from "../../models/request/DeleteRequest.ts";
 import type {DiscountRequest} from "../../models/request/DiscountRequest.ts";
 
-export const getAll = () => {
+export const getAllCustomers = () => {
     return async (dispatch: Dispatch): Promise<void> => {
         try {
             const response = await CustomerService.getAll();

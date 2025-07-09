@@ -12,7 +12,6 @@ const ProtectedRoute = ({ children }: Props) => {
     const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
     const isLoading = useSelector((state: RootState) => state.currentUser.isLoading);
 
-    console.log('Auth:', isAuthUser, `Load:`, isLoading);
 
     if (isLoading) {
         return <div>Загрузка...</div>;
@@ -21,8 +20,9 @@ const ProtectedRoute = ({ children }: Props) => {
     if (isAuthUser) {
         return <>{children}</>;
     }
+    console.log('Auth:', isAuthUser, `Load:`, isLoading);
 
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

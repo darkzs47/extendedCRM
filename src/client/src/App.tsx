@@ -8,7 +8,7 @@ import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
-import AdminMain from "./pages/AdminMain.tsx";
+import AdminMain from "./pages/AdminPanel.tsx";
 import {BrowserRouter as Router} from "react-router";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Customers from "./pages/Customers.tsx";
@@ -31,9 +31,9 @@ function App() {
                 <Header/>
                     <Routes>
                         <Route path="/login" element={
-                            <ProtectedRoute><Login /></ProtectedRoute>} />
+                            <Login />} />
                         <Route path="/register" element={
-                            <ProtectedRoute><Register /></ProtectedRoute>} />
+                            <Register />} />
 
                         <Route path="/" element={
                             <ProtectedRoute><Customers /></ProtectedRoute>

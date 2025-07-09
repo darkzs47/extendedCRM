@@ -17,11 +17,17 @@ const currentUserReducer = (state = initialState, action: UserActionTypes): User
                 isLoading: false
             }
         case LOGIN_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                isAuthUser: false,
+            }
         case LOGOUT:
             return {
                 ...state,
                 currentUser: null,
-                isAuthUser: false
+                isAuthUser: false,
+                isLoading: false
             }
         default:
             return state;

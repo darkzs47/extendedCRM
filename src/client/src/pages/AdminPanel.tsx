@@ -1,7 +1,7 @@
 import {type FC, memo} from 'react'
 import UsersTable from "../layouts/UsersTable.tsx";
 
-const AdminMain: FC = () => {
+const AdminPanel: FC = () => {
 
     return (
         <main>
@@ -11,4 +11,4 @@ const AdminMain: FC = () => {
     )
 }
 
-export default memo(AdminMain);
+export default memo(AdminPanel);

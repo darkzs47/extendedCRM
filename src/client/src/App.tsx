@@ -8,7 +8,7 @@ import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Register from "./pages/Register.tsx";
-import AdminMain from "./pages/AdminPanel.tsx";
+import AdminPanel from "./pages/AdminPanel.tsx";
 import {BrowserRouter as Router} from "react-router";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Customers from "./pages/Customers.tsx";
@@ -17,6 +17,11 @@ import AddCustomer from "./pages/AddCustomer.tsx";
 import Suppliers from "./pages/Suppliers.tsx";
 import SupplierInfo from "./pages/SupplierInfo.tsx";
 import AddSupplier from "./pages/AddSupplier.tsx";
+import UsersTable from "./layouts/UsersTable.tsx";
+import Categories from "./layouts/Categories.tsx";
+import Tools from "./pages/Tools.tsx";
+import CoefficientsDistance from "./layouts/CoefficientsDistance.tsx";
+import CoefficientsSeason from "./layouts/CoefficientsSeason.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -26,44 +31,52 @@ function App() {
     }, [])
 
     return (
-        <>
-            <Router>
-                <Header/>
-                    <Routes>
-                        <Route path="/login" element={
-                            <Login />} />
-                        <Route path="/register" element={
-                            <Register />} />
+        <Router>
+            <Header/>
+            <Routes>
+                <Route path="/login" element={
+                    <Login/>}/>
+                <Route path="/register" element={
+                    <Register/>}/>
 
-                        <Route path="/" element={
-                            <ProtectedRoute><Customers /></ProtectedRoute>
-                        } />
-                        <Route path="/admin" element={
-                            <ProtectedRoute><AdminMain /></ProtectedRoute>
-                        } />
-                        <Route path="/customers" element={
-                            <ProtectedRoute><Customers /></ProtectedRoute>
-                        } />
-                        <Route path="/customers/:id" element={
-                            <ProtectedRoute><CustomerInfo /></ProtectedRoute>
-                        } />
-                        <Route path="/customers/add" element={
-                            <ProtectedRoute><AddCustomer /></ProtectedRoute>
-                        } />
-                        <Route path="/suppliers" element={
-                            <ProtectedRoute><Suppliers /></ProtectedRoute>
-                        } />
-                        <Route path="/suppliers/:id" element={
-                            <ProtectedRoute><SupplierInfo /></ProtectedRoute>
-                        } />
-                        <Route path="/suppliers/add" element={
-                            <ProtectedRoute><AddSupplier /></ProtectedRoute>
-                        } />
+                <Route path="/" element={
+                    <ProtectedRoute><Customers/></ProtectedRoute>
+                }/>
+                <Route path="/admin" element={
+                    <ProtectedRoute><AdminPanel/></ProtectedRoute>
+                }>
+                    <Route index element={<ProtectedRoute><UsersTable/></ProtectedRoute>}/>
+                    <Route path="users" element={<ProtectedRoute><UsersTable/></ProtectedRoute>}/>
+                    <Route path="coefficients/distance" element={<ProtectedRoute><CoefficientsDistance/></ProtectedRoute>}/>
+                    <Route path="coefficients/season" element={<ProtectedRoute><CoefficientsSeason/></ProtectedRoute>}/>
+                    <Route path="categories" element={<ProtectedRoute><Categories/></ProtectedRoute>}/>
+                </Route>
+                <Route path="/customers" element={
+                    <ProtectedRoute><Customers/></ProtectedRoute>}>
+                </Route>
+                <Route path="/customers/:id" element={
+                    <ProtectedRoute><CustomerInfo/></ProtectedRoute>
+                }/>
+                <Route path="/customers/add" element={
+                    <ProtectedRoute><AddCustomer/></ProtectedRoute>
+                }/>
+                <Route path="/suppliers" element={
+                    <ProtectedRoute><Suppliers/></ProtectedRoute>
+                }/>
+                <Route path="/suppliers/:id" element={
+                    <ProtectedRoute><SupplierInfo/></ProtectedRoute>
+                }/>
+                <Route path="/suppliers/add" element={
+                    <ProtectedRoute><AddSupplier/></ProtectedRoute>
+                }/>
 
-                        <Route path="*" element={<Navigate to="/" />} />
-                    </Routes>
-            </Router>
-        </>
+                <Route path="/tools" element={
+                    <ProtectedRoute><Tools/></ProtectedRoute>
+                }/>
+
+                <Route path="*" element={<Navigate to="/"/>}/>
+            </Routes>
+        </Router>
     )
 }
 

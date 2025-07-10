@@ -16,7 +16,6 @@ const AddIdentityButton: FC<Props> = ({ identity }) => {
     return (
         <div onClick={toAddIdentityPage}>
             <a href='#' style={{width: '5rem', height: '5rem'}}>
-                {/* ВЫНЕСТИ В КОМПОНЕНТ КНОПКУ И ИСПОЛЬЗОВАТЬ ЕЕ НА ВСЕХ СТРАНИЦАХ */}
                 <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">

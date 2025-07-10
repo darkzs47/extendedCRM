@@ -10,12 +10,10 @@ export default class UserService {
     }
 
     static async deleteUser(request: DeleteRequest): Promise<AxiosResponse<void>> {
-        return api.delete<void>(`users/${request.id}`, {
-            data: request
-        });
+        return api.delete<void>(`/users/${request.id}`);
     }
 
     static async updateUser(request: UpdateUserRequest): Promise<AxiosResponse<void>> {
-        return api.patch<void>(`users/${request.id}`, request);
+        return api.patch<void>(`/users/${request.id}`, request);
     }
 }

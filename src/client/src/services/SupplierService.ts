@@ -2,7 +2,7 @@ import type {AxiosResponse} from "axios";
 import api from "../http";
 import type {DeleteRequest} from "../models/request/DeleteRequest.ts";
 import type {AddSupplierRequest} from "../models/request/AddSupplierRequest.ts";
-import type {AddSupplierResponse} from "../models/response/AddSupplierResponse.ts";
+import type {AddResponse} from "../models/response/AddResponse.ts";
 import type {SupplierFullInfoResponse} from "../models/response/SupplierFullInfoResponse.ts";
 import type {SupplierResponse} from "../models/response/SupplierResponse.ts";
 
@@ -15,9 +15,8 @@ export default class SupplierService {
         return api.get<SupplierFullInfoResponse>(`/suppliers/${id}`);
     }
 
-    static async create(request: AddSupplierRequest): Promise<AxiosResponse<AddSupplierResponse>> {
-        console.log(request);
-        return api.post<AddSupplierResponse>("/suppliers/", request);
+    static async create(request: AddSupplierRequest): Promise<AxiosResponse<AddResponse>> {
+        return api.post<AddResponse>("/suppliers/", request);
     }
 
     static async deleteSupplier(request: DeleteRequest): Promise<AxiosResponse<void>> {

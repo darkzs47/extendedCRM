@@ -1,4 +1,4 @@
-export interface AddSupplierResponse {
+export interface AddResponse {
     success: boolean;
     message?: string;
 }

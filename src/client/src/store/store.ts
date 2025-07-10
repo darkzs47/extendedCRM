@@ -6,6 +6,8 @@ import {customersReducer} from "./customers/reducer.ts";
 import { customerReducer } from './customer/reducer.ts';
 import {suppliersReducer} from "./suppliers/reducer.ts";
 import {supplierReducer} from "./supplier/reducer.ts";
+import {categoriesReducer} from "./categories/reducer.ts";
+import {toolsReducer} from "./tools/reducer.ts";
 
 const rootReducer = combineReducers({
     currentUser: currentUserReducer,
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
     customer: customerReducer,
     suppliers: suppliersReducer,
     supplier: supplierReducer,
+    categories: categoriesReducer,
+    tools: toolsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

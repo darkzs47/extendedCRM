@@ -3,7 +3,7 @@ import ToolRow from "../components/ToolRow.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
 import {getAllCategories} from "../store/categories/actions.ts";
-import {createTool} from "../store/tools/actions.ts";
+import {createTool, getAllTools} from "../store/tools/actions.ts";
 import {Button, Input, Select, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
@@ -18,6 +18,7 @@ const ToolsTable: FC = () => {
     const [newToolPurchasePrice, setNewToolPurchasePrice] = useState<number>(0)
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
+    console.log(newToolCategoryId)
 
     const handleAddNewTool = () => {
         setIsCreateNewTool(!isCreateNewTool);
@@ -32,9 +33,9 @@ const ToolsTable: FC = () => {
 
         const request = {
             name: newToolName,
-            purchasePrice: newToolPurchasePrice,
             sellPrice: newToolSellPrice,
             categoryId: newToolCategoryId,
+            purchasePrice: newToolPurchasePrice,
         }
 
         dispatch(createTool(request))
@@ -42,12 +43,13 @@ const ToolsTable: FC = () => {
         setNewToolName('')
         setNewToolPurchasePrice(0)
         setNewToolSellPrice(0)
-        setNewToolCategoryId(0)
+        setNewToolCategoryId(1)
         setIsCreateNewTool(!isCreateNewTool)
-    }, [newToolName, newToolPurchasePrice])
+    }, [newToolName, newToolPurchasePrice, newToolCategoryId, newToolSellPrice, dispatch])
 
     useEffect(() => {
         dispatch(getAllCategories());
+        dispatch(getAllTools())
     }, [dispatch])
 
     return (
@@ -111,15 +113,15 @@ const ToolsTable: FC = () => {
                             <td>
                                 <Input
                                     type='number'
-                                    onChange={(e) => setNewToolPurchasePrice(Number(e.target.value))}
-                                    value={newToolPurchasePrice}
+                                    onChange={(e) => setNewToolSellPrice(Number(e.target.value))}
+                                    value={newToolSellPrice}
                                 />
                             </td>
                             <td>
                                 <Input
                                     type='number'
-                                    onChange={(e) => setNewToolSellPrice(Number(e.target.value))}
-                                    value={newToolSellPrice}
+                                    onChange={(e) => setNewToolPurchasePrice(Number(e.target.value))}
+                                    value={newToolPurchasePrice}
                                 />
                             </td>
                             <td>

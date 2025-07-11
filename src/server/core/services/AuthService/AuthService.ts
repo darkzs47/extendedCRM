@@ -39,7 +39,7 @@ export class AuthService {
     async registration(dto: RegisterDto): Promise<UserData> {
         const candidate = await this.userRepository.findByEmail(dto.email);
 
-        if (candidate) throw new Error('User already registered');
+        if (candidate) throw new Error('UserModel already registered');
 
         const user = await this.userRepository.registration(dto);
 

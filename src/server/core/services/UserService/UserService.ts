@@ -1,6 +1,6 @@
 import {IUserRepository} from "../../repositories/UserRepository/IUserRepository";
 import {UpdateUserDto} from "../../repositories/UserRepository/dto/UpdateUserDto";
-import {UserModel} from "../../../infrastructure/db/models/User/UserModel";
+import {UserModel} from "../../../infrastructure/db/models/UserModel/UserModel";
 
 export class UserService{
     constructor(readonly userRepository: IUserRepository) {}
@@ -12,13 +12,13 @@ export class UserService{
 
     async delete(id: number): Promise<void> {
         const deleteResult = await this.userRepository.delete(id);
-        if (!deleteResult) throw new Error("User deleted failed");
+        if (!deleteResult) throw new Error("UserModel deleted failed");
         return;
     }
 
     async update(dto: UpdateUserDto): Promise<void> {
         const user = await this.userRepository.update(dto);
-        if (!user) throw new Error("User updated failed");
+        if (!user) throw new Error("UserModel updated failed");
         return;
     }
 }

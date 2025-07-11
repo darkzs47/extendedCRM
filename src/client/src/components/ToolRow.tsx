@@ -13,8 +13,8 @@ const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
         <>
             <td>{tool.name}</td>
             <td>{tool.category?.name}</td>
-            <td>{tool.purchasePrice}</td>
             <td>{tool.sellPrice}</td>
+            <td>{tool.purchasePrice}</td>
             <td>
                 <Tooltip title="Редактировать инструмент">
                     <Button

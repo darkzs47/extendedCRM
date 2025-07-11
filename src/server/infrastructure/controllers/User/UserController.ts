@@ -3,7 +3,7 @@ import {constants} from "http2";
 import { Request, Response } from 'express';
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 import {validationResult} from "express-validator";
-import {UserModel} from "../../db/models/User/UserModel";
+import {UserModel} from "../../db/models/UserModel/UserModel";
 
 type UserWithoutPassword = Pick<UserModel, 'id' | 'secondName' | 'name' | 'lastName' | 'phone' | 'email' | 'role' | 'supplierId' | 'supplier'>
 

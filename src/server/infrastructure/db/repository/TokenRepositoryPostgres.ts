@@ -1,5 +1,5 @@
 import {ITokenRepository} from "../../../core/repositories/TokenRepository/ITokenRepository";
-import {TokenModel} from "../models/Token/TokenModel";
+import {TokenModel} from "../models/TokenModel/TokenModel";
 import {logger} from "../../../logger";
 
 export class TokenRepositoryPostgres implements ITokenRepository {

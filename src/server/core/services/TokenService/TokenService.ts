@@ -1,5 +1,5 @@
 import {ITokenRepository} from "../../repositories/TokenRepository/ITokenRepository";
-import {TokenModel} from "../../../infrastructure/db/models/Token/TokenModel";
+import {TokenModel} from "../../../infrastructure/db/models/TokenModel/TokenModel";
 import jwt, {JwtPayload} from "jsonwebtoken";
 
 export class TokenService {
@@ -35,7 +35,7 @@ export class TokenService {
     async findToken(refreshToken: string) {
         const token = await this.tokenRepository.findToken(refreshToken);
 
-        if (!token) throw new Error("Token not found");
+        if (!token) throw new Error("TokenModel not found");
 
         return token;
     }

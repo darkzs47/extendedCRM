@@ -1,7 +1,7 @@
 export interface AddToolRequest {
     name: string;
-    purchasePrice: number;
     sellPrice: number;
     categoryId: number;
+    purchasePrice?: number;
     supplierId?: number;
 }

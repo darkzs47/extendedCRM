@@ -84,7 +84,6 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
             })
             return await CustomerModel.findByPk(result)
         } catch (e) {
-            logger.error(e);
             return null;
         }
     }
@@ -96,16 +95,13 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                 {discount: dto.discount}
             ) : null
         } catch (e) {
-            logger.error(e);
             return null;
         }
     }
 
     async delete(id: number): Promise<CustomerModel | null> {
         const customer = await CustomerModel.findByPk(id)
-        logger.info(customer)
-        logger.info(id)
-        customer ? customer.destroy() : null;
+        customer ? await customer.destroy() : null;
         return customer ? customer : null;
     }
 }

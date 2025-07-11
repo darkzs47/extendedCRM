@@ -1,4 +1,4 @@
-import { UserModel } from "../../models/User/UserModel";
+import { UserModel } from "../../models/UserModel/UserModel";
 import { User } from "../../../../core/models/User/User";
 import {CreateUserDto} from "../../../../core/repositories/UserRepository/dto/CreateUserDto";
 import {RegisterDto} from "../../../../core/repositories/Auth/dto/RegisterDto";

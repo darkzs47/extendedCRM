@@ -1,7 +1,7 @@
 import {IUserRepository} from "../../../core/repositories/UserRepository/IUserRepository";
 import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/CreateUserDto";
 import {User} from "../../../core/models/User/User";
-import {UserModel} from "../models/User/UserModel";
+import {UserModel} from "../models/UserModel/UserModel";
 import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
@@ -24,7 +24,7 @@ export class UserRepositoryPostgres implements IUserRepository{
 
     async delete(id: number): Promise<UserModel | null> {
         const user = await UserModel.findByPk(id)
-        user ? user.destroy() : null;
+        user ? await user.destroy() : null;
         return user ? user : null;
     }
 

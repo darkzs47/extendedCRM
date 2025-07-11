@@ -1,5 +1,5 @@
 import {Table, Column, Model, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo} from 'sequelize-typescript';
-import {UserModel} from "../User/UserModel";
+import {UserModel} from "../UserModel/UserModel";
 
 
 @Table({ tableName: 'tokens', timestamps: false, underscored: true })

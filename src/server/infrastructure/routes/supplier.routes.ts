@@ -17,11 +17,11 @@ router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: 
     postgresSupplierController.getById(req, res)
 })
 
-router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req, res) => {
+router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresSupplierController.create(req, res)
 })
 
-router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req, res) => {
+router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req: Request, res: Response) => {
     postgresSupplierController.delete(req, res)
 })
 

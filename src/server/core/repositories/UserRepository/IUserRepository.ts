@@ -1,5 +1,5 @@
 import {UpdateUserDto} from "./dto/UpdateUserDto";
-import {UserModel} from "../../../infrastructure/db/models/User/UserModel";
+import {UserModel} from "../../../infrastructure/db/models/UserModel/UserModel";
 
 export interface IUserRepository {
     getAll(): Promise<UserModel[]>;

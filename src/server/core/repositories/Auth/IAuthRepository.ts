@@ -1,6 +1,6 @@
 import {User} from "../../models/User/User";
 import {RegisterDto} from "./dto/RegisterDto";
-import {UserModel} from "../../../infrastructure/db/models/User/UserModel";
+import {UserModel} from "../../../infrastructure/db/models/UserModel/UserModel";
 
 export interface IAuthRepository {
     findByEmail(email: string): Promise<User | null>;

@@ -10,17 +10,14 @@ const postgresUserController = new UserController(new UserService(new UserReposi
 
 const router = Router();
 
-// router.post('/create', (req: Request, res: Response) => {
-//     postgresUserController.createUser(req, res);
-// });
-
-router.get('/', AuthMiddleware, RoleMiddleware(["admin", "employee"]),(req: Request, res: Response) => {
+router.get('/', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
     postgresUserController.getAll(req, res);
 });
 
 router.delete('/:id', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
     postgresUserController.delete(req, res);
 })
+
 router.patch(
     '/:id',
     AuthMiddleware,

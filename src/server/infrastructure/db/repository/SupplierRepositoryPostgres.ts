@@ -90,7 +90,7 @@ export class SupplierRepositoryPostgres implements ISupplierRepository {
 
     async delete(id: number): Promise<SupplierModel | null> {
         const supplier = await SupplierModel.findByPk(id)
-        supplier ? supplier.destroy() : null;
+        supplier ? await supplier.destroy() : null;
         return supplier ? supplier : null;
     }
 }

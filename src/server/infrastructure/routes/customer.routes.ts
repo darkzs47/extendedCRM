@@ -17,15 +17,15 @@ router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: 
     postgresCustomerController.getById(req, res)
 })
 
-router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req, res) => {
+router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresCustomerController.create(req, res)
 })
 
-router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req, res) => {
+router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresCustomerController.updateDiscount(req, res)
 })
 
-router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req, res) => {
+router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req: Request, res: Response) => {
     postgresCustomerController.delete(req, res)
 })
 

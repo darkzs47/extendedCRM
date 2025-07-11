@@ -1,5 +1,5 @@
 import {Token} from "../../models/Token/Token";
-import {TokenModel} from "../../../infrastructure/db/models/Token/TokenModel";
+import {TokenModel} from "../../../infrastructure/db/models/TokenModel/TokenModel";
 
 export interface ITokenRepository {
     saveToken(userId: number, token: string): Promise<TokenModel>;

@@ -1,6 +1,6 @@
 import {IAuthRepository} from "../../../core/repositories/Auth/IAuthRepository";
 import {User} from "../../../core/models/User/User";
-import {UserModel} from "../models/User/UserModel";
+import {UserModel} from "../models/UserModel/UserModel";
 import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {RegisterDto} from "../../../core/repositories/Auth/dto/RegisterDto";
 

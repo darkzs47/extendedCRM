@@ -27,19 +27,12 @@ export interface CategoriesFailureAction {
 
 export interface CategoryUpdateMarkupAction {
     type: typeof UPDATE_MARKUP;
-    payload: {
-        id: number;
-        markup: number;
-    }
+    payload: Omit<ICategory, 'name'>
 }
 
 export interface CreateCategoryAction {
     type: typeof CREATE_CATEGORY;
-    payload: {
-        id: number;
-        name: string;
-        markup: number;
-    }
+    payload: ICategory
 }
 
 export type CategoriesActionTypes =

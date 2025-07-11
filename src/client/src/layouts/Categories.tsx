@@ -1,26 +1,67 @@
-import {type FC, memo} from "react";
-import type {ICategory} from "../models/ICategory.ts";
+import {type FC, memo, useCallback, useEffect, useState} from "react";
 import CategoryRow from "../components/CategoryRow.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../store/store.ts";
+import {createCategory, getAllCategories} from "../store/categories/actions.ts";
+import {Button, Input, Tooltip} from "antd";
+import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 const Categories: FC = () => {
-    const categories: ICategory[] = [{
-        id: 1,
-        name: 's',
-        markup: 1,
-    }];
+    const dispatch = useDispatch<AppDispatch>()
+    const categories = useSelector((state: RootState) => state.categories.categories)
+    const [isCreateNewCategory, setIsCreateNewCategory] = useState<boolean>(false)
+    const [newCategoryName, setNewCategoryName] = useState<string>('')
+    const [newCategoryMarkup, setNewCategoryMarkup] = useState<number>(0)
+
+    const handleAddNewCategory = () => {
+        setIsCreateNewCategory(!isCreateNewCategory);
+    }
+
+    const handleCancel = useCallback(() => {
+        setIsCreateNewCategory(!isCreateNewCategory)
+    }, [isCreateNewCategory])
+
+    const handleSubmitNewCategory = useCallback(() => {
+        if (newCategoryName === '' || newCategoryMarkup === 0) return
+
+        const request = {
+            name: newCategoryName,
+            markup: newCategoryMarkup,
+        }
+
+        dispatch(createCategory(request))
+
+        setNewCategoryMarkup(0)
+        setNewCategoryName('')
+    }, [newCategoryName, newCategoryMarkup])
+
+    useEffect(() => {
+        dispatch(getAllCategories());
+    }, [dispatch])
 
     return (
         <>
             <div>
-                <a href='#' style={{width: '5rem', height: '5rem'}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none"
-                         viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                              d="M12 4v16m8-8H4"/>
+                <Button
+                    type='primary'
+                    onClick={() => handleAddNewCategory()}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{ width: '1rem', height: '1rem' }}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                        />
                     </svg>
                     Добавить
-                </a>
+                </Button>
             </div>
             <table>
                 <thead>
@@ -31,11 +72,50 @@ const Categories: FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {categories.map(category =>
+                {categories?.map(category =>
                     <tr key={category.id}>
                         <CategoryRow category={category}/>
                     </tr>
                 )}
+                {
+                    isCreateNewCategory ? (
+                        <tr>
+                            <td>
+                                <Input
+                                onChange={(e) => setNewCategoryName(e.target.value)}
+                                value={newCategoryName}
+                                />
+                            </td>
+                            <td>
+                                <Input
+                                    type='number'
+                                    onChange={(e) => setNewCategoryMarkup(Number(e.target.value))}
+                                    value={newCategoryMarkup}
+                                />
+                                %
+                            </td>
+                            <td>
+                                <Tooltip title="Сохранить">
+                                    <Button
+                                        onClick={() => {handleSubmitNewCategory()}}
+                                        icon={<CheckOutlined />}
+                                        shape="circle"
+                                        style={{color: '#2fff00'}}
+                                    />
+                                </Tooltip>
+
+                                <Tooltip title="Отменить">
+                                    <Button
+                                        icon={<CloseOutlined />}
+                                        onClick={() => {handleCancel()}}
+                                        shape="circle"
+                                        style={{ marginRight: 8 }}
+                                    />
+                                </Tooltip>
+                            </td>
+                        </tr>
+                    ) : null
+                }
                 </tbody>
             </table>
         </>

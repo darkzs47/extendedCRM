@@ -1,5 +1,4 @@
-import {type FC, memo, useEffect, useState} from "react";
-import type {ICustomer} from "../models/ICustomer.ts";
+import {type FC, memo, useEffect} from "react";
 import CustomerRow from "../components/CustomerRow.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
@@ -8,17 +7,10 @@ import { getAllCustomers } from "../store/customers/actions.ts";
 
 const CustomersTable: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const customersFromStore = useSelector((state: RootState) => state.customers.customers)
-
-    const [customers, setCustomers] = useState<ICustomer[] | null>(null);
-
+    const customers = useSelector((state: RootState) => state.customers.customers)
     useEffect(() => {
         dispatch(getAllCustomers());
     }, [dispatch]);
-
-    useEffect(() => {
-        setCustomers(customersFromStore);
-    }, [customersFromStore]);
 
     return (
         <>

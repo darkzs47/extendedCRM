@@ -8,10 +8,11 @@ interface ToolRowProps {
 }
 
 const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
+
     return (
         <>
             <td>{tool.name}</td>
-            <td>{tool.category.name}</td>
+            <td>{tool.category?.name}</td>
             <td>{tool.purchasePrice}</td>
             <td>{tool.sellPrice}</td>
             <td>

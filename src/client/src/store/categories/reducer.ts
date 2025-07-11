@@ -21,14 +21,9 @@ export const categoriesReducer = (state = initialState, action: CategoriesAction
         case CREATE_CATEGORY:
             return {
                 ...state,
-                categories: [
-                    state.categories ? {...state.categories} : null,
-                    {
-                        id: action.payload.id,
-                        name: action.payload.name,
-                        markup: action.payload.markup,
-                    }
-                ],
+                categories: state.categories
+                    ? [...state.categories, action.payload]
+                    : [action.payload],
             }
         case UPDATE_MARKUP:
             return {
@@ -43,7 +38,9 @@ export const categoriesReducer = (state = initialState, action: CategoriesAction
         case DELETE_CATEGORY:
             return {
                 ...state,
-                categories: state.categories?.filter(category => category.id !== action.payload)
+                categories: state.categories
+                    ? state.categories.filter(category => category.id !== action.payload)
+                    : null,
             }
         case CATEGORIES_FAILURE:
             return {

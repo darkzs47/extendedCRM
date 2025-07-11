@@ -22,11 +22,9 @@ export const toolsReducer = (state = initialState, action: ToolsActionTypes) => 
         case CREATE_TOOL:
             return {
                 ...state,
-                tools: [
-                    state.tools ? {...state.tools} : null,
-                    {
-                        ...action.payload,
-                    }],
+                    tools: state.tools
+                        ? [...state.tools, action.payload]
+                        : [action.payload],
             }
         case UPDATE_TOOL:
             return {
@@ -41,7 +39,9 @@ export const toolsReducer = (state = initialState, action: ToolsActionTypes) => 
         case DELETE_TOOL:
             return {
                 ...state,
-                tools: state.tools?.filter(tool => tool.id !== action.payload)
+                tools: state.tools
+                    ? state.tools.filter(tool => tool.id !== action.payload)
+                    : null,
             }
         case TOOLS_FAILURE:
             return {

@@ -9,7 +9,7 @@ const Navigation: FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser)
-    const currentUserRole = useSelector((state: RootState) => state.currentUser.currentUser?.role)
+    const userRole = useSelector((state: RootState) => state.currentUser.currentUser?.role)
     const handleLogout: MouseEventHandler = useCallback(() => {
             dispatch(logout());
             navigate('/')
@@ -19,38 +19,17 @@ const Navigation: FC = () => {
     return (
         <nav>
             <ul>
-                {!isAuthUser ? (
+                {isAuthUser && (
                     <>
-                        <li>
-                            <NavLink to="/login">Login</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/register">Register</NavLink>
-                        </li>
-                    </>
-                ) : (
-                    <>
-                        {currentUserRole === 'admin' && (
+                        {userRole === 'admin' && (
                             <>
                                 <li>
                                     <NavLink to="/admin">Админ-панель</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to="/orders">Заказы</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/customers">Клиенты</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/suppliers">Поставщики</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/tools">Инструменты</NavLink>
-                                </li>
                             </>
                         )}
 
-                        {currentUserRole === 'employee' && (
+                        {userRole === 'employee' || userRole === 'admin' && (
                             <>
                                 <li>
                                     <NavLink to="/orders">Заказы</NavLink>

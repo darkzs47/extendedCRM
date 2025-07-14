@@ -21,7 +21,7 @@ router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req
     postgresToolController.updateTool(req, res)
 })
 
-router.delete(':id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
+router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     postgresToolController.deleteTool(req, res)
 })
 

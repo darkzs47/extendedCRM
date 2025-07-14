@@ -37,7 +37,7 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
     const handleDeleteUser = useCallback((user: IUser) => {
         const confirmString = `Вы действительно хотите удалить пользователя ${user.secondName} ${user.name} ${user.lastName}`;
         if (confirm(confirmString)) dispatch(deleteUser({id: user.id}))
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     const handleSaveChanges = useCallback(async (user: IUser) => {
         const confirmString = `Вы действительно хотите изменить данные пользователя ${user.secondName} ${user.name} ${user.lastName}`;
@@ -85,7 +85,7 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
                             />
                         </td>
                         <td>
-                            <Select value={role} onChange={setRole}>
+                            <Select value={role} onChange={setRole} placeholder="Сменить роль">
                                 {Object.entries(roles).map(([key, label]) => (
                                     <Select.Option key={key} value={key}>
                                         {label}

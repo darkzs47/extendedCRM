@@ -18,7 +18,6 @@ const ToolsTable: FC = () => {
     const [newToolPurchasePrice, setNewToolPurchasePrice] = useState<number>(0)
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
-    console.log(newToolCategoryId)
 
     const handleAddNewTool = () => {
         setIsCreateNewTool(!isCreateNewTool);
@@ -46,6 +45,13 @@ const ToolsTable: FC = () => {
         setNewToolCategoryId(1)
         setIsCreateNewTool(!isCreateNewTool)
     }, [newToolName, newToolPurchasePrice, newToolCategoryId, newToolSellPrice, dispatch])
+
+    const calculatePrice = useCallback((priceValue: number) => {
+        setNewToolPurchasePrice(priceValue)
+        const currentCategoryMarkup: number = categories?.find(category => category.id === newToolCategoryId)?.markup ?? 1
+        const sellPrice: number = parseFloat((priceValue * currentCategoryMarkup).toFixed(1))
+        setNewToolSellPrice(sellPrice)
+    }, [newToolPurchasePrice])
 
     useEffect(() => {
         dispatch(getAllCategories());
@@ -89,7 +95,7 @@ const ToolsTable: FC = () => {
                 <tbody>
                 {tools?.map(tool =>
                     <tr key={tool.id}>
-                        <ToolRow tool={tool}/>
+                        <ToolRow tool={tool} categoryId={tool.categoryId}/>
                     </tr>
                 )}
                 {
@@ -102,7 +108,7 @@ const ToolsTable: FC = () => {
                                 />
                             </td>
                             <td>
-                                <Select value={newToolCategoryId} onChange={setNewToolCategoryId}>
+                                <Select value={newToolCategoryId} onChange={setNewToolCategoryId} placeholder="Выберите категорию">
                                     {categories?.map((category) => (
                                         <Select.Option key={category.id} value={category.id}>
                                             {category.name}
@@ -113,16 +119,12 @@ const ToolsTable: FC = () => {
                             <td>
                                 <Input
                                     type='number'
-                                    onChange={(e) => setNewToolSellPrice(Number(e.target.value))}
-                                    value={newToolSellPrice}
+                                    onChange={(e) => calculatePrice(Number(e.target.value))}
+                                    value={newToolPurchasePrice}
                                 />
                             </td>
                             <td>
-                                <Input
-                                    type='number'
-                                    onChange={(e) => setNewToolPurchasePrice(Number(e.target.value))}
-                                    value={newToolPurchasePrice}
-                                />
+                                {newToolSellPrice}
                             </td>
                             <td>
                                 <Tooltip title="Сохранить">

@@ -39,12 +39,14 @@ export const deleteTool = (request: DeleteRequest) => {
 }
 
 export const updateTool = (request: UpdateToolRequest) => {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch): Promise<{success: boolean}> => {
         try {
             await ToolService.updateTool(request);
             dispatch({type: UPDATE_TOOL, payload: {...request}});
+            return { success: true };
         } catch (e) {
             dispatch({ type: TOOLS_FAILURE })
+            return { success: false };
         }
     }
 }

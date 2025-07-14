@@ -3,10 +3,16 @@ import {IToolRepository} from "../../../core/repositories/ToolRepository/IToolRe
 import {CreateToolDto} from "../../../core/repositories/ToolRepository/dto/CreateToolDto";
 import {UpdateToolDto} from "../../../core/repositories/ToolRepository/dto/UpdateToolDto";
 import {ToolMapper} from "../mappers/ToolMapper/ToolMapper";
+import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 
 export class ToolRepositoryPostgres implements IToolRepository {
     async getAllTools(): Promise<ToolModel[]> {
-        const toolsModels: ToolModel[] = await ToolModel.findAll();
+        const toolsModels: ToolModel[] = await ToolModel.findAll(
+            {
+                include: [
+                    {model: CategoryModel, as: 'category'}],
+            }
+        );
         return toolsModels;
     }
 
@@ -26,6 +32,6 @@ export class ToolRepositoryPostgres implements IToolRepository {
     async deleteTool(id: number): Promise<ToolModel | null> {
         const tool: ToolModel | null = await ToolModel.findByPk(id)
         tool ? await tool.destroy() : null
-        return tool;
+        return tool ? tool : null;
     }
 }

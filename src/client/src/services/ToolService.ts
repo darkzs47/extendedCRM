@@ -12,7 +12,6 @@ export default class ToolService {
     }
 
     static async createTool(request: AddToolRequest): Promise<AxiosResponse<AddResponse>> {
-        console.log(request);
         return api.post<AddResponse>(`/tools/`, request);
     }
 

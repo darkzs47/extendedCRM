@@ -14,22 +14,21 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isEditing, setIsEditing] = useState<boolean>(false)
 
-    const [markup, setMarkup] = useState<number>(category.markup)
+    const [markup, setMarkup] = useState<number>(parseFloat(((category.markup - 1) * 100).toFixed(0)))
 
     const handleEditing = useCallback(() => {
         setIsEditing(!isEditing)
-        setMarkup(0)
     }, [isEditing])
 
     const handleSaveChanges = useCallback((category: ICategory) => {
         if (markup === 0) return
         const request = {
             id: category.id,
-            markup: markup,
+            markup: 1 + (markup / 100),
         }
         dispatch(updateMarkupCategory(request))
-        setMarkup(0)
-    }, [markup, category])
+        setIsEditing(!isEditing)
+    }, [dispatch, markup, category])
 
     return (
         <>
@@ -69,7 +68,7 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                     ) :
                     (
                         <>
-                            <td>{category.markup}</td>
+                            <td>{markup}%</td>
                             <td>
                                 <Tooltip title="Редактировать категорию">
                                     <Button

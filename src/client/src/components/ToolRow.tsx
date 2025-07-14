@@ -6,8 +6,6 @@ import type {AppDispatch, RootState} from "../store/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import type {ICategory} from "../models/ICategory.ts";
 import {deleteTool, updateTool} from "../store/tools/actions.ts";
-import {updateUser} from "../store/users/actions.ts";
-import type {UserDataForUpdate} from "./UserRow.tsx";
 
 interface ToolRowProps {
     tool: ITool;

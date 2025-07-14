@@ -3,7 +3,7 @@ import CategoryRow from "../components/CategoryRow.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
 import {createCategory, getAllCategories} from "../store/categories/actions.ts";
-import {Button, Input, Tooltip} from "antd";
+import {Button, Input, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 const Categories: FC = () => {
@@ -13,9 +13,9 @@ const Categories: FC = () => {
     const [newCategoryName, setNewCategoryName] = useState<string>('')
     const [newCategoryMarkup, setNewCategoryMarkup] = useState<number>(0)
 
-    const handleAddNewCategory = () => {
+    const handleAddNewCategory = useCallback(() => {
         setIsCreateNewCategory(!isCreateNewCategory);
-    }
+    }, [isCreateNewCategory])
 
     const handleCancel = useCallback(() => {
         setIsCreateNewCategory(!isCreateNewCategory)
@@ -26,14 +26,15 @@ const Categories: FC = () => {
 
         const request = {
             name: newCategoryName,
-            markup: newCategoryMarkup,
+            markup: 1 + (newCategoryMarkup / 100),
         }
 
         dispatch(createCategory(request))
 
         setNewCategoryMarkup(0)
         setNewCategoryName('')
-    }, [newCategoryName, newCategoryMarkup])
+        setIsCreateNewCategory(!isCreateNewCategory)
+    }, [dispatch, newCategoryName, newCategoryMarkup])
 
     useEffect(() => {
         dispatch(getAllCategories());
@@ -87,9 +88,14 @@ const Categories: FC = () => {
                                 />
                             </td>
                             <td>
-                                <Input
+                                <InputNumber
+                                    style={{width: '100px'}}
                                     type='number'
-                                    onChange={(e) => setNewCategoryMarkup(Number(e.target.value))}
+                                    onChange={(value) => {
+                                        if (value !== null) {
+                                            setNewCategoryMarkup(value);
+                                        }
+                                    }}
                                     value={newCategoryMarkup}
                                 />
                                 %

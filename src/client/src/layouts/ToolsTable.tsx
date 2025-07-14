@@ -19,9 +19,9 @@ const ToolsTable: FC = () => {
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
 
-    const handleAddNewTool = () => {
+    const handleAddNewTool = useCallback(() => {
         setIsCreateNewTool(!isCreateNewTool);
-    }
+    }, [isCreateNewTool])
 
     const handleCancel = useCallback(() => {
         setIsCreateNewTool(!isCreateNewTool)

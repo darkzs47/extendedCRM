@@ -1,7 +1,7 @@
 import {type FC, memo, useCallback, useState} from "react";
-import ToolsTable from "../layouts/ToolsTable.tsx";
-import styles from "../styles/toolsMain.module.scss"
-import AddIdentityButton from "../components/AddIdentityButton.tsx";
+import ToolsTable from "../../components/tables/Tools.tsx";
+import styles from "./tools.module.scss"
+import AddIdentityButton from "../../components/common/AddIdentityButton.tsx";
 
 const Tools: FC = () => {
 

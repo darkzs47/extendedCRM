@@ -1,8 +1,8 @@
 import React, {type FC, memo, useCallback, useEffect, useState} from "react";
-import CategoryRow from "../components/CategoryRow.tsx";
+import CategoryRow from "./rows/Category.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {createCategory, getAllCategories} from "../store/categories/actions.ts";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {createCategory, getAllCategories} from "../../store/categories/actions.ts";
 import {Button, Input, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
@@ -12,7 +12,7 @@ interface Props {
     onCancel: () => void;
 }
 
-const CategoriesTable: FC<Props> = ( { isCreateNewCategory, setIsCreateNewCategory, onCancel }: Props ) => {
+const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, onCancel }: Props ) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories = useSelector((state: RootState) => state.categories.categories)
     const [newCategoryName, setNewCategoryName] = useState<string>('')
@@ -103,4 +103,4 @@ const CategoriesTable: FC<Props> = ( { isCreateNewCategory, setIsCreateNewCatego
     )
 }
 
-export default memo(CategoriesTable);
+export default memo(Categories);

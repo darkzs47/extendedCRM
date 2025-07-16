@@ -1,12 +1,12 @@
 import React, {type FC, memo, useCallback, useEffect, useState} from "react";
-import ToolRow from "../components/ToolRow.tsx";
+import ToolRow from "./rows/Tool.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getAllCategories} from "../store/categories/actions.ts";
-import {createTool, getAllTools} from "../store/tools/actions.ts";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getAllCategories} from "../../store/categories/actions.ts";
+import {createTool, getAllTools} from "../../store/tools/actions.ts";
 import {Button, Input, Select, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
-import styles from "../styles/toolsMain.module.scss"
+import styles from "../../pages/tools/tools.module.scss"
 
 interface Props {
     isCreateNewTool: boolean,
@@ -14,7 +14,7 @@ interface Props {
     onCancel: () => void,
 }
 
-const ToolsTable: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Props) => {
+const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories = useSelector((state: RootState) => state.categories.categories)
     const tools = useSelector((state: RootState) => state.tools.tools)
@@ -130,4 +130,4 @@ const ToolsTable: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }
     )
 }
 
-export default memo(ToolsTable);
+export default memo(Tools);

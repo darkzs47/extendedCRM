@@ -1,7 +1,7 @@
 import {type FC, memo} from "react";
-import type {ICustomerFullInfo} from "../models/ICustomerFullInfo.ts";
+import type {ICustomerFullInfo} from "../../models/ICustomerFullInfo.ts";
 import {Button, Form, Input, InputNumber} from "antd"
-import styles from "../styles/addCustomer.module.scss"
+import styles from "../../pages/customers/addCustomer.module.scss"
 
 export type CustomerFormValues = Omit<ICustomerFullInfo, 'id' | 'branches' | 'representatives'>;
 
@@ -11,7 +11,7 @@ interface CustomerFormProps {
     initialValues?: CustomerFormValues;
 }
 
-const CustomerForm: FC<CustomerFormProps> = ({onNext, onChange, initialValues}) => {
+const Customer: FC<CustomerFormProps> = ({onNext, onChange, initialValues}) => {
     const [form] = Form.useForm<CustomerFormValues>();
 
     const handleFinish = (values: CustomerFormValues) => {
@@ -117,4 +117,4 @@ const CustomerForm: FC<CustomerFormProps> = ({onNext, onChange, initialValues}) 
     );
 }
 
-export default memo(CustomerForm);
+export default memo(Customer);

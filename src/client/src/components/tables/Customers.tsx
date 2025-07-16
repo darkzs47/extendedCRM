@@ -1,11 +1,11 @@
 import {type FC, memo, useEffect} from "react";
-import CustomerRow from "../components/CustomerRow.tsx";
+import CustomerRow from "./rows/Customer.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getAllCustomers} from "../store/customers/actions.ts";
-import styles from "../styles/customersMain.module.scss"
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getAllCustomers} from "../../store/customers/actions.ts";
+import styles from "../../pages/customers/customers.module.scss"
 
-const CustomersTable: FC = () => {
+const Customers: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
     const customers = useSelector((state: RootState) => state.customers.customers)
 
@@ -40,4 +40,4 @@ const CustomersTable: FC = () => {
     )
 }
 
-export default memo(CustomersTable);
+export default memo(Customers);

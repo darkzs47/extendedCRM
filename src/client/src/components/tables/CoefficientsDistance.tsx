@@ -1,11 +1,11 @@
 import React, {memo, type FC, useCallback, useState, useEffect} from "react";
-import type {ICoefficientDistance} from "../models/ICoefficientDistance.ts";
-import CoeffDistanceRow from "../components/CoeffDistanceRow.tsx";
+import type {ICoefficientDistance} from "../../models/ICoefficientDistance.ts";
+import CoeffDistanceRow from "./rows/CoefficientDistance.tsx";
 import {Button, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {createDistanceCoefficients, getDistanceCoefficients} from "../store/coefficients/actions.ts";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {createDistanceCoefficients, getDistanceCoefficients} from "../../store/coefficients/actions.ts";
 
 interface Props {
     isCreateNewCoefficient: boolean;
@@ -13,7 +13,7 @@ interface Props {
     onCancel: () => void;
 }
 
-const CoefficientsDistanceTable: FC<Props> = ( {isCreateNewCoefficient, setIsCreateNewCoefficient, onCancel}: Props ) => {
+const CoefficientsDistance: FC<Props> = ({isCreateNewCoefficient, setIsCreateNewCoefficient, onCancel}: Props ) => {
     const dispatch = useDispatch<AppDispatch>()
     const coefficients: ICoefficientDistance[] | null = useSelector((state: RootState) => state.coefficients.distances)
 
@@ -127,4 +127,4 @@ const CoefficientsDistanceTable: FC<Props> = ( {isCreateNewCoefficient, setIsCre
     )
 }
 
-export default memo(CoefficientsDistanceTable);
+export default memo(CoefficientsDistance);

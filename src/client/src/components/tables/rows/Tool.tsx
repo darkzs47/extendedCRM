@@ -1,18 +1,18 @@
 import {type FC, memo, useCallback, useState} from "react";
-import type {ITool} from "../models/ITool.ts";
+import type {ITool} from "../../../models/ITool.ts";
 import {Button, Input, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import type {AppDispatch, RootState} from "../store/store.ts";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {useDispatch, useSelector} from "react-redux";
-import type {ICategory} from "../models/ICategory.ts";
-import {deleteTool, updateTool} from "../store/tools/actions.ts";
+import type {ICategory} from "../../../models/ICategory.ts";
+import {deleteTool, updateTool} from "../../../store/tools/actions.ts";
 
 interface ToolRowProps {
     tool: ITool;
     categoryId: number;
 }
 
-const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
+const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories: ICategory[] | null = useSelector((state: RootState) => state.categories.categories)
 
@@ -133,4 +133,4 @@ const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
     )
 }
 
-export default memo(ToolRow);
+export default memo(Tool);

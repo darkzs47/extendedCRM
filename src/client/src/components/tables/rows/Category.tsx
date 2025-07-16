@@ -1,16 +1,16 @@
 import {type FC, memo, useCallback, useState} from "react";
 import {Button, Input, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import type {ICategory} from "../models/ICategory.ts";
+import type {ICategory} from "../../../models/ICategory.ts";
 import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../store/store.ts";
-import {deleteCategory, updateMarkupCategory} from "../store/categories/actions.ts";
+import type {AppDispatch} from "../../../store/store.ts";
+import {deleteCategory, updateMarkupCategory} from "../../../store/categories/actions.ts";
 
 interface CategoryRowProps {
     category: ICategory
 }
 
-const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
+const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const [isEditing, setIsEditing] = useState<boolean>(false)
 
@@ -97,4 +97,4 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
     )
 }
 
-export default memo(CategoryRow);
+export default memo(Category);

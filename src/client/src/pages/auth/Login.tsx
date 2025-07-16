@@ -1,5 +1,5 @@
 import {memo, type FC} from 'react'
-import LoginForm from "../components/LoginForm.tsx";
+import LoginForm from "../../components/auth/LoginForm.tsx";
 
 const Login: FC = () => {
 

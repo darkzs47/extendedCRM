@@ -1,6 +1,6 @@
 import {type FC, memo} from "react";
-import UsersTable from "../layouts/UsersTable.tsx";
-import styles from "../styles/usersMain.module.scss"
+import UsersTable from "../../components/tables/Users.tsx";
+import styles from "./users.module.scss"
 
 const Users: FC = () => {
     return (

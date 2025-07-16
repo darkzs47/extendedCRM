@@ -1,16 +1,16 @@
 import {type FC, memo, useCallback, useState} from "react";
 import {Button, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined, EditOutlined} from "@ant-design/icons";
-import type {ICoefficientSeason} from "../models/ICoefficientSeason.ts";
+import type {ICoefficientSeason} from "../../../models/ICoefficientSeason.ts";
 import {useDispatch} from "react-redux";
-import type { AppDispatch } from "../store/store.ts";
-import {updateSeasonCoefficients} from "../store/coefficients/actions.ts";
+import type { AppDispatch } from "../../../store/store.ts";
+import {updateSeasonCoefficients} from "../../../store/coefficients/actions.ts";
 
 export interface CoeffSeasonRowProps {
     coefficient: ICoefficientSeason;
 }
 
-const CoeffSeasonRow: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRowProps) => {
+const CoefficientSeason: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRowProps) => {
     const dispatch = useDispatch<AppDispatch>();
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [newCoefficient, setNewCoefficient] = useState<number>(coefficient.coefficient)
@@ -87,4 +87,4 @@ const CoeffSeasonRow: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRowPr
     )
 }
 
-export default memo(CoeffSeasonRow);
+export default memo(CoefficientSeason);

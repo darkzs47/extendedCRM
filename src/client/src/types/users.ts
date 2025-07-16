@@ -1,5 +1,5 @@
 import type {IUser} from "../models/IUser.ts";
-import type {UserDataForUpdate} from "../components/UserRow.tsx";
+import type {UserDataForUpdate} from "../components/tables/rows/User.tsx";
 
 export const USERS_SUCCESS = 'USERS_SUCCESS';
 export const USERS_FAILURE = 'USERS_FAILURE';

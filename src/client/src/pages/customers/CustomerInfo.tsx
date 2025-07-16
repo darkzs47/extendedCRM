@@ -1,10 +1,10 @@
 import {type FC, memo, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getCustomerById} from "../store/customer/actions.ts";
-import type {ICustomerFullInfo} from "../models/ICustomerFullInfo.ts";
-import styles from "../styles/customer.module.scss";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getCustomerById} from "../../store/customer/actions.ts";
+import type {ICustomerFullInfo} from "../../models/ICustomerFullInfo.ts";
+import styles from "./customer.module.scss";
 
 const CustomerInfo: FC = () => {
     const {id} = useParams()

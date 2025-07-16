@@ -1,17 +1,17 @@
 import {type FC, memo, useCallback} from "react";
 import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../store/store.ts";
+import type {AppDispatch} from "../../../store/store.ts";
 import {useNavigate} from "react-router-dom";
 import {Button, Tooltip} from "antd";
 import {DeleteOutlined, EyeOutlined} from "@ant-design/icons";
-import type {ISupplier} from "../models/ISupplier.ts";
-import { deleteSupplier } from "../store/suppliers/actions.ts";
+import type {ISupplier} from "../../../models/ISupplier.ts";
+import { deleteSupplier } from "../../../store/suppliers/actions.ts";
 
 interface SupplierRowProps {
     supplier: ISupplier;
 }
 
-const SupplierRow: FC<SupplierRowProps> = ({supplier}: SupplierRowProps) => {
+const Supplier: FC<SupplierRowProps> = ({supplier}: SupplierRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
@@ -52,4 +52,4 @@ const SupplierRow: FC<SupplierRowProps> = ({supplier}: SupplierRowProps) => {
     )
 }
 
-export default memo(SupplierRow);
+export default memo(Supplier);

@@ -1,7 +1,7 @@
 import {type FC, memo, useCallback, useState} from "react";
-import CoefficientsDistanceTable from "../layouts/CoefficientsDistanceTable.tsx";
-import AddIdentityButton from "../components/AddIdentityButton.tsx";
-import styles from "../styles/coefficietnsDistance.module.scss"
+import CoefficientsDistanceTable from "../../components/tables/CoefficientsDistance.tsx";
+import AddIdentityButton from "../../components/common/AddIdentityButton.tsx";
+import styles from "./coefficietnsDistance.module.scss"
 
 const CoefficientsDistance: FC = () => {
     const [isCreateNewCoefficient, setIsCreateNewCoefficient] = useState<boolean>(false);

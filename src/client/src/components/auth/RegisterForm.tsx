@@ -1,11 +1,11 @@
 import {type FC, memo, type MouseEventHandler, useCallback} from 'react'
 import {Button, Form, Input} from "antd";
 import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../store/store.ts";
-import {registration} from "../store/currentUser/actions.ts";
+import type {AppDispatch} from "../../store/store.ts";
+import {registration} from "../../store/currentUser/actions.ts";
 import {useNavigate} from "react-router-dom";
-import type {RegisterRequest} from "../models/request/RegisterRequest.ts";
-import styles from "../styles/register.module.scss"
+import type {RegisterRequest} from "../../models/request/RegisterRequest.ts";
+import styles from "../../pages/auth/register.module.scss"
 
 const RegisterForm: FC = () => {
     const [form] = Form.useForm();

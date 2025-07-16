@@ -1,7 +1,7 @@
 import {type FC, memo} from "react";
 import {Button, Form, Input,} from "antd";
-import type {ISupplierFullInfo} from "../models/ISupplierFullInfo.ts";
-import styles from "../styles/addSupplier.module.scss";
+import type {ISupplierFullInfo} from "../../models/ISupplierFullInfo.ts";
+import styles from "../../pages/suppliers/addSupplier.module.scss";
 
 export type SupplierFormValues = Omit<ISupplierFullInfo, 'id' | 'branches' | 'representatives'>;
 
@@ -11,7 +11,7 @@ interface SupplierFormProps {
     initialValues?: SupplierFormValues;
 }
 
-const SupplierForm: FC<SupplierFormProps> = ({onNext, onChange, initialValues}) => {
+const Supplier: FC<SupplierFormProps> = ({onNext, onChange, initialValues}) => {
     const [form] = Form.useForm<SupplierFormValues>();
 
     const handleFinish = (values: SupplierFormValues) => {
@@ -103,4 +103,4 @@ const SupplierForm: FC<SupplierFormProps> = ({onNext, onChange, initialValues}) 
     );
 }
 
-export default memo(SupplierForm);
+export default memo(Supplier);

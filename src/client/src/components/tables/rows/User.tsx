@@ -1,12 +1,12 @@
 import {type FC, memo, useCallback, useEffect, useState} from "react";
-import type {IUser} from "../models/IUser.ts";
+import type {IUser} from "../../../models/IUser.ts";
 import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import {Button, Input, Select, Tooltip} from "antd";
-import type {UserRole} from "../../../server/core/models/User/User.ts";
+import type {UserRole} from "../../../../../server/core/models/User/User.ts";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {deleteUser, updateUser} from "../store/users/actions.ts";
-import {getAllSuppliers} from "../store/suppliers/actions.ts";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
+import {deleteUser, updateUser} from "../../../store/users/actions.ts";
+import {getAllSuppliers} from "../../../store/suppliers/actions.ts";
 
 interface UserRowProps {
     user: IUser;
@@ -25,7 +25,7 @@ const roles: Record<string, string> = {
 
 export type UserDataForUpdate = Omit<IUser, "name" | "secondName" | "lastName">
 
-const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControls }) => {
+const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControls }) => {
     const dispatch = useDispatch<AppDispatch>();
     const suppliers = useSelector((state: RootState) => state.suppliers.suppliers)
 
@@ -160,4 +160,4 @@ const UserRow: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideCont
     )
 }
 
-export default memo(UserRow);
+export default memo(User);

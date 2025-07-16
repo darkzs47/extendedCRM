@@ -1,10 +1,10 @@
 import {type FC, memo, type MouseEventHandler, useCallback} from 'react'
 import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {Button} from "antd";
-import {logout} from "../store/currentUser/actions.ts";
-import styles from "../styles/navigation.module.scss"
+import {logout} from "../../../store/currentUser/actions.ts";
+import styles from "./navigation.module.scss"
 import {LogoutOutlined} from '@ant-design/icons';
 
 const Navigation: FC = () => {

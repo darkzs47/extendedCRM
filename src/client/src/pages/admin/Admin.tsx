@@ -1,8 +1,8 @@
 import {type FC, memo} from 'react'
 import {NavLink, Outlet} from 'react-router-dom';
-import styles from "../styles/admin.module.scss"
+import styles from "./admin.module.scss"
 
-const AdminPanel: FC = () => {
+const Admin: FC = () => {
 
     return (
         <main className={styles.adminMain}>
@@ -23,4 +23,4 @@ const AdminPanel: FC = () => {
     )
 }
 
-export default memo(AdminPanel);
+export default memo(Admin);

@@ -1,5 +1,5 @@
 import {memo, type FC} from 'react'
-import RegisterForm from "../components/RegisterForm.tsx";
+import RegisterForm from "../../components/auth/RegisterForm.tsx";
 
 const Register: FC = () => {
 

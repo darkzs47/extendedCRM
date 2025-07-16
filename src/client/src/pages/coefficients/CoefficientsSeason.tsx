@@ -1,5 +1,5 @@
 import {type FC, memo} from "react";
-import CoefficientsSeasonTable from "../layouts/CoefficientsSeasonTable.tsx";
+import CoefficientsSeasonTable from "../../components/tables/CoefficientsSeason.tsx";
 
 const CoefficientsSeason: FC = () => {
     return (

@@ -1,7 +1,7 @@
 import {type FC, memo} from "react";
 import {Button, Checkbox, Form, Input} from "antd"
-import type {IAddress} from "../models/IAddress.ts";
-import styles from "../styles/addCustomer.module.scss"
+import type {IAddress} from "../../models/IAddress.ts";
+import styles from "../../pages/customers/addCustomer.module.scss"
 
 export type BranchFormValues = {
     name: string;
@@ -19,7 +19,7 @@ interface BranchFormProps {
     initialValues: BranchFormValues;
 }
 
-const BranchForm: FC<BranchFormProps> = ({onNext, onBack, onChange, initialValues}) => {
+const Branch: FC<BranchFormProps> = ({onNext, onBack, onChange, initialValues}) => {
     const [form] = Form.useForm<BranchFormValues>();
 
     const onFinish = (values: BranchFormValues) => {
@@ -205,4 +205,4 @@ const BranchForm: FC<BranchFormProps> = ({onNext, onBack, onChange, initialValue
     )
 }
 
-export default memo(BranchForm);
+export default memo(Branch);

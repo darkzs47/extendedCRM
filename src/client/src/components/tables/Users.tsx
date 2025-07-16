@@ -1,10 +1,10 @@
 import {type FC, memo, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getAllUsers} from "../store/users/actions.ts";
-import UserRow from "../components/UserRow.tsx";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getAllUsers} from "../../store/users/actions.ts";
+import UserRow from "./rows/User.tsx";
 
-const UsersTable: FC = () => {
+const Users: FC = () => {
     const users = useSelector((state: RootState) => state.users.users);
     const currentUser = useSelector((state: RootState) => state.currentUser.currentUser)
     const dispatch = useDispatch<AppDispatch>()
@@ -46,4 +46,4 @@ const UsersTable: FC = () => {
     )
 }
 
-export default memo(UsersTable);
+export default memo(Users);

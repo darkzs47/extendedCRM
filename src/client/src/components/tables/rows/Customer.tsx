@@ -1,17 +1,17 @@
 import {type FC, memo, useCallback, useState} from "react";
 import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
 import {Button, Input, Tooltip} from "antd";
-import type {ICustomer} from "../models/ICustomer.ts";
+import type {ICustomer} from "../../../models/ICustomer.ts";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../store/store.ts";
-import {deleteCustomer, updateDiscount} from "../store/customers/actions.ts";
+import type {AppDispatch} from "../../../store/store.ts";
+import {deleteCustomer, updateDiscount} from "../../../store/customers/actions.ts";
 
 interface CustomerRowProps {
     customer: ICustomer;
 }
 
-const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
+const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
@@ -111,4 +111,4 @@ const CustomerRow: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
     )
 }
 
-export default memo(CustomerRow);
+export default memo(Customer);

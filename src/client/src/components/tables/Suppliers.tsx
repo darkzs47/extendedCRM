@@ -1,11 +1,11 @@
 import {type FC, memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getAllSuppliers} from "../store/suppliers/actions.ts";
-import SupplierRow from "../components/SupplierRow.tsx";
-import styles from "../styles/suppliersMain.module.scss"
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getAllSuppliers} from "../../store/suppliers/actions.ts";
+import SupplierRow from "./rows/Supplier.tsx";
+import styles from "../../pages/suppliers/suppliers.module.scss"
 
-const SuppliersTable: FC = () => {
+const Suppliers: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
     const suppliers = useSelector((state: RootState) => state.suppliers.suppliers)
 
@@ -39,4 +39,4 @@ const SuppliersTable: FC = () => {
     )
 }
 
-export default memo(SuppliersTable);
+export default memo(Suppliers);

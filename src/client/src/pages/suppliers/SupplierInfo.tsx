@@ -1,10 +1,10 @@
 import {type FC, memo, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import type {ISupplierFullInfo} from "../models/ISupplierFullInfo.ts";
-import {getSupplierById} from "../store/supplier/actions.ts";
-import styles from "../styles/supplier.module.scss"
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import type {ISupplierFullInfo} from "../../models/ISupplierFullInfo.ts";
+import {getSupplierById} from "../../store/supplier/actions.ts";
+import styles from "./supplier.module.scss"
 
 const SupplierInfo: FC = () => {
     const {id} = useParams()

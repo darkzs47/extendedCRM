@@ -1,19 +1,19 @@
 import {type FC, memo, useCallback, useState} from "react";
 import {Button, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import type {ICoefficientDistance} from "../models/ICoefficientDistance.ts";
+import type {ICoefficientDistance} from "../../../models/ICoefficientDistance.ts";
 import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../store/store.ts";
+import type {AppDispatch} from "../../../store/store.ts";
 import {
     deleteDistanceCoefficients,
     updateDistanceCoefficients,
-} from "../store/coefficients/actions.ts";
+} from "../../../store/coefficients/actions.ts";
 
 export interface CoeffDistanceRowProps {
     coefficient: ICoefficientDistance;
 }
 
-const CoeffDistanceRow: FC<CoeffDistanceRowProps> = ({coefficient}: CoeffDistanceRowProps) => {
+const CoefficientDistance: FC<CoeffDistanceRowProps> = ({coefficient}: CoeffDistanceRowProps) => {
     const dispatch = useDispatch<AppDispatch>();
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [newCoefficient, setNewCoefficient] = useState<number>(coefficient.coefficient)
@@ -110,4 +110,4 @@ const CoeffDistanceRow: FC<CoeffDistanceRowProps> = ({coefficient}: CoeffDistanc
     )
 }
 
-export default memo(CoeffDistanceRow);
+export default memo(CoefficientDistance);

@@ -1,11 +1,11 @@
 import {type FC, memo, useState} from "react";
-import CustomerForm, {type CustomerFormValues} from "../layouts/CustomerForm.tsx";
-import BranchForm, {type BranchFormValues} from "../layouts/BranchForm.tsx";
-import RepresentativeForm, {type RepresentativeFormValues} from "../layouts/RepresentativeForm.tsx";
-import type {AddCustomerRequest} from "../models/request/AddCustomerRequest.ts";
-import CustomerService from "../services/CustomerService.ts";
+import CustomerForm, {type CustomerFormValues} from "../../components/forms/Customer.tsx";
+import BranchForm, {type BranchFormValues} from "../../components/forms/Branch.tsx";
+import RepresentativeForm, {type RepresentativeFormValues} from "../../components/forms/Representative.tsx";
+import type {AddCustomerRequest} from "../../models/request/AddCustomerRequest.ts";
+import CustomerService from "../../services/CustomerService.ts";
 import {useNavigate} from "react-router-dom";
-import styles from "../styles/addCustomer.module.scss"
+import styles from "./addCustomer.module.scss"
 
 const AddCustomer: FC = () => {
     const navigate = useNavigate();

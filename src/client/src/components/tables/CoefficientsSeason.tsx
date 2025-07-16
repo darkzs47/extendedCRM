@@ -1,9 +1,9 @@
 import  {type FC, memo, useEffect} from "react";
-import type {ICoefficientSeason} from "../models/ICoefficientSeason.ts";
-import CoeffSeasonRow from "../components/CoeffSeasonRow.tsx";
+import type {ICoefficientSeason} from "../../models/ICoefficientSeason.ts";
+import CoeffSeasonRow from "./rows/CoefficientSeason.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../store/store.ts";
-import {getSeasonCoefficients} from "../store/coefficients/actions.ts";
+import type {AppDispatch, RootState} from "../../store/store.ts";
+import {getSeasonCoefficients} from "../../store/coefficients/actions.ts";
 
 const CoeffSeason: FC = () => {
     const dispatch = useDispatch<AppDispatch>()

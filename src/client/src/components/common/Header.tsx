@@ -1,6 +1,6 @@
 import {type FC, memo} from 'react'
 
-import Navigation from "../components/Navigation.tsx";
+import Navigation from "./navigation/Navigation.tsx";
 
 const Header: FC = () => {
     return (

@@ -1,11 +1,11 @@
 import {type FC, memo, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import BranchForm, {type BranchFormValues} from "../layouts/BranchForm.tsx";
-import RepresentativeForm, {type RepresentativeFormValues} from "../layouts/RepresentativeForm.tsx";
-import SupplierForm, {type SupplierFormValues} from "../layouts/SupplierForm.tsx";
-import type {AddSupplierRequest} from "../models/request/AddSupplierRequest.ts";
-import SupplierService from "../services/SupplierService.ts";
-import styles from "../styles/addSupplier.module.scss"
+import BranchForm, {type BranchFormValues} from "../../components/forms/Branch.tsx";
+import RepresentativeForm, {type RepresentativeFormValues} from "../../components/forms/Representative.tsx";
+import SupplierForm, {type SupplierFormValues} from "../../components/forms/Supplier.tsx";
+import type {AddSupplierRequest} from "../../models/request/AddSupplierRequest.ts";
+import SupplierService from "../../services/SupplierService.ts";
+import styles from "./addSupplier.module.scss"
 
 const AddSupplier: FC = () => {
     const navigate = useNavigate();

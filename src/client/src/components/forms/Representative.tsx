@@ -1,7 +1,7 @@
 import {type FC, memo} from "react";
-import type {IRepresentative} from "../models/IRepresentative";
+import type {IRepresentative} from "../../models/IRepresentative.ts";
 import {Button, Checkbox, Form, Input} from "antd";
-import styles from "../styles/addCustomer.module.scss"
+import styles from "../../pages/customers/addCustomer.module.scss"
 
 export type RepresentativeFormValues = Omit<IRepresentative, 'id' | 'customer' | 'customerId'>;
 
@@ -12,7 +12,7 @@ interface RepresentativeFormProps {
     initialValues?: RepresentativeFormValues;
 }
 
-const RepresentativeForm: FC<RepresentativeFormProps> = ({onBack, onSubmit, onChange, initialValues}) => {
+const Representative: FC<RepresentativeFormProps> = ({onBack, onSubmit, onChange, initialValues}) => {
     const [form] = Form.useForm<RepresentativeFormValues>();
 
     const handleFinish = (values: RepresentativeFormValues) => {
@@ -119,4 +119,4 @@ const RepresentativeForm: FC<RepresentativeFormProps> = ({onBack, onSubmit, onCh
     );
 };
 
-export default memo(RepresentativeForm);
+export default memo(Representative);

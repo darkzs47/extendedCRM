@@ -5,6 +5,7 @@ import RepresentativeForm, {type RepresentativeFormValues} from "../layouts/Repr
 import type {AddCustomerRequest} from "../models/request/AddCustomerRequest.ts";
 import CustomerService from "../services/CustomerService.ts";
 import {useNavigate} from "react-router-dom";
+import styles from "../styles/addCustomer.module.scss"
 
 const AddCustomer: FC = () => {
     const navigate = useNavigate();
@@ -24,7 +25,10 @@ const AddCustomer: FC = () => {
         }
 
         const request: AddCustomerRequest = {
-            customer: customerData,
+            customer: {
+                ...customerData,
+                discount: 1 + (customerData.discount / 100)
+            },
             branch: branchData,
             representative: representativeData,
         }
@@ -38,7 +42,8 @@ const AddCustomer: FC = () => {
     };
 
     return (
-        <main>
+        <main className={styles.customerFormContainer}>
+            <h2>Добавление клиента</h2>
             {step === 1 && <CustomerForm
                 onNext={handleNext}
                 onChange={setCustomerData}

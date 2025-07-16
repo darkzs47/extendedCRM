@@ -1,9 +1,9 @@
 import {type FC, memo, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
-import AddIdentityButton from "../components/AddIdentityButton.tsx";
 import {getAllSuppliers} from "../store/suppliers/actions.ts";
 import SupplierRow from "../components/SupplierRow.tsx";
+import styles from "../styles/suppliersMain.module.scss"
 
 const SuppliersTable: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -14,8 +14,7 @@ const SuppliersTable: FC = () => {
     }, [dispatch]);
 
     return (
-        <>
-            <AddIdentityButton identity={"suppliers"}/>
+        <div className={styles.suppliersMainContainer}>
             <table>
                 <thead>
                 <tr>
@@ -36,7 +35,7 @@ const SuppliersTable: FC = () => {
                 </tbody>
                 <tfoot></tfoot>
             </table>
-        </>
+        </div>
     )
 }
 

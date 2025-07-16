@@ -1,0 +1,49 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+.registerContainer {
+  @include flex-column-container();
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.registerForm {
+  @include flex-column-container();
+
+  input, :global(.ant-input-password) {
+    width: 20vw !important;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: $font-body;
+    transition: border 0.2s;
+
+    &:focus {
+      border-color: $primary-color !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+    }
+  }
+}
+
+.buttonsContainer {
+  @include flex-row-container();
+  padding: 2vh 0;
+  min-width: 25vw;
+  justify-content: space-between;
+}
+
+.registerButtons {
+  background-color: $primary-color !important;
+  color: $primary-light-text-color !important;
+  font-family: $font-family !important;
+  border: none;
+  border-radius: 6px;
+  font-size: $font-button !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: $primary-hover !important;
+  }
+}

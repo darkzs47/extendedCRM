@@ -84,6 +84,7 @@ export class SupplierRepositoryPostgres implements ISupplierRepository {
             })
             return await SupplierModel.findByPk(result)
         } catch (e) {
+            logger.info(e)
             return null;
         }
     }

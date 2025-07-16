@@ -1,4 +1,4 @@
-import {type FC, memo, useCallback, useEffect, useState} from "react";
+import React, {type FC, memo, useCallback, useEffect, useState} from "react";
 import ToolRow from "../components/ToolRow.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
@@ -6,26 +6,24 @@ import {getAllCategories} from "../store/categories/actions.ts";
 import {createTool, getAllTools} from "../store/tools/actions.ts";
 import {Button, Input, Select, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
+import styles from "../styles/toolsMain.module.scss"
 
-const ToolsTable: FC = () => {
+interface Props {
+    isCreateNewTool: boolean,
+    setIsCreateNewTool: React.Dispatch<React.SetStateAction<boolean>>,
+    onCancel: () => void,
+}
+
+const ToolsTable: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories = useSelector((state: RootState) => state.categories.categories)
     const tools = useSelector((state: RootState) => state.tools.tools)
 
-    const [isCreateNewTool, setIsCreateNewTool] = useState<boolean>(false)
     const [newToolName, setNewToolName] = useState<string>('')
 
     const [newToolPurchasePrice, setNewToolPurchasePrice] = useState<number>(0)
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
-
-    const handleAddNewTool = useCallback(() => {
-        setIsCreateNewTool(!isCreateNewTool);
-    }, [isCreateNewTool])
-
-    const handleCancel = useCallback(() => {
-        setIsCreateNewTool(!isCreateNewTool)
-    }, [isCreateNewTool])
 
     const handleSubmitNewTool = useCallback(() => {
         if (newToolName === '' || newToolPurchasePrice === 0) return
@@ -59,29 +57,7 @@ const ToolsTable: FC = () => {
     }, [dispatch])
 
     return (
-        <>
-            <div>
-                <Button
-                    type='primary'
-                    onClick={() => handleAddNewTool()}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ width: '1rem', height: '1rem' }}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 4v16m8-8H4"
-                        />
-                    </svg>
-                    Добавить
-                </Button>
-            </div>
+        <div className={styles.toolsMainContainer}>
             <table>
                 <thead>
                 <tr>
@@ -139,7 +115,7 @@ const ToolsTable: FC = () => {
                                 <Tooltip title="Отменить">
                                     <Button
                                         icon={<CloseOutlined />}
-                                        onClick={() => {handleCancel()}}
+                                        onClick={onCancel}
                                         shape="circle"
                                         style={{ marginRight: 8 }}
                                     />
@@ -150,7 +126,7 @@ const ToolsTable: FC = () => {
                 }
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

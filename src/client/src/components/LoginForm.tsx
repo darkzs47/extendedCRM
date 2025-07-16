@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login} from "../store/currentUser/actions.ts";
 import type {AppDispatch} from "../store/store.ts";
+import styles from '../styles/login.module.scss';
 
 const LoginForm: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -23,8 +24,9 @@ const LoginForm: FC = () => {
     );
 
     return (
-        <div style={{width: '300px', display: 'flex', flexDirection: 'column'}}>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div className={styles.loginContainer}>
+            <h2>Вход в систему</h2>
+            <div className={styles.loginForm}>
                 <Input
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
@@ -34,14 +36,14 @@ const LoginForm: FC = () => {
                     onChange={e => setPassword(e.target.value)}
                     value={password}
                     type='password'
-                    placeholder='Password'
+                    placeholder='Пароль'
                 />
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Button onClick={handleLogin} type="primary" htmlType="submit">
+            <div className={styles.buttonsContainer}>
+                <Button className={styles.loginButtons} onClick={handleLogin} type="primary" htmlType="submit">
                     Войти
                 </Button>
-                <Button type="primary" htmlType="button" onClick={toRegisterPageHandler}>
+                <Button className={styles.loginButtons} type="primary" htmlType="button" onClick={toRegisterPageHandler}>
                     Регистрация
                 </Button>
             </div>

@@ -1,0 +1,52 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+.supplierFormContainer {
+  @include flex-column-container();
+  min-width: 100vw;
+
+  h2 {
+    padding: 1rem;
+    margin: 0;
+  }
+
+  h3 {
+    padding-bottom: 1rem;
+    margin: 0;
+  }
+
+  .form {
+    @include flex-column-container();
+
+
+    input {
+      width: 25vw !important;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: $font-body;
+      transition: border 0.2s;
+
+      &:focus {
+        border-color: $primary-color !important;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+      }
+    }
+  }
+
+  .submitButton {
+    background-color: $primary-color !important;
+    color: $primary-light-text-color !important;
+    font-family: $font-family !important;
+    border: none;
+    border-radius: 6px;
+    font-size: $font-button !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: $primary-hover !important;
+    }
+  }
+}

@@ -15,32 +15,34 @@ const UsersTable: FC = () => {
     }, [dispatch]);
 
     return (
-        <table>
-            <thead>
-            <tr>
-                <th>ФИО</th>
-                <th>Email</th>
-                <th>Телефон</th>
-                <th>Роль</th>
-                <th>Поставщик</th>
-                <th>Действия</th>
-            </tr>
-            </thead>
-            <tbody>
-            {users?.map((user) =>
-                <tr key={user.id}>
-                    <UserRow
-                        user={user}
-                        isEditing={editingUserId === user.id}
-                        onEdit={() => setEditingUserId(user.id)}
-                        onCancel={() => setEditingUserId(null)}
-                        hideControls={currentUser?.id === user.id || user.role === 'admin'}
-                    />
+        <>
+            <table>
+                <thead>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Роль</th>
+                    <th>Поставщик</th>
+                    <th>Действия</th>
                 </tr>
-            )}
-            </tbody>
-            <tfoot></tfoot>
-        </table>
+                </thead>
+                <tbody>
+                {users?.map((user) =>
+                    <tr key={user.id}>
+                        <UserRow
+                            user={user}
+                            isEditing={editingUserId === user.id}
+                            onEdit={() => setEditingUserId(user.id)}
+                            onCancel={() => setEditingUserId(null)}
+                            hideControls={currentUser?.id === user.id || user.role === 'admin'}
+                        />
+                    </tr>
+                )}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </>
     )
 }
 

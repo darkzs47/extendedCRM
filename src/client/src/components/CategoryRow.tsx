@@ -4,7 +4,7 @@ import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined} from "@ant-d
 import type {ICategory} from "../models/ICategory.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../store/store.ts";
-import {updateMarkupCategory} from "../store/categories/actions.ts";
+import {deleteCategory, updateMarkupCategory} from "../store/categories/actions.ts";
 
 interface CategoryRowProps {
     category: ICategory
@@ -29,6 +29,11 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
         dispatch(updateMarkupCategory(request))
         setIsEditing(!isEditing)
     }, [dispatch, markup, category])
+
+    const handleDeleteCategory = useCallback((category: ICategory)=> {
+        const confirmString = `Вы действительно хотите удалить категорию ${category.name}`;
+        if (confirm(confirmString)) dispatch(deleteCategory({id: category.id}))
+    }, [dispatch, category])
 
     return (
         <>
@@ -80,6 +85,7 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                 </Tooltip>
                                 <Tooltip title="Удалить категорию">
                                     <Button
+                                        onClick={() => handleDeleteCategory(category)}
                                         icon={<DeleteOutlined/>}
                                         danger
                                         type="default"

@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../store/store.ts";
 import {Button} from "antd";
 import {logout} from "../store/currentUser/actions.ts";
+import styles from "../styles/navigation.module.scss"
+import {LogoutOutlined} from '@ant-design/icons';
 
 const Navigation: FC = () => {
     const navigate = useNavigate();
@@ -17,40 +19,43 @@ const Navigation: FC = () => {
     );
 
     return (
-        <nav>
-            <ul>
-                {isAuthUser && (
-                    <>
-                        {userRole === 'admin' && (
-                            <>
-                                <li>
-                                    <NavLink to="/admin">Админ-панель</NavLink>
-                                </li>
-                            </>
-                        )}
+        <nav className={styles.navbar}>
+            {isAuthUser && (
+                <>
+                    <ul className={styles.mainUl}>
+                        <>
+                            {userRole === 'admin' && (
+                                <>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/admin">Админ-панель</NavLink>
+                                    </li>
+                                </>
+                            )}
 
-                        {userRole === 'employee' || userRole === 'admin' && (
-                            <>
-                                <li>
-                                    <NavLink to="/orders">Заказы</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/clients">Клиенты</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/suppliers">Поставщики</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/tools">Инструменты</NavLink>
-                                </li>
-                            </>
-                        )}
-                        <Button type="primary" htmlType="button" onClick={handleLogout}>
-                            Выйти
-                        </Button>
-                    </>
-                )}
-            </ul>
+                            {userRole === 'employee' || userRole === 'admin' && (
+                                <>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/orders">Заказы</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/clients">Клиенты</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/suppliers">Поставщики</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/tools">Инструменты</NavLink>
+                                    </li>
+                                </>
+                            )}
+                        </>
+                    </ul>
+                    <Button className={styles.logoutButton} type="default" danger icon={<LogoutOutlined/>}
+                            htmlType="button"
+                            onClick={handleLogout}>
+                        Выйти
+                    </Button>
+                </>)}
         </nav>
     )
 };

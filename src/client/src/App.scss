@@ -1,0 +1,57 @@
+@use "./styles/variables" as *;
+@use "./styles/mixins" as *;
+
+body {
+  font-family: $font-family;
+  background-color: $primary-bg;
+}
+
+h3 {
+  font-size: $font-h2;
+  font-weight: 600 !important;
+  color: $primary-black-text-color;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  width: 70vw;
+  min-width: 40vw;
+  border-collapse: collapse;
+  background-color: $bg-card;
+  font-size: $font-body;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  thead {
+    background-color: $primary-table-bg-color;
+
+    th {
+      padding: 0.75rem 1.5rem;
+      text-align: left;
+      font-weight: 500;
+      font-size: $font-caption;
+      color: $secondary-text-color;
+      text-transform: uppercase;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: $hover-table-row;
+      }
+    }
+
+    td {
+      padding: 0.75rem 1.5rem;
+      color: $text-color;
+      font-size: $font-body;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 import type {RootState} from '../store/store.ts';
-import type {ReactNode} from "react";
+import {type ReactNode,} from "react";
 
 interface Props {
     children: ReactNode;
@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }: Props) => {
 
     const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
     const isLoading = useSelector((state: RootState) => state.currentUser.isLoading);
-
 
     if (isLoading) {
         return <div>Загрузка...</div>;

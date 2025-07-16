@@ -1,29 +1,34 @@
-import {type FC, memo, useCallback} from "react";
-import {useNavigate} from "react-router-dom";
+import {type FC, memo} from "react";
+import {Button} from "antd";
 
 interface Props {
-    identity: string;
+    onClick: () => void;
 }
 
-const AddIdentityButton: FC<Props> = ({ identity }) => {
-
-    const navigate = useNavigate()
-
-    const toAddIdentityPage = useCallback(() => {
-        navigate(`/${identity}/add`)
-    }, [])
+const AddIdentityButton: FC<Props> = ({ onClick }) => {
 
     return (
-        <div onClick={toAddIdentityPage}>
-            <a href='#' style={{width: '5rem', height: '5rem'}}>
-                <svg xmlns="http://www.w3.org/2000/svg" style={{width: '2rem', height: '2rem'}} fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                          d="M12 4v16m8-8H4"/>
+        <div>
+            <Button
+                type='primary'
+                onClick={onClick}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ width: '1rem', height: '1rem' }}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m8-8H4"
+                    />
                 </svg>
                 Добавить
-            </a>
+            </Button>
         </div>
     )
 }

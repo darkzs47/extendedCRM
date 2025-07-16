@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import 'antd/dist/reset.css';
 import React, {useEffect} from "react";
 import Header from "./layouts/Header.tsx";
@@ -6,7 +6,7 @@ import {checkAuth} from "./store/currentUser/actions.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "./store/store.ts";
 import Login from "./pages/Login.tsx";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import Register from "./pages/Register.tsx";
 import AdminPanel from "./pages/AdminPanel.tsx";
 import {BrowserRouter as Router} from "react-router";
@@ -17,15 +17,14 @@ import AddCustomer from "./pages/AddCustomer.tsx";
 import Suppliers from "./pages/Suppliers.tsx";
 import SupplierInfo from "./pages/SupplierInfo.tsx";
 import AddSupplier from "./pages/AddSupplier.tsx";
-import UsersTable from "./layouts/UsersTable.tsx";
-import Categories from "./layouts/Categories.tsx";
+import Users from "./pages/Users.tsx";
+import Categories from "./pages/Categories.tsx";
 import Tools from "./pages/Tools.tsx";
-import CoefficientsDistance from "./layouts/CoefficientsDistance.tsx";
-import CoefficientsSeason from "./layouts/CoefficientsSeason.tsx";
+import CoefficientsDistance from "./pages/CoefficientsDistance.tsx";
+import CoefficientsSeason from "./pages/CoefficientsSeason.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
-
     useEffect(() => {
         if (localStorage.getItem("token")) dispatch(checkAuth())
     }, [])
@@ -45,8 +44,8 @@ function App() {
                 <Route path="/admin" element={
                     <ProtectedRoute><AdminPanel/></ProtectedRoute>
                 }>
-                    <Route index element={<ProtectedRoute><UsersTable/></ProtectedRoute>}/>
-                    <Route path="users" element={<ProtectedRoute><UsersTable/></ProtectedRoute>}/>
+                    <Route index element={<ProtectedRoute><Users/></ProtectedRoute>}/>
+                    <Route path="users" element={<ProtectedRoute><Users/></ProtectedRoute>}/>
                     <Route path="coefficients/distance" element={<ProtectedRoute><CoefficientsDistance/></ProtectedRoute>}/>
                     <Route path="coefficients/season" element={<ProtectedRoute><CoefficientsSeason/></ProtectedRoute>}/>
                     <Route path="categories" element={<ProtectedRoute><Categories/></ProtectedRoute>}/>

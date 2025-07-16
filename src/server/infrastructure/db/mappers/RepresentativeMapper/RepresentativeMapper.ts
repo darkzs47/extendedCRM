@@ -7,7 +7,7 @@ export class RepresentativeMapper {
             secondName: data.secondName,
             name: data.name,
             lastName: data.lastName,
-            representativePosition: data.position,
+            representativePosition: data.representativePosition,
             email: data.email,
             phone: data.phone,
             isMain: data.isMain,

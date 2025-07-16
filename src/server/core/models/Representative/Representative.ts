@@ -4,7 +4,7 @@ export class Representative {
         readonly secondName: string,
         readonly name: string,
         readonly lastName: string,
-        readonly position: string,
+        readonly representativePosition: string,
         readonly email: string,
         readonly phone: string,
         readonly isMain: boolean,

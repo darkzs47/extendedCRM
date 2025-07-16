@@ -5,6 +5,7 @@ import RepresentativeForm, {type RepresentativeFormValues} from "../layouts/Repr
 import SupplierForm, {type SupplierFormValues} from "../layouts/SupplierForm.tsx";
 import type {AddSupplierRequest} from "../models/request/AddSupplierRequest.ts";
 import SupplierService from "../services/SupplierService.ts";
+import styles from "../styles/addSupplier.module.scss"
 
 const AddSupplier: FC = () => {
     const navigate = useNavigate();
@@ -38,7 +39,8 @@ const AddSupplier: FC = () => {
     };
 
     return (
-        <main>
+        <main className={styles.supplierFormContainer}>
+            <h2>Добавление поставщика</h2>
             {step === 1 && <SupplierForm
                 onNext={handleNext}
                 onChange={setSupplierData}

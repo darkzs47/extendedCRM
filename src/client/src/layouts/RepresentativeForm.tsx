@@ -1,6 +1,7 @@
 import {type FC, memo} from "react";
-import type { IRepresentative } from "../models/IRepresentative";
+import type {IRepresentative} from "../models/IRepresentative";
 import {Button, Checkbox, Form, Input} from "antd";
+import styles from "../styles/addCustomer.module.scss"
 
 export type RepresentativeFormValues = Omit<IRepresentative, 'id' | 'customer' | 'customerId'>;
 
@@ -11,7 +12,7 @@ interface RepresentativeFormProps {
     initialValues?: RepresentativeFormValues;
 }
 
-const RepresentativeForm: FC<RepresentativeFormProps> = ({ onBack, onSubmit, onChange, initialValues}) => {
+const RepresentativeForm: FC<RepresentativeFormProps> = ({onBack, onSubmit, onChange, initialValues}) => {
     const [form] = Form.useForm<RepresentativeFormValues>();
 
     const handleFinish = (values: RepresentativeFormValues) => {
@@ -20,53 +21,101 @@ const RepresentativeForm: FC<RepresentativeFormProps> = ({ onBack, onSubmit, onC
     };
 
     return (
-        <Form
-            form={form}
-            layout="vertical"
-            onFinish={handleFinish}
-            initialValues={initialValues}
-            style={{ width: "300px" }}
-            onValuesChange={(_, values) => onChange(values)}
-        >
-            <Form.Item name="secondName" label="Фамилия" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+        <>
+            <h3>Представитель</h3>
+            <Form
+                className={styles.form}
+                form={form}
+                layout="vertical"
+                onFinish={handleFinish}
+                initialValues={initialValues}
+                style={{width: "300px"}}
+                onValuesChange={(_, values) => onChange(values)}
+            >
+                <Form.Item
+                    name="secondName"
+                    label="Фамилия"
+                    rules={[{required: true, message: 'Фамилия обязательна для заполнения'}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="name" label="Имя" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="name"
+                    label="Имя"
+                    rules={[{required: true, message: 'Имя обязательно для заполнения'}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="lastName" label="Отчество" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="lastName"
+                    label="Отчество"
+                    rules={[{required: true, message: 'Фамилия обязательна для заполнения'}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="position" label="Должность" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="representativePosition"
+                    label="Должность"
+                    rules={[{required: true, message: 'Должность обязательна для заполнения'}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="email" label="Email" rules={[{ required: true, type: "email" }]}>
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="email"
+                    label="Email"
+                    rules={[
+                        {required: true, message: 'Email обязателен для заполнения'},
+                        {type: 'email', message: 'Неверный формат email'}
+                    ]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="phone" label="Телефон" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    name="phone"
+                    label="Телефон"
+                    rules={[{required: true, message: 'Телефон обязателен для заполнения'}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item name="isMain" valuePropName="checked">
-                <Checkbox checked={false}>Основной представитель</Checkbox>
-            </Form.Item>
+                <Form.Item
+                    name="isMain"
+                    valuePropName="checked"
+                >
+                    <Checkbox
+                        checked={false}
+                    >
+                        Основной представитель
+                    </Checkbox>
+                </Form.Item>
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit">
-                    Добавить
-                </Button>
-            </Form.Item>
+                <div className={styles.buttonsContainer}>
+                    <Form.Item>
+                        <Button
+                            onClick={onBack}
+                        >
+                            Назад
+                        </Button>
+                    </Form.Item>
 
-            <Form.Item>
-                <Button onClick={onBack}>Назад</Button>
-            </Form.Item>
+                    <Form.Item>
+                        <Button
+                            className={styles.submitButton}
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            Добавить
+                        </Button>
+                    </Form.Item>
+                </div>
 
-        </Form>
+            </Form>
+        </>
     );
 };
 

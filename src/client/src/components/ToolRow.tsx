@@ -46,11 +46,11 @@ const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                 purchasePrice,
             };
             const result = await dispatch(updateTool(updatedData))
+            handleEditing()
             if (!result.success) {
                 setSellPrice(tool.sellPrice)
                 setPurchasePrice(tool.purchasePrice)
             }
-            handleEditing()
         }
     }, [dispatch, sellPrice, purchasePrice])
 
@@ -105,8 +105,8 @@ const ToolRow: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                     <>
                         <td>{tool.name}</td>
                         <td>{categoryName}</td>
-                        <td>{tool.purchasePrice}</td>
-                        <td>{tool.sellPrice}</td>
+                        <td>{tool.purchasePrice} ₽</td>
+                        <td>{tool.sellPrice} ₽</td>
                         <td>
                             <Tooltip title="Редактировать стоимость инструмента">
                                 <Button

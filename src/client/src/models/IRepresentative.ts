@@ -6,7 +6,7 @@ export interface IRepresentative {
     secondName: string,
     name: string,
     lastName: string,
-    position: string,
+    representativePosition: string,
     phone: string,
     email: string,
     isMain: boolean,

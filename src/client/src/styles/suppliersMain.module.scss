@@ -1,0 +1,22 @@
+@use "./mixins" as *;
+
+.suppliersMain {
+  padding: 1rem 4rem;
+  width: 78vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  .headerContainer {
+    @include flex-row-container;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &Container {
+    display: flex;
+    gap: 1rem;
+  }
+}

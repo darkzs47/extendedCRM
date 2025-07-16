@@ -1,0 +1,61 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+.loginContainer {
+  @include flex-column-container();
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+h2 {
+  font-size: $font-h2;
+  font-weight: bold;
+}
+
+.loginForm {
+  @include flex-column-container();
+  gap: 1rem;
+  min-width: 20vw;
+
+  input {
+    padding: 10px 12px;
+    border: 1px solid $border-color !important;
+    border-radius: 6px;
+    font-size: $font-body;
+    transition: border 0.2s;
+
+    &:focus {
+      border-color: $primary-color !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+    }
+  }
+}
+
+.buttonsContainer {
+  @include flex-row-container();
+  padding: 2vh 0;
+  min-width: 20vw;
+  justify-content: space-between;
+}
+
+.loginButtons {
+  background-color: $primary-color !important;
+  color: $primary-light-text-color !important;
+  font-family: $font-family !important;
+  border: none;
+  border-radius: 6px;
+  font-size: $font-button !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: $primary-hover !important;
+  }
+}
+
+.error {
+  color: $error-color;
+  font-size: $font-caption;
+}

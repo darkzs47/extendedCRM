@@ -3,11 +3,11 @@ import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {CategoryController} from "../controllers/Category/CategoryController";
 import {CategoryService} from "../../core/services/CategoryService/CategoryService";
-import {CategoryRepositoryPostgres} from "../db/repository/CategoryRepositoryPostgres";
+import {CategoryRepository} from "../db/repository/CategoryRepository";
 
 const router = Router();
 
-const categoryController = new CategoryController(new CategoryService(new CategoryRepositoryPostgres()));
+const categoryController = new CategoryController(new CategoryService(new CategoryRepository()));
 
 router.get('/', AuthMiddleware, RoleMiddleware(['admin', "employee"]), (req: Request, res: Response) => {
     categoryController.getAllCategories(req, res);

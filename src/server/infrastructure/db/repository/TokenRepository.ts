@@ -2,7 +2,7 @@ import {ITokenRepository} from "../../../core/repositories/TokenRepository/IToke
 import {TokenModel} from "../models/TokenModel/TokenModel";
 import {logger} from "../../../logger";
 
-export class TokenRepositoryPostgres implements ITokenRepository {
+export class TokenRepository implements ITokenRepository {
     async findTokenByUserId(userId: number): Promise<TokenModel | null> {
         return await TokenModel.findOne({ where: { userId: userId } });
     }

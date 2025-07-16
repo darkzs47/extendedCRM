@@ -10,6 +10,7 @@ import customerRoutes from './infrastructure/routes/customer.routes';
 import supplierRoutes from "./infrastructure/routes/supplier.routes";
 import toolRoutes from "./infrastructure/routes/tool.routes";
 import categoryRoutes from "./infrastructure/routes/category.routes";
+import coefficientsRoutes from "./infrastructure/routes/coefficients.routes";
 
 export const startServer = async () => {
     try {
@@ -30,6 +31,7 @@ export const startServer = async () => {
         app.use('/suppliers', supplierRoutes)
         app.use('/tools', toolRoutes)
         app.use('/categories', categoryRoutes)
+        app.use('/coefficients', coefficientsRoutes)
 
         const port = process.env.PORT;
         app.listen(port, () => {

@@ -5,7 +5,7 @@ import {UpdateToolDto} from "../../../core/repositories/ToolRepository/dto/Updat
 import {ToolMapper} from "../mappers/ToolMapper/ToolMapper";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 
-export class ToolRepositoryPostgres implements IToolRepository {
+export class ToolRepository implements IToolRepository {
     async getAllTools(): Promise<ToolModel[]> {
         const toolsModels: ToolModel[] = await ToolModel.findAll(
             {

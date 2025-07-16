@@ -1,25 +1,24 @@
-import {ICustomerRepository} from "../../../core/repositories/CustomerRepository/ICustomerRepository";
-import {CustomerModel} from "../models/CustomerModel/CustomerModel";
+import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 import {BranchModel} from "../models/BranchModel/BranchModel";
 import {AddressModel} from "../models/AddressModel/AddressModel";
 import {RepresentativeModel} from "../models/RepresentativeModel/RepresentativeModel";
 import {sequelize} from "../orm/sequelize";
-import {CreateCustomerDto} from "../../../core/repositories/CustomerRepository/dto/CreateCustomerDto";
 import {AddressMapper} from "../mappers/AddressMapper/AddressMapper";
-import {CustomerMapper} from "../mappers/CustomerMapper/CustomerMapper";
 import {RepresentativeMapper} from "../mappers/RepresentativeMapper/RepresentativeMapper";
 import {BranchMapper} from "../mappers/BranchMapper/BranchMapper";
+import {ISupplierRepository} from "../../../core/repositories/SupplierRepository/ISupplierRepository";
+import {CreateSupplierDto} from "../../../core/repositories/SupplierRepository/dto/CreateSupplierDto";
+import {SupplierMapper} from "../mappers/SupplierMapper/SupplierMapper";
 import {logger} from "../../../logger";
-import {UpdateDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateDiscountDto";
 
-export class CustomerRepositoryPostgres implements ICustomerRepository {
-    async getAll(): Promise<CustomerModel[]> {
-        const customersModels = await CustomerModel.findAll();
-        return customersModels;
+export class SupplierRepository implements ISupplierRepository {
+    async getAll(): Promise<SupplierModel[]> {
+        const suppliersModels = await SupplierModel.findAll();
+        return suppliersModels;
     }
 
-    async getById(id: number): Promise<CustomerModel | null> {
-        const customersModels = await CustomerModel.findByPk(id ,{
+    async getById(id: number): Promise<SupplierModel | null> {
+        const suppliersModels = await SupplierModel.findByPk(id ,{
             include: [
                 {
                     model: BranchModel,
@@ -36,10 +35,10 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                 },
             ],
         });
-        return customersModels;
+        return suppliersModels;
     }
 
-    async create(dto: CreateCustomerDto): Promise<CustomerModel | null> {
+    async create(dto: CreateSupplierDto): Promise<SupplierModel | null> {
         try {
             const result = await sequelize.transaction(async (trx) => {
                 const addressActual = await AddressModel.create(
@@ -48,8 +47,8 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                 const addressLegal = await AddressModel.create(
                     AddressMapper.toModel(dto.branch.addressLegal),
                     {transaction: trx});
-                const customer = await CustomerModel.create(
-                    CustomerMapper.toModel(dto.customer),
+                const supplier = await SupplierModel.create(
+                    SupplierMapper.toModel(dto.supplier),
                     {transaction: trx}
                 );
                 const representativeShortModel = RepresentativeMapper.toModel(dto.representative);
@@ -62,7 +61,7 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                         email: representativeShortModel.email,
                         phone: representativeShortModel.phone,
                         isMain: representativeShortModel.isMain,
-                        customerId: customer.id,
+                        supplierId: supplier.id,
                     },
                     {transaction: trx}
                 );
@@ -76,32 +75,23 @@ export class CustomerRepositoryPostgres implements ICustomerRepository {
                         addressActualId: addressActual.id,
                         addressLegalId: addressLegal.id,
                         representativeId: representative.id,
-                        customerId: customer.id,
+                        supplierId: supplier.id,
                     },
                     {transaction: trx}
                 );
-                return customer.id;
+                logger.info(supplier)
+                return supplier.id;
             })
-            return await CustomerModel.findByPk(result)
+            return await SupplierModel.findByPk(result)
         } catch (e) {
+            logger.info(e)
             return null;
         }
     }
 
-    async updateDiscount(dto: UpdateDiscountDto): Promise<CustomerModel | null> {
-        try {
-            const customer = await CustomerModel.findByPk(dto.id)
-            return customer ? customer.update(
-                {discount: dto.discount}
-            ) : null
-        } catch (e) {
-            return null;
-        }
-    }
-
-    async delete(id: number): Promise<CustomerModel | null> {
-        const customer = await CustomerModel.findByPk(id)
-        customer ? await customer.destroy() : null;
-        return customer ? customer : null;
+    async delete(id: number): Promise<SupplierModel | null> {
+        const supplier = await SupplierModel.findByPk(id)
+        supplier ? await supplier.destroy() : null;
+        return supplier ? supplier : null;
     }
 }

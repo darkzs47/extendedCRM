@@ -1,11 +1,11 @@
 import {Request, Response, Router} from "express";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
-import {SupplierRepositoryPostgres} from "../db/repository/SupplierRepositoryPostgres";
+import {SupplierRepository} from "../db/repository/SupplierRepository";
 import {SupplierService} from "../../core/services/SupplierService/SupplierService";
 import {SupplierController} from "../controllers/Supplier/SupplierController";
 
-const postgresSupplierController = new SupplierController(new SupplierService(new SupplierRepositoryPostgres()));
+const postgresSupplierController = new SupplierController(new SupplierService(new SupplierRepository()));
 
 const router = Router();
 

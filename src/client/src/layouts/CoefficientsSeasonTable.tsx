@@ -1,13 +1,18 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useEffect} from "react";
 import type {ICoefficientSeason} from "../models/ICoefficientSeason.ts";
 import CoeffSeasonRow from "../components/CoeffSeasonRow.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../store/store.ts";
+import {getSeasonCoefficients} from "../store/coefficients/actions.ts";
 
 const CoeffSeason: FC = () => {
-    const coefficients: ICoefficientSeason[] = [{
-        id: 1,
-        season: 'Лето',
-        coefficient: 1,
-    }];
+    const dispatch = useDispatch<AppDispatch>()
+    const coefficients: ICoefficientSeason[] | null = useSelector((state: RootState) => state.coefficients.seasons)
+
+    useEffect(() => {
+        dispatch(getSeasonCoefficients())
+    }, []);
+
     return (
         <>
             <table>
@@ -19,7 +24,7 @@ const CoeffSeason: FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {coefficients.map(coefficient =>
+                {coefficients?.map(coefficient =>
                     <tr key={coefficient.id}>
                         <CoeffSeasonRow coefficient={coefficient}/>
                     </tr>

@@ -1,17 +1,17 @@
 import { Request, Response, Router } from 'express';
 import {AuthController} from "../controllers/AuthController";
 import {AuthService} from "../../core/services/AuthService/AuthService";
-import {AuthRepositoryPostgres} from "../db/repository/AuthRepositoryPostgres";
+import {AuthRepository} from "../db/repository/AuthRepository";
 import {registrationValidation} from "../validations/registerValidation";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {TokenService} from "../../core/services/TokenService/TokenService";
-import {TokenRepositoryPostgres} from "../db/repository/TokenRepositoryPostgres";
+import {TokenRepository} from "../db/repository/TokenRepository";
 import {loginValidation} from "../validations/authValidation";
 
-const tokenRepository = new TokenRepositoryPostgres();
+const tokenRepository = new TokenRepository();
 const tokenService = new TokenService(tokenRepository);
 
-const authRepository = new AuthRepositoryPostgres();
+const authRepository = new AuthRepository();
 const authService = new AuthService(authRepository, tokenService);
 
 const authController = new AuthController(authService);

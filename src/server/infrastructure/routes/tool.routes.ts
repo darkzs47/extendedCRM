@@ -3,11 +3,11 @@ import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {ToolController} from "../controllers/Tool/ToolController";
 import {ToolService} from "../../core/services/ToolService/ToolService";
-import {ToolRepositoryPostgres} from "../db/repository/ToolRepositoryPostgres";
+import {ToolRepository} from "../db/repository/ToolRepository";
 
 const router = Router();
 
-const postgresToolController = new ToolController(new ToolService(new ToolRepositoryPostgres()))
+const postgresToolController = new ToolController(new ToolService(new ToolRepository()))
 
 router.get('/', AuthMiddleware, RoleMiddleware(['admin', "employee"]), (req: Request, res: Response) => {
     postgresToolController.getAllTools(req, res)

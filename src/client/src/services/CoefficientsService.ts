@@ -29,6 +29,6 @@ export class CoefficientsService {
     }
 
     static async updateSeasonCoefficients(request: UpdateSeasonCoefficientsRequest): Promise<AxiosResponse> {
-        return api.patch(`/coefficients/distance/${request.id}`, request)
+        return api.patch(`/coefficients/season/${request.id}`, request)
     }
 }

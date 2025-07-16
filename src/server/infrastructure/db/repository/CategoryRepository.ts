@@ -1,10 +1,10 @@
-import {ICategoryRepository} from "../../../core/repositories/CategoryRepository/CategoryRepository";
+import {ICategoryRepository} from "../../../core/repositories/CategoryRepository/ICategoryRepository";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 import {CreateCategoryDto} from "../../../core/repositories/CategoryRepository/dto/CreateCategoryDto";
 import {UpdateMarkupCategoryDto} from "../../../core/repositories/CategoryRepository/dto/UpdateMarkupCategoryDto";
 import {CategoryMapper} from "../mappers/CategoryMapper/CategoryMapper";
 
-export class CategoryRepositoryPostgres implements ICategoryRepository {
+export class CategoryRepository implements ICategoryRepository {
     async getAllCategories(): Promise<CategoryModel[]> {
         const categories: CategoryModel[] = await CategoryModel.findAll();
         return categories;

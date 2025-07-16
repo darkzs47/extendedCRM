@@ -1,4 +1,4 @@
-import {ICategoryRepository} from "../../repositories/CategoryRepository/CategoryRepository";
+import {ICategoryRepository} from "../../repositories/CategoryRepository/ICategoryRepository";
 import {CategoryModel} from "../../../infrastructure/db/models/CategoryModel/CategoryModel";
 import {CreateCategoryDto} from "../../repositories/CategoryRepository/dto/CreateCategoryDto";
 import {UpdateMarkupCategoryDto} from "../../repositories/CategoryRepository/dto/UpdateMarkupCategoryDto";

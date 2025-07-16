@@ -6,7 +6,7 @@ import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 
-export class UserRepositoryPostgres implements IUserRepository{
+export class UserRepository implements IUserRepository{
 
     async getAll(): Promise<UserModel[]> {
         const usersModels = await UserModel.findAll(

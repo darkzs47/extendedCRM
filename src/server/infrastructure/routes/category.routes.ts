@@ -3,7 +3,7 @@ import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {CategoryController} from "../controllers/Category/CategoryController";
 import {CategoryService} from "../../core/services/CategoryService/CategoryService";
-import {CategoryRepository} from "../db/repository/CategoryRepository";
+import {CategoryRepository} from "../db/repositories/CategoryRepository";
 
 const router = Router();
 

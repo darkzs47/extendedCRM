@@ -1,10 +1,10 @@
 import {Request, Response, Router} from "express";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
-import {SeasonCoefficientsRepository} from "../db/repository/SeasonCoefficientsRepository";
+import {SeasonCoefficientsRepository} from "../db/repositories/SeasonCoefficientsRepository";
 import {SeasonCoefficientsService} from "../../core/services/CoefficientsService/SeasonCoefficientsService";
 import {SeasonCoefficientsController} from "../controllers/Coefficients/SeasonCoefficientsController";
-import {DistanceCoefficientsRepository} from "../db/repository/DistanceCoefficientsRepository";
+import {DistanceCoefficientsRepository} from "../db/repositories/DistanceCoefficientsRepository";
 import {DistanceCoefficientsService} from "../../core/services/CoefficientsService/DistanceCoefficientsService";
 import {DistanceCoefficientsController} from "../controllers/Coefficients/DistanceCoefficientsController";
 

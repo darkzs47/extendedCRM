@@ -1,7 +1,7 @@
 import {Request, Response, Router} from "express";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
-import {SupplierRepository} from "../db/repository/SupplierRepository";
+import {SupplierRepository} from "../db/repositories/SupplierRepository";
 import {SupplierService} from "../../core/services/SupplierService/SupplierService";
 import {SupplierController} from "../controllers/Supplier/SupplierController";
 

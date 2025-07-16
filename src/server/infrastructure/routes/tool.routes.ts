@@ -3,7 +3,7 @@ import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {ToolController} from "../controllers/Tool/ToolController";
 import {ToolService} from "../../core/services/ToolService/ToolService";
-import {ToolRepository} from "../db/repository/ToolRepository";
+import {ToolRepository} from "../db/repositories/ToolRepository";
 
 const router = Router();
 

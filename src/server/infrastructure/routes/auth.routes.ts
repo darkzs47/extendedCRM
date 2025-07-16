@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
 import {AuthController} from "../controllers/Auth/AuthController";
 import {AuthService} from "../../core/services/AuthService/AuthService";
-import {AuthRepository} from "../db/repository/AuthRepository";
+import {AuthRepository} from "../db/repositories/AuthRepository";
 import {registrationValidation} from "../validations/registerValidation";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {TokenService} from "../../core/services/TokenService/TokenService";
-import {TokenRepository} from "../db/repository/TokenRepository";
+import {TokenRepository} from "../db/repositories/TokenRepository";
 import {loginValidation} from "../validations/authValidation";
 
 const tokenRepository = new TokenRepository();

@@ -1,4 +1,4 @@
-import {CustomerRepository} from "../db/repository/CustomerRepository";
+import {CustomerRepository} from "../db/repositories/CustomerRepository";
 import {Request, Response, Router} from "express";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";

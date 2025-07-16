@@ -25,9 +25,9 @@ export class CategoryService {
         return category;
     }
 
-    async deleteCategory(id: number): Promise<void> {
-        const deleteResult: CategoryModel | null = await this.categoryRepository.deleteCategory(id);
-        if (!deleteResult) throw new Error("Не удалось удалить категорию");
-        return
+    async deleteCategory(id: number): Promise<CategoryModel | null> {
+        const category: CategoryModel | null = await this.categoryRepository.deleteCategory(id);
+        if (!category) throw new Error("Не удалось удалить категорию");
+        return category;
     }
 }

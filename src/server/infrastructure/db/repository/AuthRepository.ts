@@ -5,18 +5,18 @@ import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {RegisterDto} from "../../../core/repositories/Auth/dto/RegisterDto";
 
 export class AuthRepository implements IAuthRepository{
-    async findByEmail(email: string): Promise<User | null> {
-        const user = await UserModel.findOne({ where: { email: email } });
+    async findUserByEmail(email: string): Promise<User | null> {
+        const user: UserModel | null = await UserModel.findOne({ where: { email: email } });
         return user ? UserMapper.toDomain(user) : null;
     }
 
     async registration(dto: RegisterDto): Promise<User> {
-        const user = await UserModel.create(UserMapper.toModel(dto));
+        const user: UserModel | null = await UserModel.create(UserMapper.toModel(dto));
         return UserMapper.toDomain(user);
     }
 
-    async findById(id: number): Promise<UserModel | null> {
-        const user = await UserModel.findByPk(id)
+    async findUserById(id: number): Promise<UserModel | null> {
+        const user: UserModel | null = await UserModel.findByPk(id)
         return user ? user : null;
     }
 }

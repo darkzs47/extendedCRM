@@ -1,16 +1,10 @@
-import {Tool} from "../../../../core/models/Tool/Tool";
 import {ToolModel} from "../../models/ToolModel/ToolModel";
-
-type ToolWithoutId = Omit<Tool, "id">;
+import {CreateToolDto} from "../../../../core/repositories/ToolRepository/dto/CreateToolDto";
 
 export class ToolMapper {
-    static toModel(data: ToolWithoutId): Partial<ToolModel> {
+    static toModel(data: CreateToolDto): Partial<ToolModel> {
         return {
-            name: data.name,
-            sellPrice: data.sellPrice,
-            categoryId: data.categoryId,
-            purchasePrice: data.purchasePrice,
-            supplierId: data.supplierId,
+            ...data
         }
     }
 }

@@ -6,26 +6,26 @@ export class SupplierService {
 
     constructor(readonly supplierRepository: ISupplierRepository) {    }
 
-    async getAll(): Promise<SupplierModel[]> {
-        const suppliers = await this.supplierRepository.getAll();
+    async getAllSuppliers(): Promise<SupplierModel[]> {
+        const suppliers: SupplierModel[] = await this.supplierRepository.getAllSuppliers();
         return suppliers;
     }
 
-    async getById(id: number): Promise<SupplierModel> {
-        const supplier = await this.supplierRepository.getById(id)
-        if (!supplier) throw new Error(`Supplier not found`);
+    async getSupplierById(id: number): Promise<SupplierModel> {
+        const supplier: SupplierModel | null = await this.supplierRepository.getSupplierById(id)
+        if (!supplier) throw new Error(`Поставщик не найден`);
         return supplier;
     }
 
-    async create(dto: CreateSupplierDto): Promise<SupplierModel> {
-        const newSupplier = await this.supplierRepository.create(dto);
-        if (!newSupplier) throw new Error(`Create error`);
+    async createSupplier(dto: CreateSupplierDto): Promise<SupplierModel> {
+        const newSupplier: SupplierModel | null = await this.supplierRepository.createSupplier(dto);
+        if (!newSupplier) throw new Error(`Поставщик не создан`);
         return newSupplier;
     }
 
-    async delete(id: number): Promise<void> {
-        const deleteResult = await this.supplierRepository.delete(id);
-        if (!deleteResult) throw new Error(`Supplier not found`);
-        return;
+    async deleteSupplier(id: number): Promise<SupplierModel> {
+        const supplier: SupplierModel | null = await this.supplierRepository.deleteSupplier(id);
+        if (!supplier) throw new Error(`Не удалось удалить поставщика`);
+        return supplier;
     }
 }

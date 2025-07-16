@@ -14,7 +14,7 @@ export class CategoryController {
             res.status(constants.HTTP_STATUS_OK).json(categories);
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message})
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось получить информацию об категориях"})
             return;
         }
     }
@@ -26,7 +26,7 @@ export class CategoryController {
             res.status(constants.HTTP_STATUS_OK).json(category);
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message})
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось добавить категорию"})
             return;
         }
     }
@@ -39,7 +39,7 @@ export class CategoryController {
             res.status(constants.HTTP_STATUS_OK).json(categoryUpdated);
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message})
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось изменить наценку категории"})
             return;
         }
     }
@@ -51,7 +51,7 @@ export class CategoryController {
             res.status(constants.HTTP_STATUS_OK).json({message: "Категория успешно удалена"})
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_CONFLICT).json({message: (e as Error).message})
+            res.status(constants.HTTP_STATUS_CONFLICT).json({message: "Не удалось удалить категорию"})
             return;
         }
     }

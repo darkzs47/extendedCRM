@@ -7,13 +7,13 @@ import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 
 export class ToolRepository implements IToolRepository {
     async getAllTools(): Promise<ToolModel[]> {
-        const toolsModels: ToolModel[] = await ToolModel.findAll(
+        const tools: ToolModel[] = await ToolModel.findAll(
             {
                 include: [
                     {model: CategoryModel, as: 'category'}],
             }
         );
-        return toolsModels;
+        return tools;
     }
 
     async createTool(dto: CreateToolDto): Promise<ToolModel | null> {
@@ -23,15 +23,15 @@ export class ToolRepository implements IToolRepository {
 
     async updateTool(dto: UpdateToolDto): Promise<ToolModel | null> {
         const tool: ToolModel | null = await ToolModel.findByPk(dto.id)
-        tool?.update(
+        tool ? await tool.update(
             { purchasePrice: dto.purchasePrice ?? null, sellPrice: dto.sellPrice ?? null  },
-        )
+        ) : null
         return tool
     }
 
     async deleteTool(id: number): Promise<ToolModel | null> {
         const tool: ToolModel | null = await ToolModel.findByPk(id)
         tool ? await tool.destroy() : null
-        return tool ? tool : null;
+        return tool
     }
 }

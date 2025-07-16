@@ -21,7 +21,7 @@ router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req
     categoryController.updateCategory(req, res)
 })
 
-router.delete(':id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
+router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
     categoryController.deleteCategory(req, res)
 })
 

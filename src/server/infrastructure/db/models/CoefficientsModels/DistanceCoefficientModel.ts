@@ -1,7 +1,7 @@
 import {AutoIncrement, Column, Model, PrimaryKey, Table} from "sequelize-typescript";
 
 @Table({ tableName: 'distance_coefficients', timestamps: false, underscored: true })
-export class DistanceCoefficientsModel extends Model {
+export class DistanceCoefficientModel extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column

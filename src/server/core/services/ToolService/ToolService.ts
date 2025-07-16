@@ -12,20 +12,20 @@ export class ToolService {
     }
 
     async createTool(dto: CreateToolDto): Promise<ToolModel> {
-        const tool: ToolModel | null = await this.toolRepository.createTool(dto);
-        if (!tool) throw new Error(`Не удалось создать инструмент`);
-        return tool;
+        const newTool: ToolModel | null = await this.toolRepository.createTool(dto);
+        if (!newTool) throw new Error(`Инструмент не создан`);
+        return newTool;
     }
 
     async updateTool(dto: UpdateToolDto): Promise<ToolModel> {
         const tool: ToolModel | null = await this.toolRepository.updateTool(dto)
-        if (!tool) throw new Error(`Не удалось обновить информацию`);
+        if (!tool) throw new Error(`Информация не обновлена`);
         return tool;
     }
 
-    async deleteTool(id: number): Promise<void> {
-        const deleteResult = await this.toolRepository.deleteTool(id)
-        if (!deleteResult) throw new Error(`Не удалось удалить инструмент`);
-        return;
+    async deleteTool(id: number): Promise<ToolModel> {
+        const tool: ToolModel | null = await this.toolRepository.deleteTool(id)
+        if (!tool) throw new Error(`Не удалось удалить инструмент`);
+        return tool;
     }
 }

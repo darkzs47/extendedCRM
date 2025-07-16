@@ -9,16 +9,15 @@ import {BranchMapper} from "../mappers/BranchMapper/BranchMapper";
 import {ISupplierRepository} from "../../../core/repositories/SupplierRepository/ISupplierRepository";
 import {CreateSupplierDto} from "../../../core/repositories/SupplierRepository/dto/CreateSupplierDto";
 import {SupplierMapper} from "../mappers/SupplierMapper/SupplierMapper";
-import {logger} from "../../../logger";
 
 export class SupplierRepository implements ISupplierRepository {
-    async getAll(): Promise<SupplierModel[]> {
-        const suppliersModels = await SupplierModel.findAll();
-        return suppliersModels;
+    async getAllSuppliers(): Promise<SupplierModel[]> {
+        const suppliers: SupplierModel[] = await SupplierModel.findAll();
+        return suppliers;
     }
 
-    async getById(id: number): Promise<SupplierModel | null> {
-        const suppliersModels = await SupplierModel.findByPk(id ,{
+    async getSupplierById(id: number): Promise<SupplierModel | null> {
+        const suppliers: SupplierModel | null = await SupplierModel.findByPk(id ,{
             include: [
                 {
                     model: BranchModel,
@@ -35,24 +34,24 @@ export class SupplierRepository implements ISupplierRepository {
                 },
             ],
         });
-        return suppliersModels;
+        return suppliers;
     }
 
-    async create(dto: CreateSupplierDto): Promise<SupplierModel | null> {
+    async createSupplier(dto: CreateSupplierDto): Promise<SupplierModel | null> {
         try {
-            const result = await sequelize.transaction(async (trx) => {
-                const addressActual = await AddressModel.create(
+            const result: number = await sequelize.transaction(async (trx) => {
+                const addressActual: AddressModel = await AddressModel.create(
                     AddressMapper.toModel(dto.branch.addressActual),
                     {transaction: trx});
-                const addressLegal = await AddressModel.create(
+                const addressLegal: AddressModel = await AddressModel.create(
                     AddressMapper.toModel(dto.branch.addressLegal),
                     {transaction: trx});
-                const supplier = await SupplierModel.create(
+                const supplier: SupplierModel = await SupplierModel.create(
                     SupplierMapper.toModel(dto.supplier),
                     {transaction: trx}
                 );
-                const representativeShortModel = RepresentativeMapper.toModel(dto.representative);
-                const representative = await RepresentativeModel.create(
+                const representativeShortModel: Partial<RepresentativeModel> = RepresentativeMapper.toModel(dto.representative);
+                const representative: RepresentativeModel = await RepresentativeModel.create(
                     {
                         secondName: representativeShortModel.secondName,
                         name: representativeShortModel.name,
@@ -65,8 +64,8 @@ export class SupplierRepository implements ISupplierRepository {
                     },
                     {transaction: trx}
                 );
-                const branchShortModel = BranchMapper.toModel(dto.branch);
-                const branch = await BranchModel.create(
+                const branchShortModel: Partial<BranchModel> = BranchMapper.toModel(dto.branch);
+                const branch: BranchModel = await BranchModel.create(
                     {
                         name: branchShortModel.name,
                         phone: branchShortModel.phone,
@@ -79,19 +78,17 @@ export class SupplierRepository implements ISupplierRepository {
                     },
                     {transaction: trx}
                 );
-                logger.info(supplier)
                 return supplier.id;
             })
             return await SupplierModel.findByPk(result)
         } catch (e) {
-            logger.info(e)
             return null;
         }
     }
 
-    async delete(id: number): Promise<SupplierModel | null> {
-        const supplier = await SupplierModel.findByPk(id)
+    async deleteSupplier(id: number): Promise<SupplierModel | null> {
+        const supplier: SupplierModel | null = await SupplierModel.findByPk(id)
         supplier ? await supplier.destroy() : null;
-        return supplier ? supplier : null;
+        return supplier;
     }
 }

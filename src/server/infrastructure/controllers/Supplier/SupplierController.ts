@@ -1,54 +1,54 @@
 import {Request, Response} from "express";
 import {constants} from "http2";
 import {SupplierService} from "../../../core/services/SupplierService/SupplierService";
-import {SupplierModel} from "../../db/models/SupplierModel/SupplierModel";
 import {CreateSupplierDto} from "../../../core/repositories/SupplierRepository/dto/CreateSupplierDto";
+import {SupplierShort} from "../../../types/SupplierTypes/Supplier";
+import {SupplierModel} from "../../db/models/SupplierModel/SupplierModel";
 
-type SupplierShort = Pick<SupplierModel, 'id' | 'companyName' | 'phone' | 'email'>;
 
 export class SupplierController {
     constructor(readonly supplierService: SupplierService) {}
 
-    async getAll(req: Request, res: Response): Promise<void> {
+    async getAllSuppliers(req: Request, res: Response): Promise<void> {
         try {
-            const suppliers: SupplierShort[] = (await this.supplierService.getAll())
-                .map(({ id, companyName, email, phone }) => ({ id, companyName, email, phone }));
+            const suppliers: SupplierShort[] = await this.supplierService.getAllSuppliers()
             res.status(constants.HTTP_STATUS_OK).json(suppliers)
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось получить информацию о поставщиках"});
             return
         }
     }
 
-    async getById(req: Request, res: Response): Promise<void> {
+    async getSupplierById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
-            const supplier = await this.supplierService.getById(Number(id))
+            const supplier: SupplierModel = await this.supplierService.getSupplierById(Number(id))
             res.status(constants.HTTP_STATUS_OK).json(supplier)
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message});
+            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: "Не удалось получить информацию о поставщике"});
             return
         }
     }
 
-    async create(req: Request, res: Response): Promise<void> {
+    async createSupplier(req: Request, res: Response): Promise<void> {
         try {
             const { supplier, branch, representative } = req.body;
-            const newSupplier = await this.supplierService.create(new CreateSupplierDto(supplier, branch, representative));
-            res.status(constants.HTTP_STATUS_CREATED).json({message: 'Клиент добавлен'})
+            const newSupplier: SupplierModel = await this.supplierService.createSupplier(new CreateSupplierDto(supplier, branch, representative));
+            res.status(constants.HTTP_STATUS_CREATED).json(newSupplier)
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось добавить поставщика"});
         }
     }
-    async delete(req: Request, res: Response): Promise<void> {
+
+    async deleteSupplier(req: Request, res: Response): Promise<void> {
         try {
             const {id} = req.params;
-            await this.supplierService.delete(Number(id))
-            res.status(constants.HTTP_STATUS_OK).json({message: 'Клиент успешно удалён'})
+            await this.supplierService.deleteSupplier(Number(id))
+            res.status(constants.HTTP_STATUS_OK).json({message: 'Поставщик успешно удалён'})
         } catch (e) {
-            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: (e as Error).message})
+            res.status(constants.HTTP_STATUS_NOT_FOUND).json({message: "Не удалось удалить поставщика"})
         }
     }
 }

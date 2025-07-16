@@ -14,9 +14,9 @@ export class CategoryService {
     }
 
     async createCategory(dto: CreateCategoryDto): Promise<CategoryModel> {
-        const category: CategoryModel | null = await this.categoryRepository.createCategory(dto);
-        if (!category) throw new Error("Категория не создана");
-        return category;
+        const newCategory: CategoryModel | null = await this.categoryRepository.createCategory(dto);
+        if (!newCategory) throw new Error("Категория не создана");
+        return newCategory;
     }
 
     async updateCategory(dto: UpdateMarkupCategoryDto): Promise<CategoryModel> {
@@ -26,7 +26,7 @@ export class CategoryService {
     }
 
     async deleteCategory(id: number): Promise<void> {
-        const deleteResult = await this.categoryRepository.deleteCategory(id);
+        const deleteResult: CategoryModel | null = await this.categoryRepository.deleteCategory(id);
         if (!deleteResult) throw new Error("Не удалось удалить категорию");
         return
     }

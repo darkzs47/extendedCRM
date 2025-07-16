@@ -9,8 +9,8 @@ import {AddressModel} from "../models/AddressModel/AddressModel";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 import {ToolModel} from "../models/ToolModel/ToolModel";
-import {DistanceCoefficientsModel} from "../models/CoefficientModels/DistanceCoefficientsModel";
-import {SeasonCoefficientsModel} from "../models/CoefficientModels/SeasonCoefficientsModel";
+import {DistanceCoefficientModel} from "../models/CoefficientsModels/DistanceCoefficientModel";
+import {SeasonCoefficientModel} from "../models/CoefficientsModels/SeasonCoefficientModel";
 
 dotenv.config();
 
@@ -31,8 +31,8 @@ export const sequelize = new Sequelize({
         AddressModel,
         ToolModel,
         CategoryModel,
-        DistanceCoefficientsModel,
-        SeasonCoefficientsModel,
+        DistanceCoefficientModel,
+        SeasonCoefficientModel,
     ],
     logging: false,
 });

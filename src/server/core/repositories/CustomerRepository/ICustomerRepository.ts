@@ -1,11 +1,11 @@
 import {CustomerModel} from "../../../infrastructure/db/models/CustomerModel/CustomerModel";
 import {CreateCustomerDto} from "./dto/CreateCustomerDto";
-import {UpdateDiscountDto} from "./dto/UpdateDiscountDto";
+import {UpdateCustomerDiscountDto} from "./dto/UpdateCustomerDiscountDto";
 
 export interface ICustomerRepository {
-    getAll(): Promise<CustomerModel[]>;
-    getById(id: number): Promise<CustomerModel | null>;
-    create(dto: CreateCustomerDto): Promise<CustomerModel | null>;
-    delete(id: number): Promise<CustomerModel | null>;
-    updateDiscount(dto: UpdateDiscountDto): Promise<CustomerModel | null>;
+    getAllCustomers(): Promise<CustomerModel[]>;
+    getCustomerById(id: number): Promise<CustomerModel | null>;
+    createCustomer(dto: CreateCustomerDto): Promise<CustomerModel | null>;
+    deleteCustomer(id: number): Promise<CustomerModel | null>;
+    updateCustomerDiscount(dto: UpdateCustomerDiscountDto): Promise<CustomerModel | null>;
 }

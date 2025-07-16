@@ -1,10 +1,9 @@
-import {AuthService} from "../../core/services/AuthService/AuthService";
+import {AuthService} from "../../../core/services/AuthService/AuthService";
 import {constants} from "http2";
 import { Request, Response, } from "express";
-import hashPassword from "../../hash";
-import {RegisterDto} from "../../core/repositories/Auth/dto/RegisterDto";
+import hashPassword from "../../../hash";
+import {RegisterDto} from "../../../core/repositories/Auth/dto/RegisterDto";
 import { validationResult } from "express-validator";
-import {logger} from "../../logger";
 
 export class AuthController {
     constructor(private authService: AuthService) {}
@@ -47,7 +46,7 @@ export class AuthController {
             const {refreshToken} = req.cookies;
             await this.authService.logout(refreshToken);
             res.clearCookie('refreshToken');
-            res.status(constants.HTTP_STATUS_OK).json({ message: 'Logout successful' });
+            res.status(constants.HTTP_STATUS_OK).json({ message: 'Успешный выход' });
             return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: (e as Error).message});

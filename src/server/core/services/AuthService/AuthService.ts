@@ -1,32 +1,30 @@
 import {IAuthRepository} from "../../repositories/Auth/IAuthRepository";
 import bcrypt from "bcrypt";
-import {generateTokens, Tokens} from "../../../generateTokens";
+import {generateTokens} from "../../../generateTokens";
 import {RegisterDto} from "../../repositories/Auth/dto/RegisterDto";
 import {TokenService} from "../TokenService/TokenService";
-import {User, UserRole} from "../../models/User/User";
-
-type UserData = {
-    accessToken: string;
-    refreshToken: string;
-    id: number;
-    role: UserRole;
-}
+import {UserAuth} from "../../../types/UserTypes/UserAuth";
+import {User} from "../../models/User/User";
+import {Jwt, JwtPayload} from "jsonwebtoken";
+import {Token} from "../../models/Token/Token";
+import {UserModel} from "../../../infrastructure/db/models/UserModel/UserModel";
+import {Tokens} from "../../../types/TokenTypes/Tokens";
 
 export class AuthService {
     constructor(
         readonly userRepository: IAuthRepository,
         private readonly tokenService: TokenService) {}
 
-    async login(email: string, password: string): Promise<UserData> {
-        const user = await this.userRepository.findByEmail(email);
+    async login(email: string, password: string): Promise<UserAuth> {
+        const user: User | null = await this.userRepository.findUserByEmail(email);
 
-        if (!user) throw new Error('Invalid email or password');
+        if (!user) throw new Error('Пользователя с таким email не существует');
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid: boolean = await bcrypt.compare(password, user.password);
 
-        if (!isPasswordValid) throw new Error('Invalid email or password');
+        if (!isPasswordValid) throw new Error('Неверный пароль');
 
-        const tokens = generateTokens({ id: user.id, role: user.role });
+        const tokens: Tokens = generateTokens({ id: user.id, role: user.role });
         await this.tokenService.saveToken(user.id, tokens.refreshToken);
 
         return {
@@ -36,14 +34,14 @@ export class AuthService {
         }
     }
 
-    async registration(dto: RegisterDto): Promise<UserData> {
-        const candidate = await this.userRepository.findByEmail(dto.email);
+    async registration(dto: RegisterDto): Promise<UserAuth> {
+        const candidate: User | null = await this.userRepository.findUserByEmail(dto.email);
 
-        if (candidate) throw new Error('UserModel already registered');
+        if (candidate) throw new Error('Пользователь с таким email уже существует');
 
-        const user = await this.userRepository.registration(dto);
+        const user: User = await this.userRepository.registration(dto);
 
-        const tokens = generateTokens({ id: user.id, role: user.role });
+        const tokens: Tokens = generateTokens({ id: user.id, role: user.role });
         await this.tokenService.saveToken(user.id, tokens.refreshToken);
 
         return {
@@ -58,16 +56,16 @@ export class AuthService {
         return;
     }
 
-    async refresh(refreshToken: string): Promise<UserData> {
-        if (!refreshToken) throw new Error('Refresh token is required');
+    async refresh(refreshToken: string): Promise<UserAuth> {
+        if (!refreshToken) throw new Error('Refresh токен обязателен');
 
-        const userData = this.tokenService.validateRefreshToken(refreshToken);
-        const tokenFromDb = await this.tokenService.findToken(refreshToken);
+        const userData: string | JwtPayload | null = this.tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb: Token = await this.tokenService.findToken(refreshToken);
 
-        if (!userData || !tokenFromDb) throw new Error('Unauthorized');
+        if (!userData || !tokenFromDb) throw new Error('Авторизуйтесь!');
         // @ts-ignore
-        const user = await this.userRepository.findById(userData.id);
-        if (!user) throw new Error('Unauthorized');
+        const user: UserModel | null = await this.userRepository.findUserById(Number(userData.id));
+        if (!user) throw new Error('Авторизуйтесь!');
         const tokens = generateTokens({ id: user.id, role: user.role });
         await this.tokenService.saveToken(user.id, tokens.refreshToken);
         return {

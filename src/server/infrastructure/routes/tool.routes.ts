@@ -7,22 +7,22 @@ import {ToolRepository} from "../db/repository/ToolRepository";
 
 const router = Router();
 
-const postgresToolController = new ToolController(new ToolService(new ToolRepository()))
+const toolController = new ToolController(new ToolService(new ToolRepository()))
 
 router.get('/', AuthMiddleware, RoleMiddleware(['admin', "employee"]), (req: Request, res: Response) => {
-    postgresToolController.getAllTools(req, res)
+    toolController.getAllTools(req, res)
 })
 
 router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresToolController.createTool(req, res)
+    toolController.createTool(req, res)
 })
 
 router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresToolController.updateTool(req, res)
+    toolController.updateTool(req, res)
 })
 
 router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresToolController.deleteTool(req, res)
+    toolController.deleteTool(req, res)
 })
 
 export default router;

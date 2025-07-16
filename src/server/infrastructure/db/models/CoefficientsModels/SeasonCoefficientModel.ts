@@ -2,7 +2,7 @@ import {AutoIncrement, Column, Model, PrimaryKey, Table} from "sequelize-typescr
 import {Seasons} from "../../../../core/models/Coefficients/Season";
 
 @Table({ tableName: 'seasonal_coefficients', timestamps: false, underscored: true })
-export class SeasonCoefficientsModel extends Model {
+export class SeasonCoefficientModel extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column

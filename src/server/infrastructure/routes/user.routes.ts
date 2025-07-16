@@ -11,21 +11,15 @@ const postgresUserController = new UserController(new UserService(new UserReposi
 const router = Router();
 
 router.get('/', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
-    postgresUserController.getAll(req, res);
+    postgresUserController.getAllUsers(req, res);
 });
 
 router.delete('/:id', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
-    postgresUserController.delete(req, res);
+    postgresUserController.deleteUser(req, res);
 })
 
-router.patch(
-    '/:id',
-    AuthMiddleware,
-    RoleMiddleware(["admin"]),
-    updateUserValidation,
-    (req: Request, res: Response) => {
-        postgresUserController.update(req, res);
-    }
-)
+router.patch('/:id', AuthMiddleware, RoleMiddleware(["admin"]), updateUserValidation, (req: Request, res: Response) => {
+    postgresUserController.updateUser(req, res);
+})
 
 export default router;

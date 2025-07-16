@@ -10,24 +10,24 @@ import {CustomerMapper} from "../mappers/CustomerMapper/CustomerMapper";
 import {RepresentativeMapper} from "../mappers/RepresentativeMapper/RepresentativeMapper";
 import {BranchMapper} from "../mappers/BranchMapper/BranchMapper";
 import {logger} from "../../../logger";
-import {UpdateDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateDiscountDto";
+import {UpdateCustomerDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateCustomerDiscountDto";
 
 export class CustomerRepository implements ICustomerRepository {
-    async getAll(): Promise<CustomerModel[]> {
-        const customersModels = await CustomerModel.findAll();
-        return customersModels;
+    async getAllCustomers(): Promise<CustomerModel[]> {
+        const customers: CustomerModel[] = await CustomerModel.findAll();
+        return customers;
     }
 
-    async getById(id: number): Promise<CustomerModel | null> {
-        const customersModels = await CustomerModel.findByPk(id ,{
+    async getCustomerById(id: number): Promise<CustomerModel | null> {
+        const customers: CustomerModel | null = await CustomerModel.findByPk(id, {
             include: [
                 {
                     model: BranchModel,
                     as: 'branches',
                     include: [
-                        { model: AddressModel, as: 'addressActual' },
-                        { model: AddressModel, as: 'addressLegal' },
-                        { model: RepresentativeModel, as: 'representative' },
+                        {model: AddressModel, as: 'addressActual'},
+                        {model: AddressModel, as: 'addressLegal'},
+                        {model: RepresentativeModel, as: 'representative'},
                     ],
                 },
                 {
@@ -36,24 +36,24 @@ export class CustomerRepository implements ICustomerRepository {
                 },
             ],
         });
-        return customersModels;
+        return customers;
     }
 
-    async create(dto: CreateCustomerDto): Promise<CustomerModel | null> {
+    async createCustomer(dto: CreateCustomerDto): Promise<CustomerModel | null> {
         try {
-            const result = await sequelize.transaction(async (trx) => {
-                const addressActual = await AddressModel.create(
+            const result: number = await sequelize.transaction(async (trx) => {
+                const addressActual: AddressModel = await AddressModel.create(
                     AddressMapper.toModel(dto.branch.addressActual),
                     {transaction: trx});
-                const addressLegal = await AddressModel.create(
+                const addressLegal: AddressModel = await AddressModel.create(
                     AddressMapper.toModel(dto.branch.addressLegal),
                     {transaction: trx});
-                const customer = await CustomerModel.create(
+                const customer: CustomerModel = await CustomerModel.create(
                     CustomerMapper.toModel(dto.customer),
                     {transaction: trx}
                 );
-                const representativeShortModel = RepresentativeMapper.toModel(dto.representative);
-                const representative = await RepresentativeModel.create(
+                const representativeShortModel: Partial<RepresentativeModel> = RepresentativeMapper.toModel(dto.representative);
+                const representative: RepresentativeModel = await RepresentativeModel.create(
                     {
                         secondName: representativeShortModel.secondName,
                         name: representativeShortModel.name,
@@ -66,8 +66,8 @@ export class CustomerRepository implements ICustomerRepository {
                     },
                     {transaction: trx}
                 );
-                const branchShortModel = BranchMapper.toModel(dto.branch);
-                const branch = await BranchModel.create(
+                const branchShortModel: Partial<BranchModel> = BranchMapper.toModel(dto.branch);
+                const branch: BranchModel = await BranchModel.create(
                     {
                         name: branchShortModel.name,
                         phone: branchShortModel.phone,
@@ -88,20 +88,17 @@ export class CustomerRepository implements ICustomerRepository {
         }
     }
 
-    async updateDiscount(dto: UpdateDiscountDto): Promise<CustomerModel | null> {
-        try {
-            const customer = await CustomerModel.findByPk(dto.id)
-            return customer ? customer.update(
-                {discount: dto.discount}
-            ) : null
-        } catch (e) {
-            return null;
-        }
+    async updateCustomerDiscount(dto: UpdateCustomerDiscountDto): Promise<CustomerModel | null> {
+        const customer: CustomerModel | null = await CustomerModel.findByPk(dto.id)
+        customer ? await customer.update(
+            {discount: dto.discount}
+        ) : null
+        return customer
     }
 
-    async delete(id: number): Promise<CustomerModel | null> {
-        const customer = await CustomerModel.findByPk(id)
+    async deleteCustomer(id: number): Promise<CustomerModel | null> {
+        const customer: CustomerModel | null = await CustomerModel.findByPk(id)
         customer ? await customer.destroy() : null;
-        return customer ? customer : null;
+        return customer
     }
 }

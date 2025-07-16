@@ -1,6 +1,7 @@
 import {ITokenRepository} from "../../repositories/TokenRepository/ITokenRepository";
 import {TokenModel} from "../../../infrastructure/db/models/TokenModel/TokenModel";
 import jwt, {JwtPayload} from "jsonwebtoken";
+import {Token} from "../../models/Token/Token";
 
 export class TokenService {
     constructor(readonly tokenRepository: ITokenRepository) {}
@@ -16,7 +17,7 @@ export class TokenService {
 
     validateAccessToken(token: string): string | null | JwtPayload {
         try {
-            const userData = jwt.verify(token, process.env.SECRET as string);
+            const userData: string | JwtPayload = jwt.verify(token, process.env.SECRET as string);
             return userData;
         } catch (e) {
             return null;
@@ -25,7 +26,7 @@ export class TokenService {
 
     validateRefreshToken(token: string): string | null | JwtPayload {
         try {
-            const userData = jwt.verify(token, process.env.JWT_SECRET_REFRESH as string);
+            const userData: string | JwtPayload = jwt.verify(token, process.env.JWT_SECRET_REFRESH as string);
             return userData;
         } catch (e) {
             return null;
@@ -33,9 +34,9 @@ export class TokenService {
     }
 
     async findToken(refreshToken: string) {
-        const token = await this.tokenRepository.findToken(refreshToken);
+        const token: Token | null = await this.tokenRepository.findToken(refreshToken);
 
-        if (!token) throw new Error("TokenModel not found");
+        if (!token) throw new Error("Токен не найден");
 
         return token;
     }

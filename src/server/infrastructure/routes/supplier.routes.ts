@@ -5,24 +5,24 @@ import {SupplierRepository} from "../db/repository/SupplierRepository";
 import {SupplierService} from "../../core/services/SupplierService/SupplierService";
 import {SupplierController} from "../controllers/Supplier/SupplierController";
 
-const postgresSupplierController = new SupplierController(new SupplierService(new SupplierRepository()));
+const supplierController = new SupplierController(new SupplierService(new SupplierRepository()));
 
 const router = Router();
 
 router.get('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresSupplierController.getAll(req, res);
+    supplierController.getAllSuppliers(req, res);
 });
 
 router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresSupplierController.getById(req, res)
+    supplierController.getSupplierById(req, res)
 })
 
 router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresSupplierController.create(req, res)
+    supplierController.createSupplier(req, res)
 })
 
 router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req: Request, res: Response) => {
-    postgresSupplierController.delete(req, res)
+    supplierController.deleteSupplier(req, res)
 })
 
 export default router;

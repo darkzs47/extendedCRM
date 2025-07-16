@@ -1,7 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {constants} from "http2";
 import jwt from "jsonwebtoken";
-import {logger} from "../../logger";
 import {UserRole} from "../../core/models/User/User";
 
 const secret = process.env.JWT_SECRET as string;
@@ -14,7 +13,7 @@ export const RoleMiddleware = (userRoles: UserRole[]) => {
             const token = req.headers.authorization;
 
             if (!token || !token.startsWith('Bearer ')) {
-                res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Unauthorized"});
+                res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Авторизуйтесь"});
                 return
             }
 
@@ -30,12 +29,12 @@ export const RoleMiddleware = (userRoles: UserRole[]) => {
             })
 
             if (!hasRole) {
-                res.status(constants.HTTP_STATUS_FORBIDDEN).json({message: "Access denied"});
+                res.status(constants.HTTP_STATUS_FORBIDDEN).json({message: "Доступ запрещён"});
             }
             next()
         } catch (e) {
             console.error(e);
-            res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Unauthorized"});
+            res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Авторизуйтесь"});
             return;
         }
     }

@@ -5,20 +5,20 @@ import {UserModel} from "../../../infrastructure/db/models/UserModel/UserModel";
 export class UserService{
     constructor(readonly userRepository: IUserRepository) {}
 
-    async getAll(): Promise<UserModel[]> {
-        const users = await this.userRepository.getAll();
+    async getAllUsers(): Promise<UserModel[]> {
+        const users: UserModel[] = await this.userRepository.getAllUsers();
         return users;
     }
 
-    async delete(id: number): Promise<void> {
-        const deleteResult = await this.userRepository.delete(id);
-        if (!deleteResult) throw new Error("UserModel deleted failed");
-        return;
+    async update(dto: UpdateUserDto): Promise<UserModel> {
+        const user: UserModel | null = await this.userRepository.updateUser(dto);
+        if (!user) throw new Error("Информация пользователя не обновлена");
+        return user;
     }
 
-    async update(dto: UpdateUserDto): Promise<void> {
-        const user = await this.userRepository.update(dto);
-        if (!user) throw new Error("UserModel updated failed");
-        return;
+    async deleteUser(id: number): Promise<UserModel> {
+        const user: UserModel | null = await this.userRepository.deleteUser(id);
+        if (!user) throw new Error("Не удалось удалить пользователя");
+        return user;
     }
 }

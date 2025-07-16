@@ -10,7 +10,7 @@ export class User {
         readonly phone: string,
         readonly password: string,
         readonly role: UserRole,
-        readonly supplierID?: number,
+        readonly supplierId?: number,
     ) {
     }
 }

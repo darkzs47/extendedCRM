@@ -2,8 +2,8 @@ import {CreateSupplierDto} from "./dto/CreateSupplierDto";
 import {SupplierModel} from "../../../infrastructure/db/models/SupplierModel/SupplierModel";
 
 export interface ISupplierRepository {
-    getAll(): Promise<SupplierModel[]>;
-    getById(id: number): Promise<SupplierModel | null>;
-    create(dto: CreateSupplierDto): Promise<SupplierModel | null>;
-    delete(id: number): Promise<SupplierModel | null>;
+    getAllSuppliers(): Promise<SupplierModel[]>;
+    getSupplierById(id: number): Promise<SupplierModel | null>;
+    createSupplier(dto: CreateSupplierDto): Promise<SupplierModel | null>;
+    deleteSupplier(id: number): Promise<SupplierModel | null>;
 }

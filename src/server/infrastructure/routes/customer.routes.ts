@@ -5,28 +5,28 @@ import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {CustomerService} from "../../core/services/CustomerService/CustomerService";
 import {CustomerController} from "../controllers/Customer/CustomerController";
 
-const postgresCustomerController = new CustomerController(new CustomerService(new CustomerRepository()));
+const customerController = new CustomerController(new CustomerService(new CustomerRepository()));
 
 const router = Router();
 
 router.get('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresCustomerController.getAll(req, res);
+    customerController.getAllCustomers(req, res);
 });
 
 router.get('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresCustomerController.getById(req, res)
+    customerController.getCustomerById(req, res)
 })
 
 router.post('/', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresCustomerController.create(req, res)
+    customerController.createCustomer(req, res)
 })
 
 router.patch('/:id', AuthMiddleware, RoleMiddleware(['admin', 'employee']), (req: Request, res: Response) => {
-    postgresCustomerController.updateDiscount(req, res)
+    customerController.updateCustomerDiscount(req, res)
 })
 
 router.delete('/:id', AuthMiddleware, RoleMiddleware(['admin']), (req: Request, res: Response) => {
-    postgresCustomerController.delete(req, res)
+    customerController.deleteCustomer(req, res)
 })
 
 export default router;

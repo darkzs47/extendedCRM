@@ -1,13 +1,10 @@
-import {Category} from "../../../../core/models/Category/Category";
 import {CategoryModel} from "../../models/CategoryModel/CategoryModel";
-
-type CategoryWithoutId = Omit<Category, "id">;
+import {CreateCategoryDto} from "../../../../core/repositories/CategoryRepository/dto/CreateCategoryDto";
 
 export class CategoryMapper {
-    static toModel(data: CategoryWithoutId): Partial<CategoryModel> {
+    static toModel(data: CreateCategoryDto): Partial<CategoryModel> {
         return {
-            name: data.name,
-            markup: data.markup,
+            ...data
         }
     }
 }

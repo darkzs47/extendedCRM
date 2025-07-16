@@ -1,7 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {constants} from "http2";
 import jwt from "jsonwebtoken";
-import {logger} from "../../logger";
 const secret = process.env.JWT_SECRET as string;
 
 export const AuthMiddleware = (req: Request, res: Response, next: NextFunction): void => {
@@ -11,7 +10,7 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction):
         const token = req.headers.authorization;
 
         if (!token || !token.startsWith('Bearer ')) {
-            res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Unauthorized"});
+            res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Авторизуйтесь"});
             return
         }
 
@@ -21,7 +20,7 @@ export const AuthMiddleware = (req: Request, res: Response, next: NextFunction):
         req.user = decodedData;
         next()
     } catch (e) {
-        res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Unauthorized"});
+        res.status(constants.HTTP_STATUS_UNAUTHORIZED).json({message: "Авторизуйтесь"});
         return;
     }
 }

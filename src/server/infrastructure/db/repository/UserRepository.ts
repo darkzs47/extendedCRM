@@ -1,15 +1,12 @@
 import {IUserRepository} from "../../../core/repositories/UserRepository/IUserRepository";
-import {CreateUserDto} from "../../../core/repositories/UserRepository/dto/CreateUserDto";
-import {User} from "../../../core/models/User/User";
 import {UserModel} from "../models/UserModel/UserModel";
-import {UserMapper} from "../mappers/UserMapper/UserMapper";
 import {UpdateUserDto} from "../../../core/repositories/UserRepository/dto/UpdateUserDto";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 
 export class UserRepository implements IUserRepository{
 
-    async getAll(): Promise<UserModel[]> {
-        const usersModels = await UserModel.findAll(
+    async getAllUsers(): Promise<UserModel[]> {
+        const users: UserModel[] = await UserModel.findAll(
             {
                 include: [
                     {
@@ -19,19 +16,20 @@ export class UserRepository implements IUserRepository{
                 ],
             }
         );
-        return usersModels;
+        return users;
     }
 
-    async delete(id: number): Promise<UserModel | null> {
-        const user = await UserModel.findByPk(id)
+    async deleteUser(id: number): Promise<UserModel | null> {
+        const user: UserModel | null = await UserModel.findByPk(id)
         user ? await user.destroy() : null;
-        return user ? user : null;
+        return user
     }
 
-    async update(dto: UpdateUserDto): Promise<UserModel | null> {
-        const user = await UserModel.findByPk(dto.id)
-        return user ? user.update(
+    async updateUser(dto: UpdateUserDto): Promise<UserModel | null> {
+        const user: UserModel | null = await UserModel.findByPk(dto.id)
+        user ? user.update(
             { email: dto.email, phone: dto.phone, role: dto.role, supplierId: dto.supplierId ?? null },
         ) : null;
+        return user;
     }
 }

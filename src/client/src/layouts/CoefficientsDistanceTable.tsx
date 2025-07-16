@@ -16,55 +16,53 @@ interface Props {
 const CoefficientsDistanceTable: FC<Props> = ( {isCreateNewCoefficient, setIsCreateNewCoefficient, onCancel}: Props ) => {
     const dispatch = useDispatch<AppDispatch>()
     const coefficients: ICoefficientDistance[] | null = useSelector((state: RootState) => state.coefficients.distances)
-    if (!coefficients) {
-        return <table>
-            <thead>
-                <tr>
-                    <th>Минимальная дистанция(км)</th>
-                    <th>Максимальная дистанция(км)</th>
-                    <th>Коэффициент(%)</th>
-                    <th>Действия</th>
-                </tr>
-            </thead>
-        </table>
-    }
-    const [minKm, setMinKm] = useState<number>(coefficients[coefficients.length - 1].maxKm + 1)
-    const [maxKm, setMaxKm] = useState<number>(minKm + 1)
+
+    const [minKm, setMinKm] = useState<number>(0)
+    const [maxKm, setMaxKm] = useState<number>(1)
     const [coefficient, setCoefficient] = useState<number>(1)
+
+    useEffect(() => {
+        dispatch(getDistanceCoefficients())
+    }, [dispatch])
+
+    useEffect(() => {
+        if (coefficients && coefficients.length > 0) {
+            const last = coefficients[coefficients.length - 1]
+            const newMin = last.maxKm + 1
+            setMinKm(newMin)
+            setMaxKm(newMin + 1)
+        }
+    }, [coefficients])
 
     const handleSubmitNewCoefficient = useCallback(() => {
         if (coefficient < 0 || coefficient > 100) return
+
         const request = {
-            minKm: minKm,
-            maxKm: maxKm,
-            coefficient: coefficient,
+            minKm,
+            maxKm,
+            coefficient,
         }
 
         dispatch(createDistanceCoefficients(request))
         setMinKm(maxKm + 1)
         setMaxKm(maxKm + 2)
         setCoefficient(1)
-        setIsCreateNewCoefficient(!isCreateNewCoefficient)
-
+        setIsCreateNewCoefficient(prev => !prev)
     }, [minKm, maxKm, coefficient, dispatch])
-
-    useEffect(() => {
-        dispatch(getDistanceCoefficients())
-    }, []);
 
     return (
         <>
             <table>
                 <thead>
                 <tr>
-                    <th>Минимальная дистанция(км)</th>
-                    <th>Максимальная дистанция(км)</th>
-                    <th>Коэффициент(%)</th>
+                    <th>Минимальная дистанция</th>
+                    <th>Максимальная дистанция</th>
+                    <th>Коэффициент</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                {coefficients.map(coefficient =>
+                {coefficients?.map(coefficient =>
                     <tr key={coefficient.id}>
                         <CoeffDistanceRow coefficient={coefficient}/>
                     </tr>
@@ -88,6 +86,9 @@ const CoefficientsDistanceTable: FC<Props> = ( {isCreateNewCoefficient, setIsCre
                             </td>
                             <td>
                                 <InputNumber
+                                    min={1}
+                                    max={2}
+                                    step={0.01}
                                     onChange={(value) => {
                                         if (value !== null) {
                                             setCoefficient(value);

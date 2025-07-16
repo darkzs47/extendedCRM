@@ -2,7 +2,7 @@ import type {Dispatch} from "redux";
 import {
     COEFFICIENTS_FAILURE,
     CREATE_COEFFICIENT_DISTANCE,
-    DELETE_COEFFICIENT_DISTANCE,
+    DELETE_COEFFICIENT_DISTANCE, GET_COEFFICIENTS_DISTANCE,
     GET_COEFFICIENTS_SEASON, UPDATE_COEFFICIENTS_DISTANCE, UPDATE_COEFFICIENTS_SEASON
 } from "../../types/coefficients.ts";
 import {CoefficientsService} from "../../services/CoefficientsService.ts";
@@ -26,7 +26,7 @@ export const getDistanceCoefficients = () => {
     return async (dispatch: Dispatch) => {
         try {
             const response = await CoefficientsService.getDistanceCoefficients()
-            dispatch({ type: GET_COEFFICIENTS_SEASON, payload: response.data })
+            dispatch({ type: GET_COEFFICIENTS_DISTANCE, payload: response.data })
         } catch (e) {
             dispatch({ type: COEFFICIENTS_FAILURE })
         }

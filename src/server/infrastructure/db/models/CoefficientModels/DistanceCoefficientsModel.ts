@@ -1,6 +1,6 @@
 import {AutoIncrement, Column, Model, PrimaryKey, Table} from "sequelize-typescript";
 
-@Table({ tableName: 'distanceCoefficients', timestamps: false, underscored: true })
+@Table({ tableName: 'distance_coefficients', timestamps: false, underscored: true })
 export class DistanceCoefficientsModel extends Model {
     @PrimaryKey
     @AutoIncrement

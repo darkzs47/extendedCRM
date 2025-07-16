@@ -1,7 +1,6 @@
 export class UpdateDistanceCoefficientDto {
     constructor(
-        readonly minKm?: number,
-        readonly maxKm?: number,
-        readonly coefficient?: number,
+        readonly id: number,
+        readonly coefficient: number,
     ) {}
 }

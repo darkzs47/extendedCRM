@@ -1,4 +1,4 @@
-import {type FC, memo, useEffect} from "react";
+import  {type FC, memo, useEffect} from "react";
 import type {ICoefficientSeason} from "../models/ICoefficientSeason.ts";
 import CoeffSeasonRow from "../components/CoeffSeasonRow.tsx";
 import {useDispatch, useSelector} from "react-redux";

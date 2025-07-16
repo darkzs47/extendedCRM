@@ -1,4 +1,4 @@
-import {SeasonCoefficientService} from "../../../core/services/CoefficientsService/SeasonCoefficientService";
+import {SeasonCoefficientsService} from "../../../core/services/CoefficientsService/SeasonCoefficientsService";
 import {constants} from "http2";
 import {SeasonCoefficientsModel} from "../../db/models/CoefficientModels/SeasonCoefficientsModel";
 import {
@@ -6,14 +6,14 @@ import {
 } from "../../../core/repositories/CoefficientsRepository/dto/UpdateSeasonCoefficient";
 import {Request, Response} from "express";
 
-export class SeasonCoefficientController {
+export class SeasonCoefficientsController {
     constructor(
-        private readonly seasonCoefficientService: SeasonCoefficientService,
+        private readonly seasonCoefficientsService: SeasonCoefficientsService,
     ) {}
 
     async getAllSeasonCoefficients(req: Request, res: Response): Promise<void> {
         try {
-            const coefficients: SeasonCoefficientsModel[] = await this.seasonCoefficientService.getAllSeasonCoefficients();
+            const coefficients: SeasonCoefficientsModel[] = await this.seasonCoefficientsService.getAllSeasonCoefficients();
             res.status(constants.HTTP_STATUS_OK).json(coefficients);
             return
         } catch (e) {
@@ -27,7 +27,7 @@ export class SeasonCoefficientController {
             const { id } = req.params;
             const { coefficient } = req.body;
             const coefficientUpdated: SeasonCoefficientsModel =
-                await this.seasonCoefficientService.updateSeasonCoefficient(
+                await this.seasonCoefficientsService.updateSeasonCoefficient(
                     new UpdateSeasonCoefficientDto(Number(id), coefficient))
             res.status(constants.HTTP_STATUS_OK).json(coefficientUpdated)
             return;

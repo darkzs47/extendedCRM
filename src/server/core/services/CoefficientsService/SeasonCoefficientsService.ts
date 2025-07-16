@@ -2,7 +2,7 @@ import {ISeasonCoefficientsRepository} from "../../repositories/CoefficientsRepo
 import {SeasonCoefficientsModel} from "../../../infrastructure/db/models/CoefficientModels/SeasonCoefficientsModel";
 import {UpdateSeasonCoefficientDto} from "../../repositories/CoefficientsRepository/dto/UpdateSeasonCoefficient";
 
-export class SeasonCoefficientService {
+export class SeasonCoefficientsService {
     constructor(
         readonly seasonCoefficientsRepository: ISeasonCoefficientsRepository,
     ) {}

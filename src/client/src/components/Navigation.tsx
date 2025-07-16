@@ -19,9 +19,9 @@ const Navigation: FC = () => {
     );
 
     return (
-        <nav className={styles.navbar}>
+        <>
             {isAuthUser && (
-                <>
+                <nav className={styles.navbar}>
                     <ul className={styles.mainUl}>
                         <>
                             {userRole === 'admin' && (
@@ -55,9 +55,10 @@ const Navigation: FC = () => {
                             onClick={handleLogout}>
                         Выйти
                     </Button>
-                </>)}
-        </nav>
+                </nav>
+            )}
+        </>
     )
-};
+}
 
 export default memo(Navigation);

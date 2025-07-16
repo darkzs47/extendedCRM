@@ -56,7 +56,6 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                         onClick={() => handleSaveChanges(category)}
                                         icon={<CheckOutlined />}
                                         shape="circle"
-                                        style={{color: '#2fff00'}}
                                     />
                                 </Tooltip>
 
@@ -65,7 +64,6 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                         icon={<CloseOutlined />}
                                         onClick={() => handleEditing()}
                                         shape="circle"
-                                        style={{ marginRight: 8 }}
                                     />
                                 </Tooltip>
                             </td>
@@ -79,7 +77,6 @@ const CategoryRow: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                     <Button
                                         onClick={() => handleEditing()}
                                         icon={<EditOutlined/>}
-                                        style={{marginRight: 8}}
                                         shape="circle"
                                     />
                                 </Tooltip>

@@ -9,8 +9,7 @@ import {AddressModel} from "../models/AddressModel/AddressModel";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 import {ToolModel} from "../models/ToolModel/ToolModel";
-import {DistanceCoefficientModel} from "../models/CoefficientsModels/DistanceCoefficientModel";
-import {SeasonCoefficientModel} from "../models/CoefficientsModels/SeasonCoefficientModel";
+import {SeasonCoefficientModel} from "../models/CoefficientsModel/SeasonCoefficientModel";
 import {OrderModel} from "../models/OrderModel/OrderModel";
 import {OrderToolModel} from "../models/OrderToolModel/OrderToolModel";
 
@@ -33,7 +32,6 @@ export const sequelize = new Sequelize({
         AddressModel,
         ToolModel,
         CategoryModel,
-        DistanceCoefficientModel,
         SeasonCoefficientModel,
         OrderModel,
         OrderToolModel,

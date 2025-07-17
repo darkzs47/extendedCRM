@@ -20,8 +20,10 @@ import AddSupplier from "./pages/suppliers/AddSupplier.tsx";
 import Users from "./pages/users/Users.tsx";
 import Categories from "./pages/categories/Categories.tsx";
 import Tools from "./pages/tools/Tools.tsx";
-import CoefficientsDistance from "./pages/coefficients/CoefficientsDistance.tsx";
 import CoefficientsSeason from "./pages/coefficients/CoefficientsSeason.tsx";
+import Orders from "./pages/orders/Orders.tsx";
+import AddOrder from './pages/orders/AddOrder.tsx';
+import OrderInfo from "./pages/orders/OrderInfo.tsx";
 
 function App() {
     const dispatch = useDispatch<AppDispatch>();
@@ -46,7 +48,6 @@ function App() {
                 }>
                     <Route index element={<ProtectedRoute><Users/></ProtectedRoute>}/>
                     <Route path="users" element={<ProtectedRoute><Users/></ProtectedRoute>}/>
-                    <Route path="coefficients/distance" element={<ProtectedRoute><CoefficientsDistance/></ProtectedRoute>}/>
                     <Route path="coefficients/season" element={<ProtectedRoute><CoefficientsSeason/></ProtectedRoute>}/>
                     <Route path="categories" element={<ProtectedRoute><Categories/></ProtectedRoute>}/>
                 </Route>
@@ -71,6 +72,18 @@ function App() {
 
                 <Route path="/tools" element={
                     <ProtectedRoute><Tools/></ProtectedRoute>
+                }/>
+
+                <Route path="/orders" element={
+                    <ProtectedRoute><Orders/></ProtectedRoute>
+                }/>
+
+                <Route path="/orders/add" element={
+                    <ProtectedRoute><AddOrder/></ProtectedRoute>
+                }/>
+
+                <Route path="/orders/:id" element={
+                    <ProtectedRoute><OrderInfo/></ProtectedRoute>
                 }/>
 
                 <Route path="*" element={<Navigate to="/"/>}/>

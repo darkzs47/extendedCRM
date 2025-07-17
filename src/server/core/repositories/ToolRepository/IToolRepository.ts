@@ -4,6 +4,7 @@ import { UpdateToolDto } from "./dto/UpdateToolDto";
 
 export interface IToolRepository {
     getAllTools(): Promise<ToolModel[]>;
+    getToolById(id: number): Promise<ToolModel | null>;
     createTool(dto: CreateToolDto): Promise<ToolModel | null>;
     updateTool(dto: UpdateToolDto): Promise<ToolModel | null>;
     deleteTool(id: number): Promise<ToolModel | null>;

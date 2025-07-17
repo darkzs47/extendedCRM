@@ -1,6 +1,6 @@
 import {SeasonCoefficientsService} from "../../../core/services/CoefficientsService/SeasonCoefficientsService";
 import {constants} from "http2";
-import {SeasonCoefficientModel} from "../../db/models/CoefficientsModels/SeasonCoefficientModel";
+import {SeasonCoefficientModel} from "../../db/models/CoefficientsModel/SeasonCoefficientModel";
 import {
     UpdateSeasonCoefficientDto
 } from "../../../core/repositories/CoefficientsRepository/dto/UpdateSeasonCoefficient";

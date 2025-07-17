@@ -16,6 +16,11 @@ export class ToolRepository implements IToolRepository {
         return tools;
     }
 
+    async getToolById(id: number): Promise<ToolModel | null> {
+        const tool: ToolModel | null = await ToolModel.findByPk(id)
+        return tool;
+    }
+
     async createTool(dto: CreateToolDto): Promise<ToolModel | null> {
         const tool: ToolModel | null = await ToolModel.create(ToolMapper.toModel(dto));
         return tool;

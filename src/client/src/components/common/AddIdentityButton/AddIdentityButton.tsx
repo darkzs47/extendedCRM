@@ -1,17 +1,19 @@
 import {type FC, memo} from "react";
 import {Button} from "antd";
+import styles from "./addIdentityButton.module.scss"
 
 interface Props {
     onClick: () => void;
 }
 
-const AddIdentityButton: FC<Props> = ({ onClick }) => {
+const AddIdentityButton: FC<Props> = ({ onClick }: Props) => {
 
     return (
         <div>
             <Button
                 type='primary'
                 onClick={onClick}
+                className={styles.addButtons}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

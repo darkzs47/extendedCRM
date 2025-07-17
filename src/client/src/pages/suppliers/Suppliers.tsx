@@ -1,7 +1,7 @@
 import {type FC, memo, useCallback} from "react";
 import SuppliersTable from "../../components/tables/Suppliers.tsx";
 import styles from "./suppliers.module.scss"
-import AddIdentityButton from "../../components/common/AddIdentityButton.tsx";
+import AddIdentityButton from "../../components/common/AddIdentityButton/AddIdentityButton.tsx";
 import {useNavigate} from "react-router-dom";
 
 const Suppliers: FC = () => {

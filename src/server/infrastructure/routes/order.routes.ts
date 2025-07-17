@@ -4,8 +4,12 @@ import {OrderController} from "../controllers/OrderController/OrderController";
 import {Response, Router, Request} from "express";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import { RoleMiddleware } from "../middlewares/RoleMiddleware";
+import {CustomerService} from "../../core/services/CustomerService/CustomerService";
+import {SeasonCoefficientsService} from "../../core/services/CoefficientsService/SeasonCoefficientsService";
+import {SeasonCoefficientsRepository} from "../db/repositories/SeasonCoefficientsRepository";
+import {CustomerRepository} from "../db/repositories/CustomerRepository";
 
-const orderController = new OrderController(new OrderService(new OrderRepository()));
+const orderController = new OrderController(new OrderService(new OrderRepository(), new SeasonCoefficientsService(new SeasonCoefficientsRepository()), new CustomerService(new CustomerRepository())));
 
 const router = Router();
 

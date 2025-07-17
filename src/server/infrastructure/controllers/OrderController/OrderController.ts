@@ -31,7 +31,10 @@ export class OrderController {
 
     async createOrder(req: Request, res: Response): Promise<void> {
         try {
-
+            const { tools, customerId } = req.body;
+            const order: OrderModel[] | null = await this.orderService.createOrder(tools, customerId);
+            res.status(constants.HTTP_STATUS_OK).json(order);
+            return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось добавить заказ"})
             return;
@@ -43,7 +46,7 @@ export class OrderController {
             const { id } = req.params
             const { status } = req.body
             const orderUpdated: OrderModel | null = await this.orderService.updateStatusOrder(Number(id), status);
-            res.status(constants.HTTP_STATUS_OK).json();
+            res.status(constants.HTTP_STATUS_OK).json(orderUpdated);
             return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось изменить статус заказа"})

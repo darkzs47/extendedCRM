@@ -2,6 +2,7 @@ import {CreateToolDto} from "../../repositories/ToolRepository/dto/CreateToolDto
 import {UpdateToolDto} from "../../repositories/ToolRepository/dto/UpdateToolDto";
 import {IToolRepository} from "../../repositories/ToolRepository/IToolRepository";
 import {ToolModel} from "../../../infrastructure/db/models/ToolModel/ToolModel";
+import {Tool} from "../../models/Tool/Tool";
 
 export class ToolService {
     constructor(readonly toolRepository: IToolRepository) {    }
@@ -9,6 +10,12 @@ export class ToolService {
     async getAllTools(): Promise<ToolModel[]> {
         const tools: ToolModel[] = await this.toolRepository.getAllTools()
         return tools;
+    }
+
+    async getToolById(toolId: number): Promise<ToolModel> {
+        const tool: ToolModel | null = await this.toolRepository.getToolById(toolId)
+        if (!tool) throw new Error(`Не удалось найти инструмент`);
+        return tool;
     }
 
     async createTool(dto: CreateToolDto): Promise<ToolModel> {

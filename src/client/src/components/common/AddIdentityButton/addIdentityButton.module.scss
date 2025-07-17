@@ -1,0 +1,17 @@
+@use "../../../styles/variables" as *;
+
+.addButtons {
+  background-color: $primary-color !important;
+  color: $primary-light-text-color !important;
+  font-family: $font-family !important;
+  border: none;
+  border-radius: 6px;
+  font-size: $font-button !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: $primary-hover !important;
+  }
+}

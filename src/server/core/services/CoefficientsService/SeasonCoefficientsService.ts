@@ -1,5 +1,5 @@
 import {ISeasonCoefficientsRepository} from "../../repositories/CoefficientsRepository/ISeasonCoefficientsRepository";
-import {SeasonCoefficientModel} from "../../../infrastructure/db/models/CoefficientsModels/SeasonCoefficientModel";
+import {SeasonCoefficientModel} from "../../../infrastructure/db/models/CoefficientsModel/SeasonCoefficientModel";
 import {UpdateSeasonCoefficientDto} from "../../repositories/CoefficientsRepository/dto/UpdateSeasonCoefficient";
 
 export class SeasonCoefficientsService {
@@ -16,5 +16,11 @@ export class SeasonCoefficientsService {
         const coefficient: SeasonCoefficientModel | null = await this.seasonCoefficientsRepository.updateSeasonCoefficient(dto)
         if (!coefficient) throw new Error("Коэффициент не изменён");
         return coefficient;
+    }
+
+    async getSeasonCoefficientByName(name: string): Promise<number> {
+        const coefficient: SeasonCoefficientModel | null = await this.seasonCoefficientsRepository.getSeasonByName(name)
+        if (!coefficient) throw new Error("Коэффициент не найден");
+        return coefficient.coefficient;
     }
 }

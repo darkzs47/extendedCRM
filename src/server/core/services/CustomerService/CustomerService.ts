@@ -18,6 +18,12 @@ export class CustomerService {
         return customer;
     }
 
+    async getCustomerDiscount(id: number): Promise<number> {
+        const customer: CustomerModel | null = await this.customerRepository.getCustomerById(id)
+        if (!customer) throw new Error(`Клиент не найден`);
+        return customer.discount;
+    }
+
     async createCustomer(dto: CreateCustomerDto): Promise<CustomerModel> {
         const newCustomer: CustomerModel | null = await this.customerRepository.createCustomer(dto);
         if (!newCustomer) throw new Error(`Клиент не создан`);

@@ -1,6 +1,6 @@
 import {type FC, memo, useCallback, useState} from "react";
 import CategoriesTable from "../../components/tables/Categories.tsx";
-import AddIdentityButton from "../../components/common/AddIdentityButton.tsx";
+import AddIdentityButton from "../../components/common/AddIdentityButton/AddIdentityButton.tsx";
 import styles from "./categories.module.scss"
 
 const Categories: FC = () => {

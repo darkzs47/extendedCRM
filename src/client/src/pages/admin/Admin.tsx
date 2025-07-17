@@ -10,7 +10,6 @@ const Admin: FC = () => {
                 <nav className={styles.adminMainNav}>
                     <ul>
                         <li><NavLink to="users">Пользователи</NavLink></li>
-                        <li><NavLink to='coefficients/distance'>Коэффициенты дистанции</NavLink></li>
                         <li><NavLink to='coefficients/season'>Коэффициенты сезонности</NavLink></li>
                         <li><NavLink to='categories'>Категории инструментов</NavLink></li>
                     </ul>

@@ -1,6 +1,0 @@
-@use "../../styles/mixins" as *;
-
-.headerContainer {
-  @include flex-row-container();
-  justify-content: space-between;
-}

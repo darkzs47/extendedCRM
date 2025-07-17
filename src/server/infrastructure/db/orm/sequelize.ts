@@ -11,6 +11,8 @@ import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 import {ToolModel} from "../models/ToolModel/ToolModel";
 import {DistanceCoefficientModel} from "../models/CoefficientsModels/DistanceCoefficientModel";
 import {SeasonCoefficientModel} from "../models/CoefficientsModels/SeasonCoefficientModel";
+import {OrderModel} from "../models/OrderModel/OrderModel";
+import {OrderToolModel} from "../models/OrderToolModel/OrderToolModel";
 
 dotenv.config();
 
@@ -33,6 +35,8 @@ export const sequelize = new Sequelize({
         CategoryModel,
         DistanceCoefficientModel,
         SeasonCoefficientModel,
+        OrderModel,
+        OrderToolModel,
     ],
     logging: false,
 });

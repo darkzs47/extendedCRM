@@ -14,7 +14,7 @@ export class CategoryController {
             res.status(constants.HTTP_STATUS_OK).json(categories);
             return
         } catch (e) {
-            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось получить информацию об категориях"})
+            res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось получить информацию о категориях"})
             return;
         }
     }

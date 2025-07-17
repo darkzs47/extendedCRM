@@ -3,10 +3,10 @@ import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {SeasonCoefficientsRepository} from "../db/repositories/SeasonCoefficientsRepository";
 import {SeasonCoefficientsService} from "../../core/services/CoefficientsService/SeasonCoefficientsService";
-import {SeasonCoefficientsController} from "../controllers/Coefficients/SeasonCoefficientsController";
+import {SeasonCoefficientsController} from "../controllers/CoefficientsController/SeasonCoefficientsController";
 import {DistanceCoefficientsRepository} from "../db/repositories/DistanceCoefficientsRepository";
 import {DistanceCoefficientsService} from "../../core/services/CoefficientsService/DistanceCoefficientsService";
-import {DistanceCoefficientsController} from "../controllers/Coefficients/DistanceCoefficientsController";
+import {DistanceCoefficientsController} from "../controllers/CoefficientsController/DistanceCoefficientsController";
 
 const router = Router();
 

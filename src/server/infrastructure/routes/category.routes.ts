@@ -1,7 +1,7 @@
 import {Request, Response, Router} from "express";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
-import {CategoryController} from "../controllers/Category/CategoryController";
+import {CategoryController} from "../controllers/CategoryController/CategoryController";
 import {CategoryService} from "../../core/services/CategoryService/CategoryService";
 import {CategoryRepository} from "../db/repositories/CategoryRepository";
 

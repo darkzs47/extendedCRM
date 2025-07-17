@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import {AuthController} from "../controllers/Auth/AuthController";
+import {AuthController} from "../controllers/AuthController/AuthController";
 import {AuthService} from "../../core/services/AuthService/AuthService";
 import {AuthRepository} from "../db/repositories/AuthRepository";
 import {registrationValidation} from "../validations/registerValidation";

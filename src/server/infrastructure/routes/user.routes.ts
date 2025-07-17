@@ -1,5 +1,5 @@
 import {Request, Response, Router} from 'express';
-import {UserController} from "../controllers/User/UserController";
+import {UserController} from "../controllers/UserController/UserController";
 import {UserService} from "../../core/services/UserService/UserService";
 import {UserRepository} from "../db/repositories/UserRepository";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";

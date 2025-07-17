@@ -1,7 +1,7 @@
 import {Request, Response, Router} from "express";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {AuthMiddleware} from "../middlewares/AuthMiddleware";
-import {ToolController} from "../controllers/Tool/ToolController";
+import {ToolController} from "../controllers/ToolController/ToolController";
 import {ToolService} from "../../core/services/ToolService/ToolService";
 import {ToolRepository} from "../db/repositories/ToolRepository";
 

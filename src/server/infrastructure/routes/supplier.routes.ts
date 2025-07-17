@@ -3,7 +3,7 @@ import {AuthMiddleware} from "../middlewares/AuthMiddleware";
 import {RoleMiddleware} from "../middlewares/RoleMiddleware";
 import {SupplierRepository} from "../db/repositories/SupplierRepository";
 import {SupplierService} from "../../core/services/SupplierService/SupplierService";
-import {SupplierController} from "../controllers/Supplier/SupplierController";
+import {SupplierController} from "../controllers/SupplierController/SupplierController";
 
 const supplierController = new SupplierController(new SupplierService(new SupplierRepository()));
 

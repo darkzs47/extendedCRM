@@ -7,6 +7,8 @@ import {createTool, getAllTools} from "../../store/tools/actions.ts";
 import {Button, Input, Select, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 import styles from "../../pages/tools/tools.module.scss"
+import type {ICategory} from "../../models/ICategory.ts";
+import type {ITool} from "../../models/ITool.ts";
 
 interface Props {
     isCreateNewTool: boolean,
@@ -16,11 +18,10 @@ interface Props {
 
 const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const categories = useSelector((state: RootState) => state.categories.categories)
-    const tools = useSelector((state: RootState) => state.tools.tools)
+    const categories: ICategory[] | null = useSelector((state: RootState) => state.categories.categories)
+    const tools: ITool[] | null = useSelector((state: RootState) => state.tools.tools)
 
     const [newToolName, setNewToolName] = useState<string>('')
-
     const [newToolPurchasePrice, setNewToolPurchasePrice] = useState<number>(0)
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
@@ -81,6 +82,7 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                                 <Input
                                     onChange={(e) => setNewToolName(e.target.value)}
                                     value={newToolName}
+                                    style={{width: '5rem'}}
                                 />
                             </td>
                             <td>
@@ -97,6 +99,7 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                                     type='number'
                                     onChange={(e) => calculatePrice(Number(e.target.value))}
                                     value={newToolPurchasePrice}
+                                    style={{width: '5rem'}}
                                 />
                             </td>
                             <td>
@@ -105,10 +108,10 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                             <td>
                                 <Tooltip title="Сохранить">
                                     <Button
-                                        onClick={() => {handleSubmitNewTool()}}
+                                        className="checkIcon"
+                                        onClick={handleSubmitNewTool}
                                         icon={<CheckOutlined />}
-                                        shape="circle"
-                                        style={{color: '#2fff00'}}
+                                        type="text"
                                     />
                                 </Tooltip>
 
@@ -116,8 +119,7 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                                     <Button
                                         icon={<CloseOutlined />}
                                         onClick={onCancel}
-                                        shape="circle"
-                                        style={{ marginRight: 8 }}
+                                        type="text"
                                     />
                                 </Tooltip>
                             </td>

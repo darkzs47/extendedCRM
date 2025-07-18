@@ -6,6 +6,14 @@ body {
   background-color: $primary-bg;
 }
 
+main {
+  height: 90h !important;
+}
+
+header {
+  height: 10vh !important;
+}
+
 h3 {
   font-size: $font-h3;
   font-weight: 600 !important;
@@ -49,10 +57,18 @@ table {
     }
 
     td {
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1.4rem;
       color: $text-color;
       font-size: $font-body;
       white-space: nowrap;
     }
   }
+}
+
+.checkIcon {
+  color: #3b9f00 !important;
+}
+
+:global(.ant-input[type="number"]) {
+    width: 1px;
 }

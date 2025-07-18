@@ -7,12 +7,8 @@ const Tools: FC = () => {
 
     const [isCreateNewTool, setIsCreateNewTool] = useState<boolean>(false)
 
-    const handleAddNewTool = useCallback(() => {
-        setIsCreateNewTool(!isCreateNewTool);
-    }, [isCreateNewTool])
-
-    const handleCancel = useCallback(() => {
-        setIsCreateNewTool(!isCreateNewTool)
+    const handleAdd = useCallback(() => {
+        setIsCreateNewTool(prev => !prev);
     }, [isCreateNewTool])
 
     return (
@@ -20,13 +16,13 @@ const Tools: FC = () => {
             <div className={styles.headerContainer}>
                 <h3>Инструменты</h3>
                 <AddIdentityButton
-                    onClick={() => handleAddNewTool()}
+                    onClick={handleAdd}
                 />
             </div>
             <ToolsTable
                 isCreateNewTool={isCreateNewTool}
                 setIsCreateNewTool={setIsCreateNewTool}
-                onCancel={handleCancel}
+                onCancel={handleAdd}
             />
         </main>
     )

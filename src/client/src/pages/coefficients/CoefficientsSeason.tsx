@@ -3,12 +3,12 @@ import CoefficientsSeasonTable from "../../components/tables/CoefficientsSeason.
 
 const CoefficientsSeason: FC = () => {
     return (
-        <>
+        <main>
             <div>
                 <h3>Коэффициенты сезонности</h3>
             </div>
             <CoefficientsSeasonTable/>
-        </>
+        </main>
     )
 }
 

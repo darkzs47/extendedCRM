@@ -40,10 +40,20 @@ const LoginForm: FC = () => {
                 />
             </div>
             <div className={styles.buttonsContainer}>
-                <Button className={styles.loginButtons} onClick={handleLogin} type="primary" htmlType="submit">
+                <Button
+                    className={styles.loginButtons}
+                    onClick={handleLogin}
+                    type="primary"
+                    htmlType="submit"
+                >
                     Войти
                 </Button>
-                <Button className={styles.loginButtons} type="primary" htmlType="button" onClick={toRegisterPageHandler}>
+                <Button
+                    className={styles.loginButtons}
+                    type="primary"
+                    htmlType="button"
+                    onClick={toRegisterPageHandler}
+                >
                     Регистрация
                 </Button>
             </div>

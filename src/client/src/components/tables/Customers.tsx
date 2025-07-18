@@ -4,10 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../store/store.ts";
 import {getAllCustomers} from "../../store/customers/actions.ts";
 import styles from "../../pages/customers/customers.module.scss"
+import type {ICustomer} from "../../models/ICustomer.ts";
 
 const Customers: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const customers = useSelector((state: RootState) => state.customers.customers)
+    const customers: ICustomer[] | null = useSelector((state: RootState) => state.customers.customers)
 
     useEffect(() => {
         dispatch(getAllCustomers());

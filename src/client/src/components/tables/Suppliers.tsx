@@ -4,10 +4,11 @@ import type {AppDispatch, RootState} from "../../store/store.ts";
 import {getAllSuppliers} from "../../store/suppliers/actions.ts";
 import SupplierRow from "./rows/Supplier.tsx";
 import styles from "../../pages/suppliers/suppliers.module.scss"
+import type {ISupplier} from "../../models/ISupplier.ts";
 
 const Suppliers: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const suppliers = useSelector((state: RootState) => state.suppliers.suppliers)
+    const suppliers: ISupplier[] | null = useSelector((state: RootState) => state.suppliers.suppliers)
 
     useEffect(() => {
         dispatch(getAllSuppliers());

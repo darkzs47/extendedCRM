@@ -17,7 +17,7 @@ const CoefficientSeason: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRo
 
     const handleEditing = useCallback(() => {
         setIsEditing(prev => !prev)
-    }, [isEditing])
+    }, [isEditing, coefficient])
 
     const handleSaveChanges = useCallback((coefficient: ICoefficientSeason) => {
         if (newCoefficient === coefficient.coefficient) return
@@ -51,8 +51,9 @@ const CoefficientSeason: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRo
                     <td>
                         <Tooltip title="Сохранить">
                             <Button
+                                className="checkIcon"
                                 type="text"
-                                icon={<CheckOutlined style={{ color: 'green' }} />}
+                                icon={<CheckOutlined />}
                                 onClick={() => handleSaveChanges(coefficient)}
                             />
                         </Tooltip>

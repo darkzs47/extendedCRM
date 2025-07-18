@@ -1,4 +1,4 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useCallback} from "react";
 import {Button, Form, Input,} from "antd";
 import type {ISupplierFullInfo} from "../../models/ISupplierFullInfo.ts";
 import styles from "../../pages/suppliers/addSupplier.module.scss";
@@ -14,10 +14,10 @@ interface SupplierFormProps {
 const Supplier: FC<SupplierFormProps> = ({onNext, onChange, initialValues}) => {
     const [form] = Form.useForm<SupplierFormValues>();
 
-    const handleFinish = (values: SupplierFormValues) => {
+    const handleFinish = useCallback((values: SupplierFormValues) => {
         onChange(values);
         onNext();
-    };
+    }, []);
 
     return (
         <>
@@ -27,7 +27,6 @@ const Supplier: FC<SupplierFormProps> = ({onNext, onChange, initialValues}) => {
                 layout="vertical"
                 onFinish={handleFinish}
                 initialValues={initialValues}
-                style={{width: '300px'}}
                 onValuesChange={(_, values) => onChange(values)}
             >
                 <Form.Item

@@ -19,8 +19,8 @@ const RegisterForm: FC = () => {
 
     const handleRegister = useCallback(async (values: RegisterRequest) => {
             const regResult = await dispatch(registration(values));
-            if (regResult) navigate('customers')
-        }, []
+            if (regResult.success) navigate('/customers')
+        }, [form, navigate]
     );
 
     return (
@@ -32,7 +32,6 @@ const RegisterForm: FC = () => {
                 name="userForm"
                 layout="vertical"
                 onFinish={handleRegister}
-                style={{width: '300px'}}
             >
                 <Form.Item
                     label="Фамилия"
@@ -87,13 +86,22 @@ const RegisterForm: FC = () => {
 
                 <div className={styles.buttonsContainer}>
                     <Form.Item>
-                        <Button type="primary" className={styles.registerButtons} htmlType="button" onClick={toLoginPageHandler}>
+                        <Button
+                            type="primary"
+                            className={styles.registerButtons}
+                            htmlType="button"
+                            onClick={toLoginPageHandler}
+                        >
                             Уже зарегистрированы?
                         </Button>
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" className={styles.registerButtons} htmlType="submit">
+                        <Button
+                            type="primary"
+                            className={styles.registerButtons}
+                            htmlType="submit"
+                        >
                             Зарегистрироваться
                         </Button>
                     </Form.Item>

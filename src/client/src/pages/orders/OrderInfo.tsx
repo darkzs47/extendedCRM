@@ -11,10 +11,7 @@ import styles from "./orderInfo.module.scss"
 
 const OrderInfo: FC = () => {
     const dispatch = useDispatch<AppDispatch>()
-    useEffect(() => {
-        dispatch(getAllOrders())
-        dispatch(getAllCustomers())
-    }, []);
+
     const {id} = useParams()
     const orders: IOrder[] | null = useSelector((state: RootState) => state.orders.orders)
     const customers: ICustomer[] | null = useSelector((state: RootState) => state.customers.customers)
@@ -26,6 +23,11 @@ const OrderInfo: FC = () => {
     const customerName = useMemo(() => {
         return customers?.find(customer => customer.id === currentOrder?.customerId)?.companyName;
     }, [customers, currentOrder?.customerId]);
+
+    useEffect(() => {
+        dispatch(getAllOrders())
+        dispatch(getAllCustomers())
+    }, [dispatch]);
 
     return (
         <main className={styles.container}>

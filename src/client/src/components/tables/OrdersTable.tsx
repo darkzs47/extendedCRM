@@ -15,7 +15,7 @@ const OrdersTable: FC = () => {
     useEffect(() => {
         dispatch(getAllCustomers())
         dispatch(getAllOrders())
-    }, []);
+    }, [dispatch]);
     return (
         <table>
             <thead>

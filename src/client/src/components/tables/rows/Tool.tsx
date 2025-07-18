@@ -29,7 +29,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
     const [purchasePrice, setPurchasePrice] = useState<number | undefined>(tool.purchasePrice)
 
     const handleEditing = useCallback(() => {
-        setIsEditing(!isEditing)
+        setIsEditing(prev => !prev)
     }, [isEditing])
 
     const handleSaveChanges = useCallback(async (tool: ITool) => {
@@ -71,6 +71,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                 type='number'
                                 onChange={(e) => setPurchasePrice(Number(e.target.value))}
                                 value={purchasePrice}
+                                style={{width: '5rem'}}
                             />
                         </td>
                         <td>
@@ -78,13 +79,15 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                 type='number'
                                 onChange={(e) => setSellPrice(Number(e.target.value))}
                                 value={sellPrice}
+                                style={{width: '5rem'}}
                             />
                         </td>
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
+                                    className="checkIcon"
                                     type="text"
-                                    icon={<CheckOutlined style={{ color: 'green' }} />}
+                                    icon={<CheckOutlined />}
                                     onClick={() => {
                                         handleSaveChanges(tool)
                                     }}
@@ -93,7 +96,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                             <Tooltip title="Отменить">
                                 <Button
                                     type='text'
-                                    onClick={() => handleEditing()}
+                                    onClick={handleEditing}
                                     icon={<CloseOutlined/>}
                                 />
                             </Tooltip>
@@ -110,7 +113,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                 <Button
                                     type="text"
                                     icon={<EditOutlined/>}
-                                    onClick={() => handleEditing()}
+                                    onClick={handleEditing}
                                 />
                             </Tooltip>
                             <Tooltip title="Удалить инструмент">

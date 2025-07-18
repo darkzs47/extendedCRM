@@ -6,12 +6,12 @@
   width: 100vw;
 
   h2 {
-    padding: 1rem;
+    padding: 0.9rem;
     margin: 0;
   }
 
   h3 {
-    padding: 0 0 1rem 0;
+    padding: 0 0 0.9rem 0;
     margin: 0;
   }
 }
@@ -19,8 +19,9 @@
 .form {
   @include flex-column-container();
 
-  span {
-    font-size: $font-caption;
+  .totalSumSpan {
+    font-size: $font-order-info;
+    margin-top: 1rem;
   }
 
   input {

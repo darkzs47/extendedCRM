@@ -11,6 +11,11 @@
   cursor: pointer;
   transition: background 0.2s;
 
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
   &:hover {
     background-color: $primary-hover !important;
   }

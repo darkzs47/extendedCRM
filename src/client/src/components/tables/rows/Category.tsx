@@ -22,8 +22,8 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
     const [markup, setMarkup] = useState<number>(parseFloat(((category.markup - 1) * 100).toFixed(0)))
 
     const handleEditing = useCallback(() => {
-        setIsEditing(!isEditing)
-    }, [isEditing])
+        setIsEditing(prev => !prev)
+    }, [isEditing, category])
 
     const handleSaveChanges = useCallback((category: ICategory) => {
         if (markup === 0) return
@@ -32,7 +32,7 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
             markup: 1 + (markup / 100),
         }
         dispatch(updateMarkupCategory(request))
-        setIsEditing(!isEditing)
+        handleEditing()
     }, [dispatch, markup, category])
 
     const handleDeleteCategory = useCallback((category: ICategory)=> {
@@ -53,13 +53,15 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                     type='number'
                                     onChange={(e) => setMarkup(Number(e.target.value))}
                                     value={markup}
+                                    style={{ width: '5rem' }}
                                 />
                             </td>
                             <td>
                                 <Tooltip title="Сохранить">
                                     <Button
+                                        className="checkIcon"
                                         type="text"
-                                        icon={<CheckOutlined style={{ color: 'green' }} />}
+                                        icon={<CheckOutlined/>}
                                         onClick={() => handleSaveChanges(category)}
                                     />
                                 </Tooltip>
@@ -68,7 +70,7 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                     <Button
                                         type="text"
                                         icon={<CloseOutlined/>}
-                                        onClick={() => handleEditing()}
+                                        onClick={handleEditing}
                                     />
                                 </Tooltip>
                             </td>
@@ -82,7 +84,7 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                     <Button
                                         type="text"
                                         icon={<EditOutlined/>}
-                                        onClick={() => handleEditing()}
+                                        onClick={handleEditing}
                                     />
                                 </Tooltip>
                                 <Tooltip title="Удалить категорию">

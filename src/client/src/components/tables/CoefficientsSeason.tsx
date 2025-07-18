@@ -11,7 +11,7 @@ const CoeffSeason: FC = () => {
 
     useEffect(() => {
         dispatch(getSeasonCoefficients())
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

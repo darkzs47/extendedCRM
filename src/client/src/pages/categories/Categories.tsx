@@ -7,26 +7,22 @@ const Categories: FC = () => {
 
     const [isCreateNewCategory, setIsCreateNewCategory] = useState<boolean>(false)
 
-    const handleAddNewCategory = useCallback(() => {
-        setIsCreateNewCategory(!isCreateNewCategory);
-    }, [isCreateNewCategory])
-
-    const handleCancel = useCallback(() => {
-        setIsCreateNewCategory(!isCreateNewCategory)
+    const handleAdd = useCallback(() => {
+        setIsCreateNewCategory(prev => !prev);
     }, [isCreateNewCategory])
 
     return (
-        <>
+        <main>
             <div className={styles.headerContainer}>
                 <h3>Категории</h3>
-                <AddIdentityButton onClick={handleAddNewCategory}/>
+                <AddIdentityButton onClick={handleAdd}/>
             </div>
             <CategoriesTable
                 isCreateNewCategory={isCreateNewCategory}
                 setIsCreateNewCategory={setIsCreateNewCategory}
-                onCancel={handleCancel}
+                onCancel={handleAdd}
             />
-        </>
+        </main>
     )
 }
 

@@ -9,7 +9,7 @@ const Orders: FC = () => {
 
     const handleAddOrder = useCallback(() => {
         navigate('/orders/add')
-    }, [])
+    }, [navigate])
 
     return (
         <main className={styles.ordersMain}>

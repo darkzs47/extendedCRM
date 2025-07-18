@@ -5,6 +5,7 @@ import type {AppDispatch, RootState} from "../../store/store.ts";
 import {createCategory, getAllCategories} from "../../store/categories/actions.ts";
 import {Button, Input, InputNumber, Tooltip} from "antd";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
+import type {ICategory} from "../../models/ICategory.ts";
 
 interface Props {
     isCreateNewCategory: boolean;
@@ -14,7 +15,7 @@ interface Props {
 
 const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, onCancel }: Props ) => {
     const dispatch = useDispatch<AppDispatch>()
-    const categories = useSelector((state: RootState) => state.categories.categories)
+    const categories: ICategory[] | null = useSelector((state: RootState) => state.categories.categories)
     const [newCategoryName, setNewCategoryName] = useState<string>('')
     const [newCategoryMarkup, setNewCategoryMarkup] = useState<number>(0)
 
@@ -60,11 +61,11 @@ const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, on
                                 <Input
                                 onChange={(e) => setNewCategoryName(e.target.value)}
                                 value={newCategoryName}
+                                style={{ width: "13rem" }}
                                 />
                             </td>
                             <td>
                                 <InputNumber
-                                    style={{width: '100px'}}
                                     type='number'
                                     onChange={(value) => {
                                         if (value !== null) {
@@ -72,16 +73,17 @@ const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, on
                                         }
                                     }}
                                     value={newCategoryMarkup}
+                                    style={{ width: '5rem' }}
                                 />
                                 %
                             </td>
                             <td>
                                 <Tooltip title="Сохранить">
                                     <Button
+                                        className="checkIcon"
                                         onClick={() => {handleSubmitNewCategory()}}
                                         icon={<CheckOutlined />}
-                                        shape="circle"
-                                        style={{color: '#2fff00'}}
+                                        type="text"
                                     />
                                 </Tooltip>
 
@@ -89,8 +91,7 @@ const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, on
                                     <Button
                                         icon={<CloseOutlined />}
                                         onClick={onCancel}
-                                        shape="circle"
-                                        style={{ marginRight: 8 }}
+                                        type="text"
                                     />
                                 </Tooltip>
                             </td>

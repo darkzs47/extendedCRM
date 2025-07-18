@@ -69,7 +69,7 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
 
     useEffect(() => {
         dispatch(getAllSuppliers())
-    }, [])
+    }, [dispatch])
 
     return (
         <>
@@ -100,7 +100,6 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                         </td>
                         <td>
                             <Select
-                                style={{width: '175px'}}
                                 value={supplierId ?? undefined}
                                 placeholder="Выбрать поставщика"
                                 onChange={(value) => setSupplierId(value)}>
@@ -114,8 +113,9 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
+                                    className="checkIcon"
                                     type="text"
-                                    icon={<CheckOutlined style={{ color: 'green' }} />}
+                                    icon={<CheckOutlined/>}
                                     onClick={() => {handleSaveChanges(user)}}
                                 />
                             </Tooltip>

@@ -34,8 +34,8 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
         if (confirm(confirmString)) dispatch(deleteCustomer({id: customer.id}))
     }, [customer])
 
-    const handleEdit = useCallback(() => {
-        setDiscountEditing(!discountEditing)
+    const handleEditing = useCallback(() => {
+        setDiscountEditing(prev => !prev)
     }, [discountEditing, discount])
 
     const handleSaveChanges = useCallback((customer: ICustomer, discount: string) => {
@@ -60,24 +60,25 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
                     <td>
                         <Input
                             type='number'
-                            style={{width: '75px'}}
                             onChange={(e) => setDiscount(e.target.value)}
                             value={discount}
+                            style={{ width: '4rem' }}
                         />%
                         <Tooltip title="Сохранить">
                             <Button
+                                className="checkIcon"
                                 onClick={() => {
                                     handleSaveChanges(customer, discount)
                                 }}
                                 type="text"
-                                icon={<CheckOutlined style={{ color: 'green' }} />}
+                                icon={<CheckOutlined />}
                             />
                         </Tooltip>
 
                         <Tooltip title="Отменить">
                             <Button
                                 type="text"
-                                onClick={() => setDiscountEditing(!discountEditing)}
+                                onClick={handleEditing}
                                 icon={<CloseOutlined/>}
                             />
                         </Tooltip>
@@ -89,7 +90,7 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
                             <Button
                                 type="text"
                                 icon={<EditOutlined/>}
-                                onClick={() => handleEdit()}
+                                onClick={handleEditing}
                             />
                         </Tooltip>
                     </td>

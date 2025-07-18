@@ -1,4 +1,4 @@
-import {type FC, memo, useEffect, useState} from "react";
+import {type FC, memo, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../store/store.ts";
@@ -10,8 +10,7 @@ const CustomerInfo: FC = () => {
     const {id} = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const customerFromStore = useSelector((state: RootState) => state.customer.customer)
-    const [customer, setCustomer] = useState<ICustomerFullInfo | null>(null)
+    const customer: ICustomerFullInfo | null = useSelector((state: RootState) => state.customer.customer)
 
     useEffect(() => {
         const getCustomerInfo = async () => {
@@ -22,10 +21,6 @@ const CustomerInfo: FC = () => {
         }
         getCustomerInfo()
     }, [])
-
-    useEffect(() => {
-        setCustomer(customerFromStore)
-    }, [customerFromStore])
 
     return (
         <main className={styles.customerMain}>

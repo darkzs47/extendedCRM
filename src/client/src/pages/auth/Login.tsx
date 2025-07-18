@@ -4,11 +4,10 @@ import LoginForm from "../../components/auth/LoginForm.tsx";
 const Login: FC = () => {
 
     return (
-        <>
-            <main>
-                <LoginForm/>
-            </main>
-        </>)
+        <main>
+            <LoginForm/>
+        </main>
+    )
 }
 
 export default memo(Login);

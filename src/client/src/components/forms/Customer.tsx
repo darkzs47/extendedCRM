@@ -1,4 +1,4 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useCallback} from "react";
 import type {ICustomerFullInfo} from "../../models/ICustomerFullInfo.ts";
 import {Button, Form, Input, InputNumber} from "antd"
 import styles from "../../pages/customers/addCustomer.module.scss"
@@ -14,10 +14,10 @@ interface CustomerFormProps {
 const Customer: FC<CustomerFormProps> = ({onNext, onChange, initialValues}) => {
     const [form] = Form.useForm<CustomerFormValues>();
 
-    const handleFinish = (values: CustomerFormValues) => {
+    const handleFinish = useCallback((values: CustomerFormValues) => {
         onChange(values);
         onNext();
-    };
+    }, [form]);
 
     return (
         <>
@@ -28,7 +28,6 @@ const Customer: FC<CustomerFormProps> = ({onNext, onChange, initialValues}) => {
                 layout="vertical"
                 onFinish={handleFinish}
                 initialValues={initialValues}
-                style={{width: '300px'}}
                 onValuesChange={(_, values) => onChange(values)}
             >
                 <Form.Item

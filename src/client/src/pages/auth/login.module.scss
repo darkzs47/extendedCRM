@@ -3,8 +3,7 @@
 
 .loginContainer {
   @include flex-column-container();
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 90vh;
 }
 
 h2 {

@@ -10,7 +10,7 @@ const Suppliers: FC = () => {
 
     const handleAddSupplier = useCallback(() => {
          navigate(`/suppliers/add`)
-     }, [])
+     }, [navigate])
 
     return (
         <main className={styles.suppliersMain}>

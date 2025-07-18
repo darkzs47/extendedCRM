@@ -4,7 +4,6 @@
 .adminMain {
   font-family: $font-family;
   background-color: $primary-bg;
-  min-height: 100vh;
   padding: 1rem 4rem;
   display: flex;
   flex-direction: column;
@@ -15,6 +14,7 @@
   }
 
   &Nav {
+    @include flex-column-container();
     width: 15rem;
     background-color: $primary-nav-bg;
     border-radius: 6px;

@@ -1,4 +1,4 @@
-import {type FC, memo, useEffect, useState} from "react";
+import {type FC, memo, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../store/store.ts";
@@ -10,8 +10,7 @@ const SupplierInfo: FC = () => {
     const {id} = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
-    const supplierFromStore = useSelector((state: RootState) => state.supplier.supplier)
-    const [supplier, setSupplier] = useState<ISupplierFullInfo | null>(null)
+    const supplier: ISupplierFullInfo | null = useSelector((state: RootState) => state.supplier.supplier)
 
     useEffect(() => {
         const getSupplierInfo = async () => {
@@ -22,10 +21,6 @@ const SupplierInfo: FC = () => {
         }
         getSupplierInfo()
     }, [])
-
-    useEffect(() => {
-        setSupplier(supplierFromStore)
-    }, [supplierFromStore])
 
     return (
         <main className={styles.customerMain}>

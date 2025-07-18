@@ -124,7 +124,8 @@ const AddOrder: FC = () => {
                         </tbody>
                     </table>
                 </div>
-                <span>Суммарная стоимость инструментов: {totalSum} ₽</span>
+                {/*@ts-ignore*/}
+                <span className={styles.totalSumSpan}>Суммарная стоимость инструментов: {(totalSum).toFixed(1)} ₽</span>
                 <Form.Item>
                     <Button
                         className={styles.submitButton}

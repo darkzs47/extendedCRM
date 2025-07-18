@@ -50,9 +50,14 @@ const Navigation: FC = () => {
                             )}
                         </>
                     </ul>
-                    <Button className={styles.logoutButton} type="default" danger icon={<LogoutOutlined/>}
-                            htmlType="button"
-                            onClick={handleLogout}>
+                    <Button
+                        className={styles.logoutButton}
+                        type="default"
+                        danger
+                        icon={<LogoutOutlined/>}
+                        htmlType="button"
+                        onClick={handleLogout}
+                    >
                         Выйти
                     </Button>
                 </nav>

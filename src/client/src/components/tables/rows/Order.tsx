@@ -34,7 +34,7 @@ const Order: FC<OrderProps> = ({order, customer}: OrderProps) => {
     const handleShowDetails = useCallback((order: IOrder) => {
         const id = order.id;
         navigate(`/orders/${id}`)
-    }, []);
+    }, [order]);
     return (
         <>
             <td>{customer}</td>
@@ -45,6 +45,7 @@ const Order: FC<OrderProps> = ({order, customer}: OrderProps) => {
             <td>
                 <Tooltip title="Завершить заказ">
                     <Button
+                        className="checkIcon"
                         type="text"
                         icon={<CheckOutlined/>}
                         onClick={() => handleChangeOrderStatus(order, "Завершён")}

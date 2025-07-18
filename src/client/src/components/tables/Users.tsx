@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../store/store.ts";
 import {getAllUsers} from "../../store/users/actions.ts";
 import UserRow from "./rows/User.tsx";
+import type {IUser} from "../../models/IUser.ts";
 
 const Users: FC = () => {
-    const users = useSelector((state: RootState) => state.users.users);
-    const currentUser = useSelector((state: RootState) => state.currentUser.currentUser)
+    const users: IUser[] | null = useSelector((state: RootState) => state.users.users);
+    const currentUser: IUser | null = useSelector((state: RootState) => state.currentUser.currentUser)
     const dispatch = useDispatch<AppDispatch>()
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
 

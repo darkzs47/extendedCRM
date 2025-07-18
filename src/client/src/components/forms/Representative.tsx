@@ -1,4 +1,4 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useCallback} from "react";
 import type {IRepresentative} from "../../models/IRepresentative.ts";
 import {Button, Checkbox, Form, Input} from "antd";
 import styles from "../../pages/customers/addCustomer.module.scss"
@@ -15,10 +15,10 @@ interface RepresentativeFormProps {
 const Representative: FC<RepresentativeFormProps> = ({onBack, onSubmit, onChange, initialValues}) => {
     const [form] = Form.useForm<RepresentativeFormValues>();
 
-    const handleFinish = (values: RepresentativeFormValues) => {
+    const handleFinish = useCallback((values: RepresentativeFormValues) => {
         onChange(values);
         onSubmit();
-    };
+    }, [form]);
 
     return (
         <>
@@ -29,7 +29,6 @@ const Representative: FC<RepresentativeFormProps> = ({onBack, onSubmit, onChange
                 layout="vertical"
                 onFinish={handleFinish}
                 initialValues={initialValues}
-                style={{width: "300px"}}
                 onValuesChange={(_, values) => onChange(values)}
             >
                 <Form.Item

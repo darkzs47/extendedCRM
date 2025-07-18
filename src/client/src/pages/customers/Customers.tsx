@@ -10,7 +10,7 @@ const Customers: FC = () => {
 
     const handleAddCustomer = useCallback(() => {
         navigate(`/customers/add`)
-    }, [])
+    }, [navigate])
 
     return (
         <main className={styles.customersMain}>

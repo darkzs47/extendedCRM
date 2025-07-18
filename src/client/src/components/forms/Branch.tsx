@@ -1,4 +1,4 @@
-import {type FC, memo} from "react";
+import {type FC, memo, useCallback} from "react";
 import {Button, Checkbox, Form, Input} from "antd"
 import type {IAddress} from "../../models/IAddress.ts";
 import styles from "../../pages/customers/addCustomer.module.scss"
@@ -22,10 +22,10 @@ interface BranchFormProps {
 const Branch: FC<BranchFormProps> = ({onNext, onBack, onChange, initialValues}) => {
     const [form] = Form.useForm<BranchFormValues>();
 
-    const onFinish = (values: BranchFormValues) => {
+    const onFinish = useCallback((values: BranchFormValues) => {
         onChange(values);
         onNext();
-    };
+    }, [form]);
 
     return (
         <>
@@ -35,7 +35,6 @@ const Branch: FC<BranchFormProps> = ({onNext, onBack, onChange, initialValues}) 
                 layout="vertical"
                 onFinish={onFinish}
                 form={form}
-                style={{width: '300px'}}
                 initialValues={initialValues}
                 onValuesChange={(_, values) => onChange(values)}
             >

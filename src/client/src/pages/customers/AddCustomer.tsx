@@ -27,7 +27,7 @@ const AddCustomer: FC = () => {
         const request: AddCustomerRequest = {
             customer: {
                 ...customerData,
-                discount: 1 + (customerData.discount / 100)
+                discount: customerData.discount / 100
             },
             branch: branchData,
             representative: representativeData,

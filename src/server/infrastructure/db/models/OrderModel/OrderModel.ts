@@ -2,7 +2,7 @@ import {
     AutoIncrement,
     BelongsTo,
     BelongsToMany,
-    Column,
+    Column, CreatedAt, Default,
     ForeignKey,
     HasMany,
     Model,
@@ -21,12 +21,14 @@ export class OrderModel extends Model {
     @Column
     id!: number;
 
+    @Default('В работе')
     @Column
     status!: OrderStatus;
 
     @Column
     finalPrice!: number;
 
+    @CreatedAt
     @Column
     createdAt?: Date;
 

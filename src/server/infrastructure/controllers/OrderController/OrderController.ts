@@ -2,9 +2,12 @@ import {Request, Response} from "express";
 import {OrderService} from "../../../core/services/OrderService/OrderService";
 import {constants} from "http2";
 import {OrderModel} from "../../db/models/OrderModel/OrderModel";
+import {ToolsInOrderRequest} from "../../../types/OrdersTypes/OrderToolsRequest";
+import {logger} from "../../../logger";
 
 export class OrderController {
-    constructor(private readonly orderService: OrderService) {}
+    constructor(private readonly orderService: OrderService) {
+    }
 
     async getAllOrders(req: Request, res: Response): Promise<void> {
         try {
@@ -19,7 +22,7 @@ export class OrderController {
 
     async getOrderById(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const {id} = req.params;
             const order: OrderModel | null = await this.orderService.getOrderById(Number(id));
             res.status(constants.HTTP_STATUS_OK).json(order);
             return
@@ -31,8 +34,12 @@ export class OrderController {
 
     async createOrder(req: Request, res: Response): Promise<void> {
         try {
-            const { tools, customerId } = req.body;
-            const order: OrderModel[] | null = await this.orderService.createOrder(tools, customerId);
+            const {tools, customerId} = req.body;
+            const formattedTools: ToolsInOrderRequest = Object.entries(tools).map(([toolId, quantity]) => ({
+                toolId: Number(toolId),
+                quantity: Number(quantity),
+            }));
+            const order: OrderModel | null = await this.orderService.createOrder(formattedTools, customerId);
             res.status(constants.HTTP_STATUS_OK).json(order);
             return
         } catch (e) {
@@ -43,8 +50,8 @@ export class OrderController {
 
     async updateStatusOrder(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params
-            const { status } = req.body
+            const {id} = req.params
+            const {status} = req.body
             const orderUpdated: OrderModel | null = await this.orderService.updateStatusOrder(Number(id), status);
             res.status(constants.HTTP_STATUS_OK).json(orderUpdated);
             return
@@ -56,7 +63,7 @@ export class OrderController {
 
     async deleteOrder(req: Request, res: Response): Promise<void> {
         try {
-            const { id } = req.params;
+            const {id} = req.params;
             await this.orderService.deleteOrder(Number(id))
             res.status(constants.HTTP_STATUS_OK).json({message: "Заказ успешно удалён"})
             return

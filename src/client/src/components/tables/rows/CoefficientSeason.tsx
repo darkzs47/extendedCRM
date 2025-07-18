@@ -51,18 +51,17 @@ const CoefficientSeason: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRo
                     <td>
                         <Tooltip title="Сохранить">
                             <Button
+                                type="text"
+                                icon={<CheckOutlined style={{ color: 'green' }} />}
                                 onClick={() => handleSaveChanges(coefficient)}
-                                icon={<CheckOutlined />}
-                                shape="circle"
-                                style={{color: '#2fff00'}}
                             />
                         </Tooltip>
 
                         <Tooltip title="Отменить">
                             <Button
-                                icon={<CloseOutlined />}
+                                type="text"
+                                icon={<CloseOutlined/>}
                                 onClick={() => handleEditing()}
-                                shape="circle"
                             />
                         </Tooltip>
                     </td>
@@ -74,9 +73,9 @@ const CoefficientSeason: FC<CoeffSeasonRowProps> = ({coefficient}: CoeffSeasonRo
                     <td>
                         <Tooltip title="Редактировать коэффициент">
                             <Button
-                                onClick={handleEditing}
+                                type="text"
                                 icon={<EditOutlined/>}
-                                shape="circle"
+                                onClick={() => handleEditing()}
                             />
                         </Tooltip>
                     </td>

@@ -1,5 +1,11 @@
 import {type FC, memo, useCallback, useState} from "react";
-import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
+import {
+    CheckOutlined,
+    CloseOutlined,
+    DeleteOutlined,
+    EditOutlined,
+    InfoCircleOutlined
+} from '@ant-design/icons';
 import {Button, Input, Tooltip} from "antd";
 import type {ICustomer} from "../../../models/ICustomer.ts";
 import {useNavigate} from "react-router-dom";
@@ -16,14 +22,14 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
     const navigate = useNavigate()
 
     const [discountEditing, setDiscountEditing] = useState<boolean>(false)
-    const [discount, setDiscount] = useState<string>(((customer.discount - 1) * 100).toFixed(0));
+    const [discount, setDiscount] = useState<string>((customer.discount * 100).toFixed(0));
 
     const handleShowDetails = useCallback((customer: ICustomer) => {
         const id = customer.id;
         navigate(`/customers/${id}`)
     }, [customer])
 
-    const handleDeleteCustomer = useCallback((customer: ICustomer)=> {
+    const handleDeleteCustomer = useCallback((customer: ICustomer) => {
         const confirmString = `Вы действительно хотите удалить всю информацию об организации ${customer.companyName}`;
         if (confirm(confirmString)) dispatch(deleteCustomer({id: customer.id}))
     }, [customer])
@@ -39,7 +45,7 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
             console.error("Некорректные данные");
             return
         }
-        const discountForServer = 1 + (Number(discount) / 100);
+        const discountForServer = Number(discount) / 100;
         const request = {id: customer.id, discount: discountForServer}
         dispatch(updateDiscount(request))
     }, [discountEditing, discount])
@@ -60,19 +66,19 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
                         />%
                         <Tooltip title="Сохранить">
                             <Button
-                                onClick={() => {handleSaveChanges(customer, discount)}}
-                                icon={<CheckOutlined />}
-                                shape="circle"
-                                style={{color: '#2fff00'}}
+                                onClick={() => {
+                                    handleSaveChanges(customer, discount)
+                                }}
+                                type="text"
+                                icon={<CheckOutlined style={{ color: 'green' }} />}
                             />
                         </Tooltip>
 
                         <Tooltip title="Отменить">
                             <Button
-                                icon={<CloseOutlined />}
+                                type="text"
                                 onClick={() => setDiscountEditing(!discountEditing)}
-                                shape="circle"
-                                style={{ marginRight: 8 }}
+                                icon={<CloseOutlined/>}
                             />
                         </Tooltip>
                     </td>
@@ -82,7 +88,7 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
                         <Tooltip title="Редактировать">
                             <Button
                                 type="text"
-                                icon={<EditOutlined />}
+                                icon={<EditOutlined/>}
                                 onClick={() => handleEdit()}
                             />
                         </Tooltip>
@@ -92,17 +98,16 @@ const Customer: FC<CustomerRowProps> = ({customer}: CustomerRowProps) => {
             <td>
                 <Tooltip title="Подробнее">
                     <Button
-                        icon={<EyeOutlined />}
-                        type="default"
+                        type="text"
+                        icon={<InfoCircleOutlined/>}
                         onClick={() => handleShowDetails(customer)}
                     />
                 </Tooltip>
                 <Tooltip title="Удалить организацию">
                     <Button
-                        icon={<DeleteOutlined/>}
+                        type="text"
                         danger
-                        type="default"
-                        shape="circle"
+                        icon={<DeleteOutlined />}
                         onClick={() => handleDeleteCustomer(customer)}
                     />
                 </Tooltip>

@@ -8,8 +8,16 @@ import {CustomerService} from "../../core/services/CustomerService/CustomerServi
 import {SeasonCoefficientsService} from "../../core/services/CoefficientsService/SeasonCoefficientsService";
 import {SeasonCoefficientsRepository} from "../db/repositories/SeasonCoefficientsRepository";
 import {CustomerRepository} from "../db/repositories/CustomerRepository";
+import {ToolRepository} from "../db/repositories/ToolRepository";
+import {ToolService} from "../../core/services/ToolService/ToolService";
 
-const orderController = new OrderController(new OrderService(new OrderRepository(), new SeasonCoefficientsService(new SeasonCoefficientsRepository()), new CustomerService(new CustomerRepository())));
+const orderController = new OrderController(
+    new OrderService(
+        new OrderRepository(),
+        new SeasonCoefficientsService(new SeasonCoefficientsRepository()),
+        new CustomerService(new CustomerRepository()),
+        new ToolService(new ToolRepository())
+    ));
 
 const router = Router();
 

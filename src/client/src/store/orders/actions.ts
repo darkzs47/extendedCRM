@@ -18,8 +18,8 @@ export const getAllOrders = () => {
 export const updateStatusOrder = (request: UpdateStatusOrderRequest) => {
     return async (dispatch: Dispatch) => {
         try {
-            await OrderService.updateStatusOrder(request)
-            dispatch({ type: UPDATE_STATUS_ORDER, payload: {...request} })
+            const response = await OrderService.updateStatusOrder(request)
+            dispatch({ type: UPDATE_STATUS_ORDER, payload: {...request, completedAt: response.data.completedAt } });
         } catch (e) {
             dispatch({ type: ORDER_FAILURE })
         }

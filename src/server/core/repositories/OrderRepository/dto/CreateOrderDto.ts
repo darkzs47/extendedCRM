@@ -1,11 +1,10 @@
-import {OrderStatus} from "../../../../types/OrdersTypes/OrderStatus";
-
 export class CreateOrderDto {
     constructor(
         readonly customerId: number,
-        tools: {
+        readonly finalPrice: number,
+        readonly tools: {
             toolId: number,
             quantity: number,
-        } []
+        }[]
     ) {}
 }

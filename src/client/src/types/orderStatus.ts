@@ -1,1 +1,1 @@
-export type OrderStatus = "В работе" | "Выполнен" | "Отменён";
+export type OrderStatus = "В работе" | "Завершён" | "Отменён";

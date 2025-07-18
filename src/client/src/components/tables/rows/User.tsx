@@ -1,6 +1,11 @@
 import {type FC, memo, useCallback, useEffect, useState} from "react";
 import type {IUser} from "../../../models/IUser.ts";
-import { EditOutlined, DeleteOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
+import {
+    EditOutlined,
+    DeleteOutlined,
+    CloseOutlined,
+    CheckOutlined
+} from '@ant-design/icons';
 import {Button, Input, Select, Tooltip} from "antd";
 import type {UserRole} from "../../../../../server/core/models/User/User.ts";
 import {useDispatch, useSelector} from "react-redux";
@@ -109,19 +114,17 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
+                                    type="text"
+                                    icon={<CheckOutlined style={{ color: 'green' }} />}
                                     onClick={() => {handleSaveChanges(user)}}
-                                    icon={<CheckOutlined />}
-                                    shape="circle"
-                                    style={{color: '#2fff00'}}
                                 />
                             </Tooltip>
 
                             <Tooltip title="Отменить">
                                 <Button
-                                    icon={<CloseOutlined />}
+                                    type="text"
+                                    icon={<CloseOutlined/>}
                                     onClick={onCancel}
-                                    shape="circle"
-                                    style={{ marginRight: 8 }}
                                 />
                             </Tooltip>
                         </td>
@@ -136,10 +139,9 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                             <td>
                                 <Tooltip title="Редактировать пользователя">
                                     <Button
-                                        icon={<EditOutlined />}
+                                        type="text"
+                                        icon={<EditOutlined/>}
                                         onClick={onEdit}
-                                        style={{ marginRight: 8 }}
-                                        shape="circle"
                                     />
                                 </Tooltip>
                                 <Tooltip title="Удалить пользователя">
@@ -147,8 +149,7 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                                         icon={<DeleteOutlined />}
                                         onClick={() => handleDeleteUser(user)}
                                         danger
-                                        type="default"
-                                        shape="circle"
+                                        type="text"
                                     />
                                 </Tooltip>
                             </td>

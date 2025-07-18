@@ -14,7 +14,7 @@ export class SeasonCoefficientsRepository implements ISeasonCoefficientsReposito
 
     async getSeasonByName(name: string): Promise<SeasonCoefficientModel | null> {
         const coefficient: SeasonCoefficientModel | null = await SeasonCoefficientModel.findOne({
-            where: {name: name}
+            where: {season: name}
         })
         return coefficient;
     }

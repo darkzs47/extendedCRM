@@ -14,14 +14,14 @@ const initialState: OrdersState = {
 export const ordersReducer = (state = initialState, action: OrdersActionTypes) => {
     switch (action.type) {
         case GET_ALL_ORDERS:
-            return { ...state, orders: action.payload };
+            return {...state, orders: action.payload};
         case UPDATE_STATUS_ORDER:
             return {
                 ...state,
                 orders: state.orders
                     ? state.orders.map((order) =>
                         order.id === action.payload.id
-                            ? { ...order, ...action.payload }
+                            ? {...order, ...action.payload}
                             : order)
                     : null
             }
@@ -36,5 +36,7 @@ export const ordersReducer = (state = initialState, action: OrdersActionTypes) =
             return {
                 ...state,
             }
+        default:
+            return state;
     }
 }

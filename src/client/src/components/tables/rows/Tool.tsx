@@ -83,20 +83,18 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
+                                    type="text"
+                                    icon={<CheckOutlined style={{ color: 'green' }} />}
                                     onClick={() => {
                                         handleSaveChanges(tool)
                                     }}
-                                    icon={<CheckOutlined/>}
-                                    shape="circle"
-                                    style={{color: '#2fff00'}}
                                 />
                             </Tooltip>
                             <Tooltip title="Отменить">
                                 <Button
+                                    type='text'
                                     onClick={() => handleEditing()}
                                     icon={<CloseOutlined/>}
-                                    style={{marginRight: 8}}
-                                    shape="circle"
                                 />
                             </Tooltip>
                         </td>
@@ -110,10 +108,9 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                         <td>
                             <Tooltip title="Редактировать стоимость инструмента">
                                 <Button
-                                    onClick={() => handleEditing()}
+                                    type="text"
                                     icon={<EditOutlined/>}
-                                    style={{marginRight: 8}}
-                                    shape="circle"
+                                    onClick={() => handleEditing()}
                                 />
                             </Tooltip>
                             <Tooltip title="Удалить инструмент">
@@ -121,7 +118,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                     onClick={() => handleDeleteTool(tool)}
                                     icon={<DeleteOutlined/>}
                                     danger
-                                    type="default"
+                                    type="text"
                                     shape="circle"
                                 />
                             </Tooltip>

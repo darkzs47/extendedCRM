@@ -5,7 +5,6 @@ import OrdersTable from "../../components/tables/OrdersTable.tsx";
 import styles from "./orders.module.scss"
 
 const Orders: FC = () => {
-
     const navigate = useNavigate()
 
     const handleAddOrder = useCallback(() => {

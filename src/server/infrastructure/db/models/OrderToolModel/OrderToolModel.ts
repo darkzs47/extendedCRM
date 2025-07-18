@@ -24,8 +24,5 @@ export class OrderToolModel extends Model {
     tool!: ToolModel;
 
     @Column
-    toolsPrice!: number;
-
-    @Column
     quantityTools!: number;
 }

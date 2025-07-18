@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../../store/store.ts";
 import {useNavigate} from "react-router-dom";
 import {Button, Tooltip} from "antd";
-import {DeleteOutlined, EyeOutlined} from "@ant-design/icons";
+import {DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import type {ISupplier} from "../../../models/ISupplier.ts";
 import { deleteSupplier } from "../../../store/suppliers/actions.ts";
 
@@ -33,8 +33,8 @@ const Supplier: FC<SupplierRowProps> = ({supplier}: SupplierRowProps) => {
             <td>
                 <Tooltip title="Подробнее">
                     <Button
-                        icon={<EyeOutlined />}
-                        type="default"
+                        type="text"
+                        icon={<InfoCircleOutlined />}
                         onClick={() => handleShowDetails(supplier)}
                     />
                 </Tooltip>
@@ -42,8 +42,7 @@ const Supplier: FC<SupplierRowProps> = ({supplier}: SupplierRowProps) => {
                     <Button
                         icon={<DeleteOutlined/>}
                         danger
-                        type="default"
-                        shape="circle"
+                        type="text"
                         onClick={() => handleDeleteSupplier(supplier)}
                     />
                 </Tooltip>

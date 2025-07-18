@@ -1,6 +1,11 @@
 import {type FC, memo, useCallback, useState} from "react";
 import {Button, Input, Tooltip} from "antd";
-import {CheckOutlined, CloseOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {
+    CheckOutlined,
+    CloseOutlined,
+    DeleteOutlined,
+    EditOutlined
+} from "@ant-design/icons";
 import type {ICategory} from "../../../models/ICategory.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../../store/store.ts";
@@ -53,17 +58,17 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                             <td>
                                 <Tooltip title="Сохранить">
                                     <Button
+                                        type="text"
+                                        icon={<CheckOutlined style={{ color: 'green' }} />}
                                         onClick={() => handleSaveChanges(category)}
-                                        icon={<CheckOutlined />}
-                                        shape="circle"
                                     />
                                 </Tooltip>
 
                                 <Tooltip title="Отменить">
                                     <Button
-                                        icon={<CloseOutlined />}
+                                        type="text"
+                                        icon={<CloseOutlined/>}
                                         onClick={() => handleEditing()}
-                                        shape="circle"
                                     />
                                 </Tooltip>
                             </td>
@@ -75,18 +80,17 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                             <td>
                                 <Tooltip title="Редактировать категорию">
                                     <Button
-                                        onClick={() => handleEditing()}
+                                        type="text"
                                         icon={<EditOutlined/>}
-                                        shape="circle"
+                                        onClick={() => handleEditing()}
                                     />
                                 </Tooltip>
                                 <Tooltip title="Удалить категорию">
                                     <Button
-                                        onClick={() => handleDeleteCategory(category)}
-                                        icon={<DeleteOutlined/>}
+                                        type="text"
                                         danger
-                                        type="default"
-                                        shape="circle"
+                                        icon={<DeleteOutlined />}
+                                        onClick={() => handleDeleteCategory(category)}
                                     />
                                 </Tooltip>
                             </td>

@@ -10,7 +10,7 @@ const postgresUserController = new UserController(new UserService(new UserReposi
 
 const router = Router();
 
-router.get('/', AuthMiddleware, RoleMiddleware(["admin"]),(req: Request, res: Response) => {
+router.get('/', AuthMiddleware, RoleMiddleware(["admin", "supplier"]),(req: Request, res: Response) => {
     postgresUserController.getAllUsers(req, res);
 });
 

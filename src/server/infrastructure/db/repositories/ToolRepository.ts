@@ -5,6 +5,7 @@ import {UpdateToolDto} from "../../../core/repositories/ToolRepository/dto/Updat
 import {ToolMapper} from "../mappers/ToolMapper/ToolMapper";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
 import {SupplierModel} from "../models/SupplierModel/SupplierModel";
+import {ITool} from "../../../../client/src/models/ITool";
 
 export class ToolRepository implements IToolRepository {
     async getAllTools(): Promise<ToolModel[]> {
@@ -31,9 +32,25 @@ export class ToolRepository implements IToolRepository {
 
     async updateTool(dto: UpdateToolDto): Promise<ToolModel | null> {
         const tool: ToolModel | null = await ToolModel.findByPk(dto.id)
-        tool ? await tool.update(
-            { purchasePrice: dto.purchasePrice ?? null, sellPrice: dto.sellPrice ?? null  },
-        ) : null
+
+        const updateData: Partial<ITool> = {};
+
+        if (dto.purchasePrice !== null && dto.purchasePrice !== undefined) {
+            updateData.purchasePrice = dto.purchasePrice;
+        }
+
+        if (dto.sellPrice !== null && dto.sellPrice !== undefined) {
+            updateData.sellPrice = dto.sellPrice;
+        }
+
+        if (dto.isAvailable !== null && dto.isAvailable !== undefined) {
+            updateData.isAvailable = dto.isAvailable;
+        }
+
+        if (dto.supplierId !== null && dto.supplierId !== undefined) {
+            updateData.supplierId = dto.supplierId;
+        }
+        tool ? await tool.update(updateData) : null
         return tool
     }
 

@@ -57,7 +57,7 @@ const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, on
                 {
                     isCreateNewCategory ? (
                         <tr>
-                            <td>
+                            <td style={{maxWidth: '130px'}}>
                                 <Input
                                 onChange={(e) => setNewCategoryName(e.target.value)}
                                 value={newCategoryName}
@@ -73,7 +73,7 @@ const Categories: FC<Props> = ({ isCreateNewCategory, setIsCreateNewCategory, on
                                         }
                                     }}
                                     value={newCategoryMarkup}
-                                    style={{ width: '5rem' }}
+                                    style={{ width: '3rem' }}
                                 />
                                 %
                             </td>

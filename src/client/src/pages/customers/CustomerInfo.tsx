@@ -34,7 +34,7 @@ const CustomerInfo: FC = () => {
                 <p><span className={styles.customerMainLabel}>КПП:</span> {customer?.kpp}</p>
                 <p><span className={styles.customerMainLabel}>ОГРН:</span> {customer?.ogrn}</p>
                 {/*@ts-ignore*/}
-                <p><span className={styles.customerMainLabel}>Размер персональной скидки:</span> {((1 - customer?.discount) * -100).toFixed(0)}%</p>
+                <p><span className={styles.customerMainLabel}>Размер персональной скидки:</span> {((customer?.discount) * 100).toFixed(0)}%</p>
             </div>
             <div className={styles.customerMainSection}>
                 <h2>Представители</h2>

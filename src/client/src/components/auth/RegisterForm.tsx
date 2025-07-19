@@ -19,7 +19,7 @@ const RegisterForm: FC = () => {
 
     const handleRegister = useCallback(async (values: RegisterRequest) => {
             const regResult = await dispatch(registration(values));
-            if (regResult.success) navigate('/customers')
+            if (regResult.success) navigate('/404')
         }, [form, navigate]
     );
 

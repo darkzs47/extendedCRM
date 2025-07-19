@@ -1,6 +1,7 @@
 import {AutoIncrement, Column, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {BranchModel} from "../BranchModel/BranchModel";
 import {RepresentativeModel} from "../RepresentativeModel/RepresentativeModel";
+import {ToolModel} from "../ToolModel/ToolModel";
 
 @Table({ tableName: 'suppliers', timestamps: false, underscored: true })
 export class SupplierModel extends Model {
@@ -29,7 +30,6 @@ export class SupplierModel extends Model {
 
     @Column
     phone!: string;
-
 
     @HasMany(() => BranchModel, { foreignKey: 'supplierId', as: 'branches' })
     branches!: BranchModel[];

@@ -73,14 +73,15 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
 
     return (
         <>
-            <td>{user.secondName} {user.name} {user.lastName}</td>
+            <td style={{maxWidth: '330px'}}>{user.secondName} {user.name} {user.lastName}</td>
             {
                 isEditing ? (
                     <>
-                        <td>
+                        <td style={{maxWidth: '110px'}}>
                             <Input
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
+                                style={{maxWidth: '110px'}}
                             />
                         </td>
                         <td>
@@ -89,8 +90,8 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                                 value={phone}
                             />
                         </td>
-                        <td>
-                            <Select value={role} onChange={setRole} placeholder="Сменить роль">
+                        <td style={{maxWidth: '150px'}}>
+                            <Select style={{maxWidth: '150px'}} value={role} onChange={setRole} placeholder="Сменить роль">
                                 {Object.entries(roles).map(([key, label]) => (
                                     <Select.Option key={key} value={key}>
                                         {label}
@@ -98,8 +99,14 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                                 ))}
                             </Select>
                         </td>
-                        <td>
+                        <td
+                            style={{
+                                maxWidth: '90px'
+                            }}>
                             <Select
+                                style={{
+                                    maxWidth: '90px'
+                                }}
                                 value={supplierId ?? undefined}
                                 placeholder="Выбрать поставщика"
                                 onChange={(value) => setSupplierId(value)}>
@@ -133,7 +140,7 @@ const User: FC<UserRowProps> = ({ user, isEditing, onEdit, onCancel, hideControl
                     <>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
-                        <td>{roles[user.role]}</td>
+                        <td style={{maxWidth: '150px'}}>{roles[user.role]}</td>
                         <td>{userSupplier ? userSupplier.companyName : '—'}</td>
                         {!hideControls && (
                             <td>

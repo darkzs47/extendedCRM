@@ -5,6 +5,7 @@ import {CreateCustomerDto} from "../../../core/repositories/CustomerRepository/d
 import {UpdateCustomerDiscountDto} from "../../../core/repositories/CustomerRepository/dto/UpdateCustomerDiscountDto";
 import {CustomerShort} from "../../../types/CustomersTypes/Customer";
 import {CustomerModel} from "../../db/models/CustomerModel/CustomerModel";
+import {logger} from "../../../logger";
 
 
 export class CustomerController {
@@ -38,8 +39,10 @@ export class CustomerController {
             const { customer, branch, representative } = req.body;
             const newCustomer: CustomerModel = await this.customerService.createCustomer(new CreateCustomerDto(customer, branch, representative));
             res.status(constants.HTTP_STATUS_CREATED).json(newCustomer)
+            return
         } catch (e) {
             res.status(constants.HTTP_STATUS_BAD_REQUEST).json({message: "Не удалось добавить клиента"});
+            return
         }
     }
 

@@ -1,11 +1,12 @@
 import {Button, Input} from "antd";
-import {type FC, type MouseEventHandler, useCallback, useState} from "react";
+import {type FC, type MouseEventHandler, useCallback, useEffect, useState} from "react";
 import {memo} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../store/currentUser/actions.ts";
-import type {AppDispatch} from "../../store/store.ts";
+import type {AppDispatch, RootState} from "../../store/store.ts";
 import styles from '../../pages/auth/login.module.scss';
+import type {UserRole} from "../../../../server/core/models/User/User.ts";
 
 const LoginForm: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -17,11 +18,22 @@ const LoginForm: FC = () => {
         }, [navigate]
     );
 
-    const handleLogin: MouseEventHandler = useCallback(async() => {
-            const authResult = await dispatch(login(email, password));
-            if (authResult) navigate('/customers')
-         }, [email, password]
+    const [authResult, setAuthResult] = useState<boolean>(false)
+
+    const handleLogin: MouseEventHandler = useCallback(async () => {
+            setAuthResult((await dispatch(login(email, password))).success)
+        }, [email, password]
     );
+
+    const currentUserRole: UserRole | undefined = useSelector((state: RootState) => state.currentUser.currentUser?.role)
+
+    useEffect(() => {
+        if (authResult) {
+            if (currentUserRole === 'admin' || currentUserRole === 'employee') navigate('/customers')
+            else if (currentUserRole === 'supplier') navigate('/tools')
+            else navigate('/404');
+        }
+    }, [authResult, currentUserRole]);
 
     return (
         <div className={styles.loginContainer}>

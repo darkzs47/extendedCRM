@@ -51,10 +51,7 @@ const Navigation: FC = () => {
                             {userRole === 'supplier' && (
                                 <>
                                     <li>
-                                        <NavLink className={styles.navLink} to="/tools">Мои инструменты</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className={styles.navLink} to="/tools">Заявки на инструменты</NavLink>
+                                        <NavLink className={styles.navLink} to="/tools">Инструменты</NavLink>
                                     </li>
                                 </>
                             )}

@@ -48,12 +48,12 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
             {
                 isEditing ? (
                         <>
-                            <td>
+                            <td style={{maxWidth: '30px'}}>
                                 <Input
                                     type='number'
                                     onChange={(e) => setMarkup(Number(e.target.value))}
                                     value={markup}
-                                    style={{ width: '5rem' }}
+                                    style={{ width: '4.5rem'}}
                                 /> %
                             </td>
                             <td>

@@ -4,6 +4,7 @@ import {CreateToolDto} from "../../../core/repositories/ToolRepository/dto/Creat
 import {UpdateToolDto} from "../../../core/repositories/ToolRepository/dto/UpdateToolDto";
 import {ToolService} from "../../../core/services/ToolService/ToolService";
 import {ToolModel} from "../../db/models/ToolModel/ToolModel";
+import {logger} from "../../../logger";
 
 export class ToolController {
     constructor(
@@ -36,8 +37,14 @@ export class ToolController {
     async updateTool(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
-            const { purchasePrice, sellPrice } = req.body;
-            const toolUpdated: ToolModel = await this.toolService.updateTool(new UpdateToolDto(Number(id), purchasePrice, sellPrice));
+            const { purchasePrice, sellPrice, isAvailable, supplierId } = req.body;
+
+            const safePurchasePrice = purchasePrice ?? null;
+            const safeSellPrice = sellPrice ?? null;
+            const safeIsAvailable = isAvailable ?? null;
+            const safeSupplierId = supplierId ?? null;
+            const toolUpdated: ToolModel = await this.toolService.updateTool(
+                new UpdateToolDto(Number(id), safePurchasePrice, safeSellPrice, safeIsAvailable, safeSupplierId));
             res.status(constants.HTTP_STATUS_OK).json(toolUpdated)
             return
         } catch (e) {

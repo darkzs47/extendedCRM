@@ -1,5 +1,5 @@
 import React, {type FC, memo, useCallback, useEffect, useState} from "react";
-import ToolRow from "./rows/Tool.tsx";
+import Tool from "./rows/Tool.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../store/store.ts";
 import {getAllCategories} from "../../store/categories/actions.ts";
@@ -9,6 +9,8 @@ import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
 import styles from "../../pages/tools/tools.module.scss"
 import type {ICategory} from "../../models/ICategory.ts";
 import type {ITool} from "../../models/ITool.ts";
+import type {UserRole} from "../../../../server/core/models/User/User.ts";
+import ToolForSupplier from "./rows/ToolForSupplier.tsx";
 
 interface Props {
     isCreateNewTool: boolean,
@@ -16,16 +18,16 @@ interface Props {
     onCancel: () => void,
 }
 
-const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Props) => {
+const Tools: FC<Props> = ({isCreateNewTool, setIsCreateNewTool, onCancel}: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories: ICategory[] | null = useSelector((state: RootState) => state.categories.categories)
     const tools: ITool[] | null = useSelector((state: RootState) => state.tools.tools)
+    const currentUserRole: UserRole | undefined = useSelector((state: RootState) => state.currentUser.currentUser?.role)
 
     const [newToolName, setNewToolName] = useState<string>('')
     const [newToolPurchasePrice, setNewToolPurchasePrice] = useState<number>(0)
     const [newToolSellPrice, setNewToolSellPrice] = useState<number>(0)
     const [newToolCategoryId, setNewToolCategoryId] = useState<number>(1);
-
     const handleSubmitNewTool = useCallback(() => {
         if (newToolName === '' || newToolPurchasePrice === 0) return
 
@@ -64,70 +66,126 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                 <tr>
                     <th>Название</th>
                     <th>Категория</th>
-                    <th>Стоимость покупки</th>
+                    {currentUserRole !== 'supplier' && <th>Стоимость покупки</th>}
                     <th>Стоимость продажи</th>
-                    <th>В наличии</th>
-                    <th>Поставщик</th>
+                    <th>Наличие</th>
+                    {currentUserRole !== 'supplier' && <th>Поставщик</th>}
                     <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                {tools?.map(tool =>
+                {tools?.map(tool => (
                     <tr key={tool.id}>
-                        <ToolRow tool={tool} categoryId={tool.categoryId}/>
+                        {currentUserRole === 'supplier'
+                            ? <ToolForSupplier key={tool.id} tool={tool} categoryId={tool.categoryId}/>
+                            : <Tool key={tool.id} tool={tool} categoryId={tool.categoryId}/>}
+                    </tr>
+                ))}
+
+                {isCreateNewTool && currentUserRole !== 'supplier' && (
+                    <tr>
+                        <td>
+                            <Input
+                                onChange={(e) => setNewToolName(e.target.value)}
+                                value={newToolName}
+                                style={{ width: '5rem' }}
+                            />
+                        </td>
+                        <td>
+                            <Select
+                                value={newToolCategoryId}
+                                onChange={setNewToolCategoryId}
+                                placeholder="Выберите категорию"
+                            >
+                                {categories?.map((category) => (
+                                    <Select.Option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        </td>
+                        <td>
+                            <Input
+                                type='number'
+                                onChange={(e) => calculatePrice(Number(e.target.value))}
+                                value={newToolPurchasePrice}
+                                style={{ width: '5rem' }}
+                            />
+                        </td>
+                        <td>{newToolSellPrice}</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>
+                            <Tooltip title="Сохранить">
+                                <Button
+                                    className="checkIcon"
+                                    onClick={handleSubmitNewTool}
+                                    icon={<CheckOutlined />}
+                                    type="text"
+                                />
+                            </Tooltip>
+
+                            <Tooltip title="Отменить">
+                                <Button
+                                    icon={<CloseOutlined />}
+                                    onClick={onCancel}
+                                    type="text"
+                                />
+                            </Tooltip>
+                        </td>
                     </tr>
                 )}
-                {
-                    isCreateNewTool ? (
-                        <tr>
-                            <td>
-                                <Input
-                                    onChange={(e) => setNewToolName(e.target.value)}
-                                    value={newToolName}
-                                    style={{width: '5rem'}}
+                {isCreateNewTool && currentUserRole === 'supplier' && (
+                    <tr>
+                        <td>
+                            <Input
+                                onChange={(e) => setNewToolName(e.target.value)}
+                                value={newToolName}
+                                style={{ width: '5rem' }}
+                            />
+                        </td>
+                        <td>
+                            <Select
+                                value={newToolCategoryId}
+                                onChange={setNewToolCategoryId}
+                                placeholder="Выберите категорию"
+                            >
+                                {categories?.map((category) => (
+                                    <Select.Option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        </td>
+                        <td>
+                            <Input
+                                type='number'
+                                onChange={(e) => calculatePrice(Number(e.target.value))}
+                                value={newToolPurchasePrice}
+                                style={{ width: '5rem' }}
+                            />
+                        </td>
+                        <td><CheckOutlined className="checkIcon" type='text'/></td>
+                        <td>
+                            <Tooltip title="Сохранить">
+                                <Button
+                                    className="checkIcon"
+                                    onClick={handleSubmitNewTool}
+                                    icon={<CheckOutlined />}
+                                    type="text"
                                 />
-                            </td>
-                            <td>
-                                <Select value={newToolCategoryId} onChange={setNewToolCategoryId} placeholder="Выберите категорию">
-                                    {categories?.map((category) => (
-                                        <Select.Option key={category.id} value={category.id}>
-                                            {category.name}
-                                        </Select.Option>
-                                    ))}
-                                </Select>
-                            </td>
-                            <td>
-                                <Input
-                                    type='number'
-                                    onChange={(e) => calculatePrice(Number(e.target.value))}
-                                    value={newToolPurchasePrice}
-                                    style={{width: '5rem'}}
-                                />
-                            </td>
-                            <td>
-                                {newToolSellPrice}
-                            </td>
-                            <td>
-                                <Tooltip title="Сохранить">
-                                    <Button
-                                        className="checkIcon"
-                                        onClick={handleSubmitNewTool}
-                                        icon={<CheckOutlined />}
-                                        type="text"
-                                    />
-                                </Tooltip>
+                            </Tooltip>
 
-                                <Tooltip title="Отменить">
-                                    <Button
-                                        icon={<CloseOutlined />}
-                                        onClick={onCancel}
-                                        type="text"
-                                    />
-                                </Tooltip>
-                            </td>
-                        </tr>
-                    ) : null
-                }
+                            <Tooltip title="Отменить">
+                                <Button
+                                    icon={<CloseOutlined />}
+                                    onClick={onCancel}
+                                    type="text"
+                                />
+                            </Tooltip>
+                        </td>
+                    </tr>
+                )}
                 </tbody>
             </table>
         </div>

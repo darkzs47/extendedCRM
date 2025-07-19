@@ -2,7 +2,7 @@ import ProtectedRoute from "../components/common/ProtectedRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import Users from "../pages/users/Users.tsx";
-import CoefficientsSeason from "../components/tables/CoefficientsSeason.tsx";
+import CoefficientsSeason from "../pages/coefficients/CoefficientsSeason.tsx";
 import Admin from "../pages/admin/Admin.tsx";
 import CustomerInfo from "../pages/customers/CustomerInfo.tsx";
 import AddCustomer from "../pages/customers/AddCustomer.tsx";

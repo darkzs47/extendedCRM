@@ -10,6 +10,7 @@ export interface ITool {
     category?: ICategory;
     supplierId?: number;
     supplier?: ISupplier;
+    isAvailable?: boolean;
 
     OrderToolModel?: {
         quantityTools: number;

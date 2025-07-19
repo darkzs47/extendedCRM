@@ -54,7 +54,7 @@ const Category: FC<CategoryRowProps> = ({category}: CategoryRowProps) => {
                                     onChange={(e) => setMarkup(Number(e.target.value))}
                                     value={markup}
                                     style={{ width: '5rem' }}
-                                />
+                                /> %
                             </td>
                             <td>
                                 <Tooltip title="Сохранить">

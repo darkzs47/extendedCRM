@@ -28,6 +28,9 @@ export class ToolModel extends Model {
     @Column
     sellPrice!: number;
 
+    @Column
+    isAvailable!: boolean;
+
     @ForeignKey(() => CategoryModel)
     @Column
     categoryId!: number;

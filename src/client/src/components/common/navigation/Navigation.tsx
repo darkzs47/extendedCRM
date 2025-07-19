@@ -14,13 +14,12 @@ const Navigation: FC = () => {
     const userRole = useSelector((state: RootState) => state.currentUser.currentUser?.role)
     const handleLogout: MouseEventHandler = useCallback(() => {
             dispatch(logout());
-            navigate('/')
+            navigate('/login')
         }, [navigate, dispatch]
     );
 
     return (
-        <>
-            {isAuthUser && (
+        <>{isAuthUser && (
                 <nav className={styles.navbar}>
                     <ul className={styles.mainUl}>
                         <>
@@ -32,19 +31,30 @@ const Navigation: FC = () => {
                                 </>
                             )}
 
-                            {userRole === 'employee' || userRole === 'admin' && (
+                            {(userRole === 'employee' || userRole === 'admin') && (
                                 <>
                                     <li>
                                         <NavLink className={styles.navLink} to="/orders">Заказы</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink className={styles.navLink} to="/clients">Клиенты</NavLink>
+                                        <NavLink className={styles.navLink} to="/customers">Клиенты</NavLink>
                                     </li>
                                     <li>
                                         <NavLink className={styles.navLink} to="/suppliers">Поставщики</NavLink>
                                     </li>
                                     <li>
                                         <NavLink className={styles.navLink} to="/tools">Инструменты</NavLink>
+                                    </li>
+                                </>
+                            )}
+
+                            {userRole === 'supplier' && (
+                                <>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/tools">Мои инструменты</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink className={styles.navLink} to="/tools">Заявки на инструменты</NavLink>
                                     </li>
                                 </>
                             )}
@@ -61,8 +71,7 @@ const Navigation: FC = () => {
                         Выйти
                     </Button>
                 </nav>
-            )}
-        </>
+            )}</>
     )
 }
 

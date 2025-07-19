@@ -15,7 +15,6 @@ interface ToolRowProps {
 const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const categories: ICategory[] | null = useSelector((state: RootState) => state.categories.categories)
-
     const categoryName: string | undefined =
         tool.category?.name
         ?? categories?.find(category => category.id === tool.categoryId)?.name
@@ -72,7 +71,7 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                 onChange={(e) => setPurchasePrice(Number(e.target.value))}
                                 value={purchasePrice}
                                 style={{width: '5rem'}}
-                            />
+                            />  ₽
                         </td>
                         <td>
                             <Input
@@ -80,8 +79,10 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                                 onChange={(e) => setSellPrice(Number(e.target.value))}
                                 value={sellPrice}
                                 style={{width: '5rem'}}
-                            />
+                            /> ₽
                         </td>
+                        <td></td>
+                        <td></td>
                         <td>
                             <Tooltip title="Сохранить">
                                 <Button
@@ -108,6 +109,10 @@ const Tool: FC<ToolRowProps> = ({tool}: ToolRowProps) => {
                         <td>{categoryName}</td>
                         <td>{tool.purchasePrice} ₽</td>
                         <td>{tool.sellPrice} ₽</td>
+                        <td>{
+                            tool.isAvailable ? <CheckOutlined className="checkIcon" type='text'/> : <CloseOutlined type='text'/>
+                        }</td>
+                        <td>{tool.supplier?.companyName ?? '—'} </td>
                         <td>
                             <Tooltip title="Редактировать стоимость инструмента">
                                 <Button

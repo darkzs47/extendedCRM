@@ -4,7 +4,7 @@ import AuthService from "../../services/AuthService.ts";
 import type {RegisterRequest} from "../../models/request/RegisterRequest.ts";
 import axios from "axios";
 import type {AuthResponse} from "../../models/response/AuthResponse.ts";
-import {API_URL} from "../../http";
+import api, {API_URL} from "../../http";
 
 export const login = (email: string, password: string) => {
     return async (dispatch: Dispatch): Promise<{ success: boolean }> => {
@@ -39,6 +39,7 @@ export const logout = () => {
         try {
             await AuthService.logout();
             localStorage.removeItem("token");
+            delete api.defaults.headers.common['Authorization'];
             dispatch({ type: LOGOUT });
         } catch (e) {
             dispatch({ type: LOGIN_FAILURE });

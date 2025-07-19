@@ -1,25 +1,36 @@
-import {useSelector} from 'react-redux';
-import {Navigate} from 'react-router-dom';
-import type {RootState} from '../../store/store.ts';
-import {type ReactNode} from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import {Navigate, Outlet} from 'react-router-dom';
+import type {AppDispatch, RootState} from '../../store/store.ts';
+import type {UserRole} from "../../../../server/core/models/User/User.ts";
+import {useEffect} from 'react';
+import {checkAuth} from "../../store/currentUser/actions.ts";
 
 interface Props {
-    children: ReactNode;
+    allowedRoles: UserRole[];
 }
 
-const ProtectedRoute = ({ children }: Props) => {
-    const isAuthUser = useSelector((state: RootState) => state.currentUser.isAuthUser);
-    const isLoading = useSelector((state: RootState) => state.currentUser.isLoading);
+const ProtectedRoute = ({allowedRoles}: Props) => {
+    const isAuthUser: boolean = useSelector((state: RootState) => state.currentUser.isAuthUser);
+    const isLoading: boolean = useSelector((state: RootState) => state.currentUser.isLoading);
+    const userRole: UserRole | undefined = useSelector((state: RootState) => state.currentUser.currentUser?.role)
+    const dispatch = useDispatch<AppDispatch>();
+    useEffect(() => {
+        dispatch(checkAuth())
+    }, []);
 
     if (isLoading) {
         return <div>Загрузка...</div>;
     }
 
-    if (isAuthUser) {
-        return <>{children}</>;
+    if (!isAuthUser || !userRole) {
+        return <Navigate to="/login" replace/>;
     }
 
-    return <Navigate to="/login" />;
+    if (allowedRoles && !allowedRoles.includes(userRole)) {
+        return <Navigate to="/404" replace/>;
+    }
+
+    return <Outlet/>;
 };
 
 export default ProtectedRoute;

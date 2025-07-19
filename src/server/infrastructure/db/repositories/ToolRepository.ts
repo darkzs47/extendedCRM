@@ -4,13 +4,16 @@ import {CreateToolDto} from "../../../core/repositories/ToolRepository/dto/Creat
 import {UpdateToolDto} from "../../../core/repositories/ToolRepository/dto/UpdateToolDto";
 import {ToolMapper} from "../mappers/ToolMapper/ToolMapper";
 import {CategoryModel} from "../models/CategoryModel/CategoryModel";
+import {SupplierModel} from "../models/SupplierModel/SupplierModel";
 
 export class ToolRepository implements IToolRepository {
     async getAllTools(): Promise<ToolModel[]> {
         const tools: ToolModel[] = await ToolModel.findAll(
             {
                 include: [
-                    {model: CategoryModel, as: 'category'}],
+                    {model: CategoryModel, as: 'category'},
+                    {model: SupplierModel, as: 'supplier'},
+                ],
             }
         );
         return tools;

@@ -6,5 +6,6 @@ export class Tool {
         readonly categoryId: number,
         readonly purchasePrice?: number,
         readonly supplierId?: number,
+        readonly isAvailable?: boolean,
     ) {}
 }

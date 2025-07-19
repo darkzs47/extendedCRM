@@ -66,6 +66,8 @@ const Tools: FC<Props> = ({ isCreateNewTool, setIsCreateNewTool, onCancel }: Pro
                     <th>Категория</th>
                     <th>Стоимость покупки</th>
                     <th>Стоимость продажи</th>
+                    <th>В наличии</th>
+                    <th>Поставщик</th>
                     <th>Действия</th>
                 </tr>
                 </thead>

@@ -14,6 +14,11 @@ header {
   height: 10vh !important;
 }
 
+
+header:empty {
+  height: 0 !important;
+}
+
 h3 {
   font-size: $font-h3;
   font-weight: 600 !important;

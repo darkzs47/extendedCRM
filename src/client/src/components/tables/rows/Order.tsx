@@ -16,7 +16,7 @@ interface OrderProps {
 
 const Order: FC<OrderProps> = ({order, customer}: OrderProps) => {
     const dispatch = useDispatch<AppDispatch>()
-    const [completedStatus, setCompletedStatus] = useState<boolean>(order.status === "Завершён")
+    const [completedStatus, setCompletedStatus] = useState<boolean>(order.status === "Завершён" || order.status === "Отменён")
     const navigate = useNavigate()
 
     const handleChangeOrderStatus = useCallback((order: IOrder, status: OrderStatus) => {
